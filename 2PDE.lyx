@@ -160,7 +160,7 @@ Notace a použité triky
 \end_layout
 
 \begin_layout Standard
-trik s polovinou derivací kvadrátu 
+trik s polovinou derivací kvadrátu 
 \family roman
 \series medium
 \shape up
@@ -184,7 +184,26 @@ Poincareho nerovnost
 \end_layout
 
 \begin_layout Standard
-Youngova nerovnost
+Youngova nerovnost, 
+\begin_inset Formula $\overset{\text{Y}}{\lesssim}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\epsilon$
+\end_inset
+
+-Young 
+\begin_inset Formula $ab=\sqrt{\epsilon}a\, b/\sqrt{\epsilon}\overset{\text{Y}}{\leq}\epsilon a^{2}/2+b^{2}/(2\epsilon)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Holderova nerovnost
 \end_layout
 
 \begin_layout Standard
@@ -3523,7 +3542,7 @@ Věta Existence a jednoznačnost
 \end_layout
 
 \begin_layout Standard
-Exisuje právě jedno řešení [Parabolické rovnice].
+Exisuje právě jedno slabé řešení [Parabolické rovnice].
 \end_layout
 
 \begin_layout Standard
@@ -3574,12 +3593,13 @@ Navíc
 \begin_inset Formula $(Res:=L^{2}(0,T,\, W^{1,2}(\Omega))\cap W^{1,2}(0,T,\, W^{-1,2}(\Omega)))$
 \end_inset
 
- dod ho ho a ted tu nejsou nuly u W.
+ DOD ho ho a ted tu nejsou nuly u W.
  Procpa?
 \end_layout
 
 \begin_layout Standard
-Mmch z toho plyne i stabilita.
+(Mmch z toho plyne i stabilita.
+ dod eh?)
 \end_layout
 
 \begin_layout Paragraph*
@@ -3608,14 +3628,18 @@ Dosadíme rozdíl řešení do rovnice
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\left\langle w_{t},\varphi\right\rangle +\int_{\Omega}a^{1}\nabla u^{1}\nabla\varphi-a^{2}\nabla u^{2}\nabla\varphi+b^{1}\nabla u^{1}\varphi-b^{2}\nabla u^{2}\varphi+c^{1}u^{1}\varphi-c^{2}u^{2}\varphi\, dx=\left\langle f,\,\varphi\right\rangle $
+\begin_inset Formula 
+\[
+\left\langle w_{t},\varphi\right\rangle +\int_{\Omega}a^{1}\nabla u^{1}\nabla\varphi-a^{2}\nabla u^{2}\nabla\varphi+b^{1}\nabla u^{1}\varphi-b^{2}\nabla u^{2}\varphi+c^{1}u^{1}\varphi-c^{2}u^{2}\varphi\, dx=\left\langle f,\,\varphi\right\rangle 
+\]
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-a členy s 
+...a členy s 
 \begin_inset Formula $a,\, b,\, c$
 \end_inset
 
@@ -3631,14 +3655,15 @@ a členy s
 \begin_inset Formula $u^{2}$
 \end_inset
 
-:
+ - 
 \end_layout
 
 \begin_layout Standard
+(
 \begin_inset Formula $(a^{1}\nabla u^{1}-a^{2}\nabla u^{2})=a^{1}(\nabla u^{1}-\nabla u^{2})+(a^{1}-a^{2})\nabla u^{2}=a^{1}\nabla w+\bar{a}\nabla u^{2}$
 \end_inset
 
-
+).
 \end_layout
 
 \begin_layout Standard
@@ -3650,7 +3675,11 @@ Přepíšeme rovnici tak, že nalevo necháme pouze dualitu a člen s
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\left\langle w_{t},\varphi\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla\varphi\, dx=\underline{\int_{\Omega}-\bar{a}\nabla u^{2}\nabla\varphi-b^{1}\nabla w\varphi-\bar{b}\nabla u^{2}\varphi-c^{1}w\varphi-\bar{c}u^{2}\varphi\, dx+\left\langle f,\,\varphi\right\rangle }_{\text{[Zbytek]}}$
+\begin_inset Formula 
+\[
+\left\langle w_{t},\varphi\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla\varphi\, dx=\int_{\Omega}-\bar{a}\nabla u^{2}\nabla\varphi-b^{1}\nabla w\varphi-\bar{b}\nabla u^{2}\varphi-c^{1}w\varphi-\bar{c}u^{2}\varphi\, dx+\left\langle f,\,\varphi\right\rangle 
+\]
+
 \end_inset
 
 
@@ -3671,19 +3700,31 @@ Zvolíme
 
  nulovou stopu.
  Upravíme rovnici přidáním členu do duality na levou i pravou stranu (na
- pravé straně je přímo vidět co jsme přidali) a jinak dosadíme za 
+ pravé straně je přímo vidět co jsme přidali) a do druhého členu na levé
+ straně dosadíme za 
 \begin_inset Formula $\varphi$
 \end_inset
 
- a část s 
+ (to vytvoří dva členy, podtržené, jeden necháme nalevo a druhý (s 
 \begin_inset Formula $a^{1}\bar{u_{D}}$
 \end_inset
 
- přesuneme doprava:
+) přibude napravo.
+ Nepodtržené zůstalo z minulého kroku, pouze s dosazeným 
+\begin_inset Formula $\varphi=w-\bar{u_{D}}$
+\end_inset
+
+.):
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\left\langle (w-\bar{u_{D}})_{t},w-\bar{u_{D}}\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla w\, dx=\left\langle -\bar{u_{D}}_{t},w-\bar{u_{D}}\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla\bar{u_{D}}\, dx+\text{[Zbytek]}$
+\begin_inset Formula 
+\begin{eqnarray*}
+L.S.:=\left\langle (w\underline{-\bar{u_{D}}})_{t},\underline{w-\bar{u_{D}}}\right\rangle +\underline{\int_{\Omega}a^{1}\nabla w\nabla w\, dx} & = & \underline{\left\langle -\bar{u_{D}}_{t},w-\bar{u_{D}}\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla\bar{u_{D}}\, dx}+\\
+ &  & +\int_{\Omega}-\bar{a}\nabla u^{2}\nabla(w-\bar{u_{D}})-b^{1}\nabla w\varphi(w-\bar{u_{D}})-\bar{b}\nabla u^{2}(w-\bar{u_{D}})-\\
+ &  & -c^{1}w(w-\bar{u_{D}})-\bar{c}u^{2}(w-\bar{u_{D}})\, dx+\left\langle f,\,(w-\bar{u_{D}})\right\rangle =:P.S.
+\end{eqnarray*}
+
 \end_inset
 
 
@@ -3694,22 +3735,234 @@ Testujeme
 \begin_inset Formula $\varphi$
 \end_inset
 
- nezávisejícím na čase ale děláme to pro s.v.
- časy, teď budeme používat Holdernerovnost a Gronwalllema abychom na pravé
- straně dostali...
+ nezávisejícím na čase, ale děláme to pro s.v.
+ časy.
 \end_layout
 
 \begin_layout Standard
-Levou stranu totiž umíme odhadnout pomocí triku s polovinou derivace kvadrátu
- a elipticitou 
+Z rovnosti 
+\begin_inset Formula $L.S.=P.S.$
+\end_inset
+
+ odvodíme na obě strany odhady (levou stranu zezdola a pravou stranu zeshora,
+ používat budeme Holderovu nerovnost), abychom mohli použít Gronwallovo
+ lemma.
+\end_layout
+
+\begin_layout Standard
+Kam směřujeme? V Gronwallově lemmatu pro nás bude odhadovaná veličina 
+\begin_inset Formula $\eta=||w-\bar{u_{D}}||_{2}^{2}$
+\end_inset
+
+,....todo chceme přepsat levou stranu do podoby 
+\begin_inset Formula $\eta\cdot\text{něco}+\text{něco}$
+\end_inset
+
+.(todo lepsi komentar!)
+\end_layout
+
+\begin_layout Standard
+(TODO emphasizovat co delame odzacatku, jsou tam upravy co jsme nevysvetlili.)
+\end_layout
+
+\begin_layout Subparagraph*
+Levou stranu 
+\end_layout
+
+\begin_layout Standard
+...totiž umíme odhadnout pomocí triku s polovinou derivace kvadrátu (za člen
+ s dualitou) a elipticitou 
 \begin_inset Formula $a^{1}$
+\end_inset
+
+ (za člen s integrálem):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+1/2\frac{d}{dt}||w-\bar{u_{D}}||_{2}^{2}+\alpha_{0}||\nabla w||\leq L.S.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Pravou stranu
+\end_layout
+
+\begin_layout Standard
+Celá pravá strana lze odhadnout Holdernerovností.
+\end_layout
+
+\begin_layout Standard
+Členy jsou odhadovány postupně jako byly napsány v rovnosti 
+\begin_inset Formula $L.S.=P.S.$
+\end_inset
+
+.
+ Na první řádce jsou členy co minule přibyly nově.
+\end_layout
+
+\begin_layout Standard
+Na třetí řádce proběhla (před odhadem) změna členu 
+\begin_inset Formula $-c^{1}w\varphi=-c^{1}(w-\bar{u_{D}})\varphi-c^{1}\bar{u_{D}}\varphi\overset{\text{dosad }\varphi}{=}-((c^{1})^{\frac{1}{2}}(w-\bar{u_{D}}))^{2}-c^{1}\bar{u_{D}}(w-\bar{u_{D}})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+(Kde jsme 
+\begin_inset Formula $c^{1}$
+\end_inset
+
+ schovali rovnou měrou ke každému členu do kvadrátu normy, proto jsme ho
+ vzali na jednu polovinu.)
+\end_layout
+
+\begin_layout Standard
+(todo jak si to zapmatovat!? nebo je to dod vec kterou ejdnou vidis ale
+ nikdy nema smysl se ji ucit nebo replikovat?)
+\begin_inset Formula 
+\begin{eqnarray*}
+P.S. & \leq & ||\bar{u_{D}}_{t}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W_{0}^{1,2}}+||a^{1}||\,||\nabla w||_{2}\,||\nabla\bar{u_{D}}||_{2}+\\
+ &  & +||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\nabla(w-\bar{u_{D}})||_{2}+||\nabla w||_{2}||\,|b^{1}|\,|w-\bar{u_{D}}|\,||_{2}+||\nabla u^{2}||_{2}||\,|w-\bar{u_{D}}|\,|\bar{b}|\,||_{2}+\\
+ &  & +\underline{||\,|c^{1}|^{1/2}|w-\bar{u_{D}}|\,||_{2}^{2}+||\,|c^{1}|\,|\bar{u_{D}}|\,|w-\bar{u_{D}}|\,||_{1}}+||\,|\bar{c}|\,|u^{2}|\,|w-\bar{u_{D}}|\,||_{1}+\\
+ &  & +||\bar{f}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W^{1,2}}\leq
+\end{eqnarray*}
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\geq1/2\frac{d}{dt}||w-\bar{u_{D}}||_{2}^{2}+\alpha_{0}||\nabla w||$
+První krok, Holdera jsme použili.
+ Cíl je osamostatnit 
+\begin_inset Formula $w$
+\end_inset
+
+ (TODO proc??).
+ Použijeme trojúhelníkovou nerovnost a Youngovu nerovnost (i
+\begin_inset Formula $\epsilon$
+\end_inset
+
+-Younga).
+ Uděláme to po jednotlivých členech nerovnosti, z Younga a epsyounga budou
+ vypadávat konstanty, které nebudeme psát, takže znak "
+\begin_inset Formula $\lesssim$
+\end_inset
+
+" bude značit nerovnost až na konstanty u členů na pravé straně.
+ Z různých částí budou vypadávat stejné členy, které nakonec sečteme dohromady.
+ Po členech tedy:
+\end_layout
+
+\begin_layout Itemize
+První člen 
+\begin_inset Formula 
+\begin{eqnarray*}
+||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\nabla(w-\bar{u_{D}})||_{2} & \overset{\triangle}{\leq} & ||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\nabla w||_{2}+||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\bar{u_{D}}||_{2}\leq\\
+ & \overset{\epsilon-Young}{\lesssim} & ||\bar{a}||_{\infty}^{2}||\nabla u^{2}||_{2}^{2}+||\nabla w||_{2}^{2}+||\bar{a}||_{\infty}^{2}||\nabla u^{2}||_{2}^{2}+||\bar{u_{D}}||_{2}^{2}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $||\nabla w||_{2}||\,|b^{1}|\,|w-\bar{u_{D}}|\,||_{2}\overset{\text{Y}}{\lesssim}||\nabla w||_{2}^{2}+||\,|b^{1}|\,|w-\bar{u_{D}}|\,||_{2}^{2}\lesssim||\nabla w||_{2}^{2}+||b^{1}||_{\infty}^{2}\,||w-\bar{u_{D}}||_{2}^{2}$
+\end_inset
+
+ (Nutně jsme vytkli v 
+\begin_inset Formula $\infty$
+\end_inset
+
+-normě, protože Holdera jsme už předtím vyčerpali.
+ Je to OK, protože předpokládáme 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+ k času.)
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $||\,|c^{1}|^{1/2}|w-\bar{u_{D}}|\,||_{2}^{2}\leq||c^{1}||_{\infty\,}||w-\bar{u_{D}}||_{2}^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+\begin_inset Formula $||\nabla u^{2}||_{2}||\,|w-\bar{u_{D}}|\,|\bar{b}|\,||_{2}\leq||\nabla u^{2}||_{2}\,||w-\bar{u_{D}}||_{2}\,||\bar{b}||_{\infty}\overset{\text{Y}}{\lesssim}||\nabla u^{2}||_{2}^{2}\,||w-\bar{u_{D}}||_{2}^{2}+||\bar{b}||_{\infty}^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+DOD co se stalo s temahle clenama?: Nechybi pak v nasledujici rovnosti?
+ 
+\begin_inset Formula 
+\begin{eqnarray*}
+ &  & +||\bar{u_{D}}_{t}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W_{0}^{1,2}}+||a^{1}||\,||\nabla w||_{2}\,||\nabla\bar{u_{D}}||_{2}+||\bar{f}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W^{1,2}}\\
+ &  & ++||\,|c^{1}|\,|\bar{u_{D}}|\,|w-\bar{u_{D}}|\,||_{1}+||\,|\bar{c}|\,|u^{2}|\,|w-\bar{u_{D}}|\,||_{1}+
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nakonec dostaneme, sesypáním všeho dohromady na pravou stranu a sepsáním
+ nerovnosti pro levou stranu - ve tvaru kdy jsou vytknute veci tak, jak
+ je budeme chtit pro Gronwalla 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $\leq\eta()\beta()+p()$
+\end_inset
+
+":
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+1/2\frac{d}{dt}||w-\bar{u_{D}}||_{2}^{2}+\alpha_{0}||\nabla w|| & \leq L.S.=P.S.\leq & \underline{||w-\bar{u_{D}}||_{2}^{2}}_{\eta()}\,\underline{c(||c_{1}||_{\infty}+||b^{1}||_{\infty}^{2}+||\nabla u^{2}||_{2}^{2})}_{\beta()}\\
+ &  & +\underline{||\bar{a}||_{\infty}||\nabla u^{2}||_{2}^{2}+||\bar{u_{D}}||_{X}^{2}+||\bar{f}||_{X}^{2}+||\bar{b}||_{\infty}^{2}+||\bar{c}||_{\infty}}_{p()}
+\end{eqnarray*}
+
 \end_inset
 
 
@@ -3771,7 +4024,58 @@ Pak pro
 \end_inset
 
  máme 
-\begin_inset Formula $\eta(t)\leq\exp(\int_{0}^{T}\beta(\tau)\, d\tau)(\eta(0)+\int_{0}^{t})$
+\begin_inset Formula $\eta(t)\leq\exp(\int_{0}^{T}\beta(\tau)\, d\tau)(\eta(0)+\int_{0}^{t}p(\tau)\, d\tau)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
+Důkaz
+\end_layout
+
+\begin_layout Plain Layout
+...vynásobením 
+\begin_inset Formula $e^{-\int_{0}^{T}\beta(\tau)\, d\tau}$
+\end_inset
+
+ a zintegrováním.
+ (dod how?)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 1
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Paragraph*
+Silnější Gronwalllema
+\end_layout
+
+\begin_layout Plain Layout
+DOD!
+\end_layout
+
+\begin_layout Plain Layout
+Nechť ?
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula $z(t)+\eta'(t)\leq\beta(t)\eta(t)+p(t)$
 \end_inset
 
 
@@ -3779,6 +4083,293 @@ Pak pro
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Standard
+DOD co sme to kurna dokazali?
+\end_layout
+
+\begin_layout Subparagraph*
+Apriorní odhad
+\end_layout
+
+\begin_layout Standard
+Lze z toho dostat i apriorní odhad! Pokud 
+\begin_inset Formula $(a,b,c)^{1}=(a,b,c)^{2},\, f^{2}=0,\, u_{0}^{2}=0,\, u_{D}^{2}=0$
+\end_inset
+
+, pak 
+\begin_inset Formula $u^{2}=0$
+\end_inset
+
+ je nulové řešení, to dosadím do rovnosti (můžu, mám dvě řešení), spousta
+ věcí vypadne a to bude apriorní odhad.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $||u(t)-u_{D}(t)||\leq c\exp(\int_{0}^{T}||c||_{\infty}+||b||_{\infty}^{2}\, dt)\,(||u_{0}-u_{D}(0)||_{\infty}^{2}+\int_{0}^{T}||u_{D}||_{X}^{2}+||f||_{X}^{2}\, dt)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Apriorní odhad budu potřebovat i v důkazu existence.
+\end_layout
+
+\begin_layout Standard
+TODO udelat to s nelinearitou cely? +g(x)
+\end_layout
+
+\begin_layout Subsubsection*
+Důkaz existence Faedo Galerkin
+\end_layout
+
+\begin_layout Standard
+Diskretizujeme k prostoru, ale držíme spojité k čase.
+\end_layout
+
+\begin_layout Standard
+Najdeme 
+\begin_inset Formula $\{w_{i}\}_{i=1}^{\infty}$
+\end_inset
+
+ OG bázi 
+\begin_inset Formula $W_{0}^{1,2}(\Omega)$
+\end_inset
+
+, která je dokonce ON v 
+\begin_inset Formula $L^{2}(\Omega)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Existenci takové báze řeší vlastní čísla laplace v 
+\begin_inset Formula $\Omega$
+\end_inset
+
+: 
+\begin_inset Formula $-\triangle w_{i}=\lambda_{i}u_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $w_{i}=0$
+\end_inset
+
+ na 
+\begin_inset Formula $\delta\Omega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Pak n-tá Galerkinova aproximace bude 
+\begin_inset Formula $u^{n}=u_{D}+\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}$
+\end_inset
+
+ (diskretizujeme k prostoru, adoptujeme myšlenku, že řešení může být jak
+ ospojitá funkce času krát diskretizace prostoru).
+\end_layout
+
+\begin_layout Standard
+Slabá formulace pro ntou aproximaci 
+\begin_inset Formula $(WF)^{n}$
+\end_inset
+
+ pak vypadá takto:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\left\langle u_{t}^{n},w_{i}\right\rangle +\int_{\Omega}\nabla u^{n}\nabla w_{i}+b\nabla u^{n}w_{i}+cu^{n}w_{i}\, dx & = & \left\langle f,w_{i}\right\rangle \,\forall i=1...n,\,\forall\text{s.v. }t\in(0,T)\\
+u^{n}(0)-u_{D}(0) & = & p^{n}(u_{0}-u_{D}(0))
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+...kde 
+\begin_inset Formula $p^{n}$
+\end_inset
+
+ je ortogonální projekce 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ na 
+\begin_inset Formula $\{w_{i}\}_{i=1}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p^{n}(v)=\sum_{i=1}^{n}(\int_{\Omega}v\, w_{i}\, dx)w_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cíl je najít 
+\begin_inset Formula $u^{n}$
+\end_inset
+
+, co splňuje 
+\begin_inset Formula $(WF)^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+No a 
+\begin_inset Formula $(WF)^{n}$
+\end_inset
+
+ je systém ODE! Protože při označení 
+\begin_inset Formula $\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}=:S_{n}$
+\end_inset
+
+ a přepíšeme (dod co se tu stalo???):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\int_{\Omega}S_{n}w_{i}+a\nabla S_{n}\nabla w_{i}+b\nabla S_{n}w_{i}+cS_{n}w_{i}\, dx=\left\langle f,\, w_{i}\right\rangle -\left\langle u_{D}{}_{t},\, w_{i}\right\rangle -\int_{\Omega}a\nabla u_{D}\nabla w_{i}+b\nabla u_{D}w_{i}+cu_{D}w_{i}=:F_{i}\in L^{1}(0,T)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rozepsana Fi je: (dod proc? ,mozna to souvisi s predchozi rovnici kterou
+ nechapu)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $F_{i}=\sum_{j=1}^{n}\int_{\Omega}\frac{d}{dt}c_{j}^{n}(t)w_{j}w_{i}+ac_{j}^{n}\nabla w_{j}\nabla w_{i}+bc_{j}^{n}\nabla w_{j}w_{i}+\alpha c_{j}^{n}w_{j}w_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tedy
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{d}{dt}c_{i}^{n}(t)=F_{i}(t)+G_{i}(t,c^{n})$
+\end_inset
+
+, kde 
+\begin_inset Formula $G_{i}(t,c^{n}):=-\sum_{i=1}^{n}c_{j}^{n}\int_{\Omega}a\nabla w_{j}\nabla w_{i}+b\nabla w_{j}w_{i}+\alpha w_{j}w_{i}\, dx$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Víme 
+\begin_inset Formula $F_{i}\in L^{1}(0,T)$
+\end_inset
+
+, 
+\begin_inset Formula $G_{i}$
+\end_inset
+
+ lineární k 
+\begin_inset Formula $c_{j}^{n}$
+\end_inset
+
+ a mšřitelná k času.
+ Tedy 
+\begin_inset Formula $G_{i}$
+\end_inset
+
+ je Caratheodoryovská.
+ (Dokonce Lipschitzovská v 
+\begin_inset Formula $c^{n}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Počáteční data jsou 
+\begin_inset Formula $\sum_{i=1}^{n}c_{i}^{n}(0)w_{i}=p^{n}(u_{0}-u_{D}(0))=\sum_{i=1}^{n}w_{i}\int_{\Omega}(u_{0}-u_{D}(0))w_{i}\, dx$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+No a musí být 
+\begin_inset Formula $c_{i}^{n}(0):=\int_{\Omega}(u_{0}-u_{D}(0))w_{i}\, dx$
+\end_inset
+
+ (číslo).
+\end_layout
+
+\begin_layout Standard
+Máme ODe systém s počátečními hodnotami, existuje tedy řešení problému (dokonce
+ abs.
+ spojitý).
+\end_layout
+
+\begin_layout Standard
+Proč
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $G_{i}$
+\end_inset
+
+ lineární spojitá v 
+\begin_inset Formula $c$
+\end_inset
+
+, měřitelná v 
+\begin_inset Formula $t$
+\end_inset
+
+, fixed point theorem.
+ Existuje 
+\begin_inset Formula $T^{*}$
+\end_inset
+
+ maximální čas 
+\begin_inset Formula $0<T^{*}\leq T$
+\end_inset
+
+, že existuje AC 
+\begin_inset Formula $c^{n}$
+\end_inset
+
+ splňující ODE na 
+\begin_inset Formula $[0,T^{*}]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section*
 
 \end_layout
 
