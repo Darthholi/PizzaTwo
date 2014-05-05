@@ -1,0 +1,2383 @@
+%% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,a4paper,english,czech,12pt]{article}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\usepackage{fancybox}
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[unicode=true,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{pdftitle={2PDE},
+ pdfauthor={Martin Holi Holecek}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{amsthm,amsmath,amssymb,amscd,mathrsfs,url}
+%\usepackage[czech]{babel}
+\usepackage{verbatim}
+\usepackage{showkeys}
+\usepackage{xcolor}
+\usepackage{stackengine}
+\usepackage{lipsum}
+\usepackage{comment}
+%%\usepackage{MNsymbol} NIKDY!
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage[customcolors,shade]{hf-tikz}
+\usepackage{marginnote}
+\usepackage{esint}
+\setlength\textwidth{145mm}
+\setlength\textheight{247mm}
+\newcommand{\opdiv}{\mathop{\mathrm{div}}}
+\newcommand{\oprot}{\mathop{\mathrm{rot}}}
+
+\newcommand*\mnote[3][0pt]{%
+  \if l#2\reversemarginpar\def\pointer{\filledmedtriangleright}%
+    \def\stackalignment{r}\fi%
+  \if r#2\normalmarginpar\def\pointer{\filledmedtriangleleft}%
+    \def\stackalignment{l}\fi%
+  \marginpar{%
+    \topinset{%
+      \scalebox{1.5}{\textcolor{blue}{$\pointer$}}}{%
+      \belowbaseline[-1.5\baselineskip-#1]{%
+        \stackengine%
+          {-5pt}%
+          {\fcolorbox{blue}{white}{\parbox{1.8cm}%
+            {\vspace{3pt}\raggedright#3}}}%
+          {~\colorbox{white}{\sffamily Pozn.}}%
+          {O}%
+          {l}%
+          {F}%
+          {F}%
+          {S}%
+        }%
+      }{%
+      3ex+#1}{%
+      -2ex}%
+  }%
+}
+
+
+\tikzstyle{mybox} = [draw=red, fill=blue!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{fancytitle} =[fill=red, text=white]
+
+\makeatother
+
+\begin{document}
+
+\title{P{\footnotesize{izza}} D{\footnotesize{\v{e}lá}} R{\footnotesize{adost}}
+II LS}
+
+\maketitle
+
+\subsection*{Notace a pou¸ité triky}
+
+$\frac{\partial u}{\partial t}=u_{t}$
+
+$W^{-1,2}(\Omega)=(W^{1,2}(\Omega))^{\star}$
+
+trik s polovinou derivací kvadrátu $u_{t}(t)u(t)=\frac{1}{2}\frac{d}{dt}u(t)^{2}$
+
+Poincareho nerovnost
+
+Youngova nerovnost, $\overset{\text{Y}}{\lesssim}$
+
+$\epsilon$-Young $ab=\sqrt{\epsilon}a\, b/\sqrt{\epsilon}\overset{\text{Y}}{\leq}\epsilon a^{2}/2+b^{2}/(2\epsilon)$
+
+Holderova nerovnost
+
+Gronwallovo lemma (todo je tam asi trikrat v ruznejch formach nekde
+jenom dukaz nekde receno ale bez dukazu jak to kurna je)
+
+
+\subsection*{Rovnice vlny a vedení tepla}
+
+Initial boundary value problem.
+
+Máme $T>0$, $\Omega\subseteq\mathbb{R}^{d}$ otev\v{r}enou, omezenou.
+
+\[
+f:\,(0,T)\times\Omega\rightarrow\mathbb{R},\, u_{D}:\,(0,T)\times\Gamma_{D}\rightarrow\mathbb{R},\,\sigma:\,(0,T)\times\Gamma_{N}\rightarrow\mathbb{R}
+\]
+
+
+\[
+K:\,(0,T)\times\Gamma_{N}\rightarrow\mathbb{R},\,\Gamma_{D},\Gamma_{N}\subseteq\delta\Omega
+\]
+
+
+Cíl - najít $u:\,(0,T)\times\Omega\rightarrow\mathbb{R}$.
+
+
+\paragraph*{Rovnice tepla - parabolická}
+
+\[
+\begin{array}{rcll}
+u_{t}-\triangle u & = & f & \textrm{v}\, Q_{T}:=(0,T)\times\Omega\\
+u & = & u_{D} & \textrm{v}\,(0,T)\times\Gamma_{D}\\
+\frac{\partial u}{\partial n}+\sigma u & = & K & \textrm{v}\,(0,T)\times\Gamma_{N}\\
+u(0,x) & = & u_{0}(x) & \textrm{s.v. v }\Omega
+\end{array}
+\]
+
+
+
+\paragraph*{Rovnice vlny - hyperbolická}
+
+\begin{equation*}
+\begin{aligned}[c] 
+u_{tt}-\triangle u &=f &...\textrm{v}\, Q_{T}:=(0,T)\times\Omega \\
+u&=u_{D}\,&...\textrm{v}\,(0,T)\times\Gamma_{D} \\
+\frac{\partial u}{\partial n}+\sigma u&=K\,&...\textrm{v}\,(0,T)\times\Gamma_{N} \\
+u(0,x)&=u_{0}(x)\,&...\,\textrm{s.v. v }\Omega \\
+u_{t}(0,x)&=v_{0}(x)\,&...\,\textrm{s.v. v }\Omega \\
+\end{aligned}
+\end{equation*} 
+
+
+\paragraph*{Rozdíl v t\v{e}ch rovnicích je v kvadratickym \v{c}lenu. V propagaci.
+Konkrétní d\r{u}sledky:}
+\begin{enumerate}
+\item Vlnová rovnice nevidí \v{c}asový sm\v{e}r, rovnice tepla ano.
+\item Rovnice tepla má vlastnost zhlazení. Zatímco vlnová rovnice propaguje
+singularity.
+\item Rovnice tepla jde do equilibria pro $t\rightarrow\infty$. Vlny ne.
+\end{enumerate}
+
+\paragraph*{Pro\v{c}}
+
+DOD rekneme si co tady delame? Je to motivace? Cast pisemky? Nebo
+je to ukazka postupu jen pro spojity?
+
+
+\paragraph*{Vlnová rovnice a \v{c}asový sm\v{e}r}
+
+Zavedeme $\tilde{u}(t)=u(T-t)$, resp se zna\v{c}ením ($f(t)\simeq f(t,x),\, f:\,(0,T)\rightarrow X\,\textrm{- B.P.}$)
+je to i funcke prostoru. A \v{r}e¨í vlnovou rovnici - dosazením a
+zderivováním (znamínko se dvojzderivováním zru¨í):
+
+\begin{eqnarray*}
+\tilde{u_{tt}}(t)-\triangle\tilde{u}(t) & = & u_{tt}(T-t,x)-\triangle u(T-t,x)=f(T-t,x)\\
+\tilde{u} & = & 0\,\textrm{na }(0,T)\times\Gamma_{D}
+\end{eqnarray*}
+
+
+... tj dle p\v{r}edpokladu a zbývá dodat po\v{c}podmínku $\tilde{u}(0)=u(T-0)=u(T)$.
+Pak $\tilde{u_{t}}(0)=-u_{t}(T-0)=-u_{t}(T)$. To znamená, ¸e umím
+li vy\v{r}e¨it problém pro po\v{c}áte\v{c}ní stav, umím i dostat po\v{c}áte\v{c}ní
+stav z koncového stavu.
+
+
+\paragraph*{Rovnice tepla a \v{c}asový sm\v{e}r}
+
+Podobné úpravy ale s jiným záv\v{e}rem:
+
+\[
+\begin{array}{c}
+\tilde{u_{t}}(t)+\triangle\tilde{u}(t)=-u_{t}(T-t,x)+\triangle u(T-t,x)=-f(T-t,x)\\
+\tilde{u}=0\,\textrm{na }(0,T)\times\Gamma_{D}\\
+\tilde{u}(0)=u(T-0)=u(T)
+\end{array}
+\]
+
+
+Tedy kdy¸ obrátíme tok \v{c}asu, tak se rovnice zm\v{e}ní - mínus
+pravá strana! Proto se tohle jmenuje zp\v{e}tná rovnice tepla.
+
+Kdy¸ tam mam $-\triangle u$ jdu dop\v{r}ed us \v{c}asem, kdy¸ tam
+mám $+\triangle u$, jdu z finálního dozadu.
+
+
+\paragraph*{Zhlazení a dosa¸ení equilibira}
+
+K t\v{e}mto fakt\r{u}m se dostaneme pomocí apriorních odhad\r{u}.
+
+
+\subparagraph*{Jak to ud\v{e}lat - první apriorní odhad}
+\begin{itemize}
+\item rovnice tepla - testujeme pomocí $u$
+\item rovnice vlny - testujeme pomocí $u_{t}$
+\end{itemize}
+
+\paragraph*{Aprioriní odhad rovnice tepla}
+
+Vynásobíme (``otestujeme\char`\"{}) $u(t)$ s fixním $t$ a zintegrujeme:
+\[
+\int_{\Omega}u_{t}(t)\, u(t)-\triangle u(t)\, u(t)\, dx=\int_{\Omega}f\, u(t)\, dx
+\]
+
+
+...p\v{r}epí¨eme:
+
+\[
+\int_{\Omega}1/2\,\frac{d}{dt}|u(t)|^{2}+|\nabla u(t)|^{2}\, dx=<f(t),\, u(t)>_{(W_{0}^{1,2}(\Omega))^{\star},W_{0}^{1,2}(\Omega)}
+\]
+
+
+...a dostáváme rovnici energie:
+
+\[
+1/2\,\frac{d}{dt}||u(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}=<f(t),\, u(t)>
+\]
+
+
+Apriorní odhad odvodíme z rovnice energie pomocí nerovnosti na pravou
+stranu:
+
+\ovalbox{\begin{minipage}[t]{0.6\columnwidth}%
+\begin{eqnarray*}
+<f(t),\, u(t)> & \leq & ||f(t)||_{(W_{0}^{1,2})^{\star}}||\nabla u(t)||_{1,2}\leq\\
+ & \leq & \frac{||f(t)||_{2}^{2}}{2}+\frac{||\nabla u(t)||_{2}^{2}}{2}
+\end{eqnarray*}
+%
+\end{minipage}}%
+\begin{minipage}[c]{0.3\columnwidth}%
+(Poincarého nerovností upravíme dualitu a pou¸ijeme Youngovu nerovnost.)%
+\end{minipage}
+
+Nerovnost aplikujeme na pravou stranu, po p\v{r}esunu \v{c}lenu s
+gradientem na levou stranu dostaneme v¨ude poloviny, tak¸e po vynásobení
+dv\v{e}ma:
+
+\[
+\frac{d}{dt}||u(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}\leq||f(t)||_{(W_{0}^{1,2})^{\star}}^{2}
+\]
+
+
+...co¸ zintegrujeme od $0$ do $t_{0}$, \v{c}len s $u(0)$ dáme na
+pravou stranu (proto¸e se jedná o po\v{c}áte\v{c}ní podmínku):
+
+\[
+||u(t_{0})||_{2}^{2}+\int_{0}^{t_{0}}||\nabla u(t)||^{2}\, dt\leq\int_{0}^{t_{0}}||f(t)||_{(W_{0}^{1,2})^{\star}}^{2}\, dt+||u(0)||_{2}^{2}
+\]
+
+
+...a proto¸e platí $\forall t_{0}\in(0,T)$: DOD prec je esssup?
+
+\[
+\underset{t\in(0,T)}{essup}||u(t)||_{2}^{2}+\int_{0}^{T}||\nabla u(t)||^{2}\, dt\leq\int_{0}^{T}||f(t)||_{(W_{0}^{1,2})^{\star}}^{2}\, dt+||u_{0}||_{2}^{2}
+\]
+
+
+...co¸ zapsáno v normách Bochnerových prostor\r{u} (zintegrovaný gradient
+dá celou normu): (DOD hmmm proc?)
+
+\[
+||u(t)||_{L^{\infty}(0,\, T,\, L^{2}(\Omega))\cap L^{2}(0,\, T,\, W_{0}^{1,2}(\Omega))}^{2}\leq||u_{0}||_{2}^{2}+||f||_{L^{2}(0,\, T,\,(W_{0}^{1,2}(\Omega))^{\star})}^{2}
+\]
+
+
+
+\paragraph*{Odhad pro $u_{t}$}
+
+Rovnici $u_{t}=\triangle u+f$ dosadíme do vyjád\v{r}ení normy derivace
+(druhá rovnost), rozd\v{e}líme a parpartes hodíme laplace na testovací
+(t\v{r}etí rovnost):
+
+\[
+||u_{t}(t)||_{(W_{0}^{1,2}(\Omega))^{\star}}=\sup_{\begin{array}{c}
+\varphi\in W_{0}^{1,2}(\Omega)\\
+||\varphi||\leq1
+\end{array}}<u_{t}(t),\,\varphi>=\sup<\triangle u(t)+f,\,\varphi>=\sup<f(t),\,\varphi>-\int_{\Omega}\nabla u(t)\,\nabla\varphi\leq||f(t)||_{(W^{1,2}(\Omega))^{\star}}+||\nabla u(t)||_{2}
+\]
+
+
+Dostaneme (DOD jak posledni rovnost radek vys a jak tenhle radek?)
+
+\[
+||u_{t}(t)||_{(W_{0}^{1,2}(\Omega))^{\star}}^{2}\leq2(||f(t)||_{(W^{1,2}(\Omega))^{\star}}^{2}+||\nabla u(t)||_{2}^{2})
+\]
+
+
+Zintegrujeme od $0$ do $T$:
+
+\[
+\int_{0}^{T}||u_{t}(t)||_{(W_{0}^{1,2}(\Omega))^{\star}}^{2}\, dt\leq2\int_{0}^{T}(||f(t)||_{(W^{1,2}(\Omega))^{\star}}^{2}+||\nabla u(t)||_{2}^{2})\, dt
+\]
+
+
+a udelame DOD nejakou podivnou upravu WTF?:
+
+\[
+\leq10\int_{0}^{T}(||f(t)||_{(W^{1,2}(\Omega))^{\star}}^{2}\, dt+||u_{0}||_{2}^{2})
+\]
+
+
+První aprioriní odhad: DOD v tom je i to co sme odvodili pro u, nebo
+odkud to teda mame? nechybi tam exponent na druhou u pravy strany:?
+
+\[
+||u||_{W^{1,2}(0,\, T,\, W_{0}^{1,2}(\Omega)^{\star})\cap L^{2}(0,\, T,\, W_{0}^{1,2}(\Omega))}^{2}\leq c(||u_{0}||_{2}+||f||_{L^{2}(0,\, T,\,(W_{0}^{1,2}(\Omega))^{\star})})
+\]
+
+
+
+\paragraph*{Vylep¨ení}
+
+(DOD mam si zapamatovat jen vylepseni, nebo to predtim bylo nejak
+potreba?)
+
+DOD - Delame ty upravy algebraicky a predpokladame ze jdou delat formalne
+- co to znamena? Mame se to ucit? Co tim teda dokazeme? neni to jenom
+motivace teda nebo jakou to ma ulohu?
+
+Budu testovat $u_{t}$, zintegruju p\v{r}ez $\Omega$ a perpartes: 
+
+\begin{minipage}[t]{0.65\columnwidth}%
+\begin{eqnarray*}
+\int_{\Omega}u_{t}(t)\, u_{t}(t)-\triangle u(t)\, u_{t}(t)\, dx & = & \int_{\Omega}f\, u_{t}(t)\, dx\\
+\int_{\Omega}|u_{t}(t)|^{2}-\nabla u(t)\,\nabla u_{t}(t)\, dx & = & \int_{\Omega}f\, u_{t}(t)\, dx\\
+\int_{\Omega}|u_{t}(t)|^{2}+\frac{1}{2}\frac{d}{dt}|\nabla u(t)|^{2}\, dx & = & \int_{\Omega}f\, u_{t}(t)\, dx\\
+||u_{t}(t)||_{2}^{2}+\frac{1}{2}\frac{d}{dt}||\nabla u(t)||_{2}^{2} & = & \int_{\Omega}f\, u_{t}(t)\, dx
+\end{eqnarray*}
+%
+\end{minipage}%
+\begin{minipage}[c]{0.33\columnwidth}%
+Budu testovat $u_{t}$, zintegruju p\v{r}ez $\Omega$.
+
+Na druhý \v{c}len jsme aplikovali perpartes a trik $a(t)\frac{\partial a(t)}{\partial t}=\frac{1}{2}\frac{d}{dt}(a(t))^{2}$
+a upravili do podoby normy.
+
+DOD jaka norma L2?%
+\end{minipage}
+
+Dostáváme druhý energetický odhad.
+
+Pro odhad pravé strany pou¸ijeme stejný odhad a postup jako vý¨e ($<f(t),\, u(t)>\leq...$
+p\v{r}esun na druhou stranu a vynásobení dv\v{e}ma):
+
+\[
+||u_{t}(t)||_{2}^{2}+\frac{d}{dt}||\nabla u(t)||_{2}^{2}\leq||f(t)||_{2}^{2}
+\]
+
+
+P\v{r}eintegrujeme a po\v{c}áte\v{c}ní podmínku p\v{r}esuneme na pravou
+stranu:
+
+\[
+\int_{0}^{t_{0}}||u_{t}(t)||_{2}^{2}\, dt+||\nabla u(t_{0})||_{2}^{2}\leq\int_{0}^{t_{0}}||f(t)||_{2}^{2}\, dt+||\nabla u_{0}||_{2}^{2}
+\]
+
+
+P\v{r}echodem $\forall t_{0}$ dostaneme lep¨í odhad ne¸ p\v{r}edtím:
+
+\[
+||u||_{W^{1,2}(0,\, T,\, L^{2}(\Omega))\cap L^{\infty}(0,\, T,\, W_{0}^{1,2}(\Omega))}\leq c(||u_{0}||_{2}^{2}+||f||_{L^{2}(0,\, T,\, L^{2}(\Omega))})
+\]
+
+
+(dod pokud je to ten samej postup tak to udelej s barvnejma zmenama
+najednou! a pak ty zavery podle barev.)
+
+
+\subparagraph*{Zhlazovací vlastnost}
+
+Zalo¸ená na nerovnosti ihned po druhém energetickém odhadu - $||u_{t}(t)||_{2}^{2}+\frac{d}{dt}||\nabla u(t)||_{2}^{2}\leq||f(t)||_{2}^{2}$
+vynásobíme $t$ (první \v{r}ádek), zintegrujeme (druhý \v{r}ádek)
+a pou¸ijeme perpartes (t\v{r}etí \v{r}ádek):
+
+(DOD jak jsme pouzili to perpartes eh?)
+
+\begin{eqnarray*}
+||u_{t}(t)||_{2}^{2}t+t\frac{d}{dt}||\nabla u(t)||_{2}^{2} & \leq & t||f(t)||_{2}^{2}\\
+\int_{0}^{t_{0}}||u_{t}(t)||_{2}^{2}t\, dt+\int_{0}^{t_{0}}t\frac{d}{dt}||\nabla u(t)||_{2}^{2}\, dt & \leq & \int_{0}^{t_{0}}t||f(t)||_{2}^{2}\, dt\\
+\int_{0}^{t_{0}}||u_{t}(t)||_{2}^{2}t\, dt+t_{0}||\nabla u(t_{0})||_{2}^{2} & \leq & \int_{0}^{t_{0}}||\nabla u(t_{0})||_{2}^{2}\, dt+\int_{0}^{t_{0}}t||f(t)||_{2}^{2}\, dt
+\end{eqnarray*}
+
+
+Vyd\v{e}líme li $t_{0}$, dostaneme $\fint$ a pravou stranu kontrolujeme
+i pro o¨klivá data. \v{C}len $\nabla u(t_{0})$ sice exploduje pro
+$t_{0}\rightarrow0$, ale pro v\v{e}t¨í interval to kontrolujeme:
+(DOD odkud spadla tahle radka?:)
+
+\[
+\forall\epsilon\forall t\geq\epsilon\,\int_{0}^{T}||u_{t}(t)||_{2}^{2}t\, dt+||\nabla u(t)||_{2}^{2}\, dt\leq c/\epsilon(||u_{0}||_{2}^{2}+\int_{0}^{T}||f(t)||_{2}^{2}\, dt)
+\]
+
+
+A to je p\v{r}esn\v{e} zhlazovací vlastnost - pro kladné \v{c}asy
+je to kontrolované.
+
+
+\paragraph*{2. Vylep¨ení}
+
+Zderivujeme podle $t$ a testujeme funkcí $u_{t}$.
+
+\[
+u_{tt}-\triangle u_{t}=f_{t}
+\]
+
+
+zintegrujeme
+
+\[
+\int_{\Omega}u_{tt}u_{t}-\triangle u_{t}u_{t}\, dx=\int_{\Omega}f_{t}u_{t}\, dx
+\]
+
+
+p\v{r}ejdeme trikem s polovinou derivace kvadrátu k normám. Na pravou
+stranu op\v{e}t nerovnost ($<f(t),\, u(t)>\leq...$ p\v{r}esun na
+druhou stranu a vynásobení dv\v{e}ma):
+
+\[
+1/2\frac{d}{dt}||u_{t}(t)||_{2}^{2}+||\nabla u_{t}(t)||_{2}^{2}=\int_{\Omega}f_{t}(t)u_{t}(t)\, dx\leq c||f_{t}(t)||_{2}^{2}+\frac{||\nabla u_{t}||_{2}^{2}}{2}
+\]
+
+
+(DOD ta konstanta tady je zas jedna polovina ne u toho f?) (todo ud\v{e}lat
+barevn\v{e} do p\r{u}vodních)
+
+kde finální nerovnost bude:
+
+\[
+\frac{d}{dt}||u_{t}(t)||_{2}^{2}+||\nabla u_{t}(t)||_{2}^{2}\leq||f_{t}(t)||_{2}^{2}
+\]
+
+
+\[
+\underset{t\in(0,T)}{essup}||u_{t}(t)||_{2}^{2}+\int_{0}^{T}||\nabla u_{t}(t)||_{2}^{2}\, dt\leq\int_{0}^{T}||f(t)||_{2}^{2}\, dt+||u_{t}(0)||_{2}^{2}\leq
+\]
+
+
+...ale $u_{t}$ není p\v{r}edepsáno, nicmén\v{e} jí umíme vyjád\v{r}it
+$u_{t}(0)=\triangle u(0)+f(0)=\triangle u_{0}+f(0)$:
+
+$\leq||f(0)||_{2}^{2}+\int_{0}^{T}||f_{t}||_{2}^{2}+||u_{0,0}||_{2,2}$
+DOD co je 0,0 ?
+
+ale pot\v{r}ebuju víc regularity. Nicmén\v{e} lze lokáln\v{e} to ud\v{e}lat.
+
+Vynásobím $(t-\epsilon)_{+}$a zintegruju - z\r{u}stane tam $\int_{\epsilon}^{T}||u_{t}(t)||_{2}^{2}$
+a to bude kontrolováno po\v{c}áte\v{c}ními daty, ale exploduje pro
+$\epsilon\rightarrow0$. ``Lokáln\v{e}'' znamená - ne k \v{c}asu
+0, anebo musím mít víc regularity.
+
+
+\paragraph*{3.Vylep¨ení - DOD co se tu dela??}
+
+ze vztahu $-\triangle u(t)=f(t)-u_{t}(t)$ pro fixní $t$ máme $||u(t)||_{2,2}^{2}\leq c(\Omega)||f(t)-u_{t}(t)||_{2}^{2}$
+(dod eh proc?)
+
+a dokázali sme ¸e $||u(t)||_{2,2}^{2}\leq c(\Omega)||f(t)-u_{t}(t)||_{2}^{2}\leq c$
+(dod z ceho?)
+
+a proto¸e platí $\forall t$ $\underset{t\in(\epsilon,T)}{esssup}||u(t)||_{2,2}^{2}\leq c(\Omega)||f(t)-u_{t}(t)||_{2}^{2}\leq c$,
+tahle nerovnost vy¸aduje $\Omega\in C^{1,1}$ (proc essup? ehhhh?)
+
+Chování pro $t\rightarrow\infty$ - juknu na 1. nerovnost:
+
+$\frac{d}{dt}||u(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}\leq||f(t)||_{(W^{1,2})^{\star}}^{2}$
+Gronwall lema
+
+$\frac{d}{dt}||u(t)||_{2}^{2}+\lambda_{1}||\nabla u(t)||_{2}^{2}\leq||f(t)||_{(W^{1,2})^{\star}}^{2}$
+vynásobíme $e^{\lambda_{1}t}$
+
+$\frac{d}{dt}(e^{\lambda_{1}t}||u(t)||_{2}^{2})\leq||f(t)||_{(W^{1,2})^{\star}}^{2}e^{\lambda_{1}t}$
+
+$||u(t)||_{2}^{2}\leq e^{-\lambda_{1}t}||u_{0}||_{2}^{2}+e^{-\lambda_{1}t}\int_{0}^{t}||f(\tau)||_{(W^{1,2})^{\star}}e^{\lambda_{1}t}d\tau$
+
+Pro $t\rightarrow\infty$ tam \v{c}leny s exponenciálou a mínus nejsou.
+Rovnice je navíc lineární, vezmu li dv\v{e} a ode\v{c}tu, pravá strana
+tam nebude. TO dává unikátnost.
+
+Pokud mám \v{r}e¨ení $-\triangle u=f$ nezávislou na \v{c}ase a $(u-w)_{t}-\triangle(u-w)=0$
+a pt¸e nezávisí na \v{c}ase, je nula.
+
+$(u-w)(0)=(u_{0}-w)$, $||u(t)-w||_{2}^{2}\leq e^{-\lambda_{1}}||u_{0}-w||_{2}^{2}$
+
+$ $
+
+
+\subsubsection*{Aprioriní odhad rovnice vlny $\sim$}
+
+Testujeme $u_{t}$. Pou¸ijeme trik s derivací kvadrátu na první \v{c}len
+a na druhý \v{c}len perpartes: (dod nechybi v prostrednim radku dvojka
+dole u normy? Jak jsme dostali treti radek?)
+
+\begin{eqnarray*}
+\int_{\Omega}u_{tt}(t)u_{t}(t)-\triangle u(t)u_{t}(t)\, dx & = & \int_{\Omega}f(t)u_{t}(t)\, dx\\
+\int_{\Omega}\frac{1}{2}\frac{d}{dt}||u_{t}(t)||^{2}-\nabla u(t)\frac{\partial}{\partial t}\nabla u(t)\, dx & = & \int_{\Omega}f(t)u_{t}(t)\, dx\\
+\frac{1}{2}\frac{d}{dt}(||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}) & = & \int_{\Omega}f(t)u_{t}(t)\, dx
+\end{eqnarray*}
+
+
+DOD treti rovnice je tam najednou plus. Odkad?
+
+Co¸ (t\v{r}etí \v{r}ádek) je energetická rovnost pro vlnovou rovnici.
+Zdarma z ní vypadne jednozna\v{c}nost.
+
+
+\subparagraph*{Ustálený stav}
+
+M\r{u}¸e se \v{r}e¨ení rovnice vlny blí¸it ustálenému stavu? Nem\r{u}¸e
+práv\v{e} kv\r{u}li energetické rovnosti!
+
+Kdyby existoval ustálený stav $-\triangle w=f,\, f(t)=\text{const}$,
+tak \v{r}e¨í i úlohu, proto¸e nezávisí na \v{c}ase (\v{c}len $u_{tt}=0$)
+no a kdy¸ od sebe ode\v{c}tu \v{r}e¨ení a ustálený stav, dostanu $(u-w)_{tt}-\triangle(u-w)=0$,
+no ale energetická rovnost se zachová v \v{c}ase. (DOD odkud je tahle
+rovnost? Nevidim ty rovnitka :( )
+
+\[
+||u_{t}(t)||_{2}^{2}+||\nabla u(t)-\nabla w(t)||_{2}^{2}=||u(t)-w(t)||_{2}^{2}=||v_{0}||_{2}^{2}+||\nabla u_{0}-\nabla w||_{2}^{2}
+\]
+
+
+Levá strana se zachovává, pravá strana na \v{c}ase nezále¸í a jde
+k nule. Co¸ je spor. Tedy \v{r}e¨ení nejde k ustálenému stavu.
+
+
+\subparagraph*{Kdy¸ nezávisí na \v{c}ase, máme zákon zachování}
+
+Kdy¸ nezávisí na $t$, je to celý zákon zachování - p\v{r}ehodíme
+pravou stranu pod derivaci na levé stran\v{e}:
+
+\[
+\frac{d}{dt}(||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}-2\int_{\Omega}fu(t)\, dx)=0
+\]
+
+
+...tohle celý se zachovává. DOD nechybi mi tam na pravy strane derivace
+u podle t?
+
+
+\subparagraph*{Te\v{d} ¸e na \v{c}ase závisí}
+
+Vezmeme energetickou rovnost a na pravou stranu Holderovu nerovnost,
+dostaneme: (dod kam se podela jedna polovina?)
+
+\[
+(((\frac{1}{2})))\frac{d}{dt}(||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2})\leq||f(t)||_{2}^{2}+||u_{t}(t)||_{2}^{2}\leq||f(t)||_{2}^{2}+||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}
+\]
+
+
+A te\v{d} Gronwallovo lemma: vynásobíme $e^{-t}$: {[}todo udelat
+nahoru spesl gronwallovo lemma dukaz{]}
+
+\[
+\frac{d}{dt}(e^{-t}(||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}))\leq e^{-t}||f(t)||_{2}^{2}
+\]
+
+
+...zintegrujeme p\v{r}ez \v{c}as: (dod jak jsme tohle dostali?)
+
+\[
+||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}\leq e^{t}(||u_{t}(0)||_{2}^{2}+||\nabla u(0)||_{2}^{2}+\int_{0}^{t}e^{-\tau}||f(\tau)||_{2}^{2}\, d\tau)
+\]
+
+
+...dod eh?:
+
+\[
+\underset{t\in(0,T)}{essup}||u_{t}(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2}\leq e^{t}(||v_{0}||_{2}^{2}+||\nabla u_{0}||_{2}^{2}+\int_{0}^{T}||f(t)||_{2}^{2}\, dt
+\]
+
+
+tedy (to je mimochodem prostor funkcí, kde se má \v{r}e¨ení hledat):
+
+\[
+||u||_{W^{1,\infty}(0,\, T,\, L^{2}(\Omega))\cap L^{\infty}(0,\, T,\, W_{0}^{1,2}(\Omega))}\leq c(T,\Omega)(||v_{0}||_{2}+||u_{0}||_{1,2}+||f||_{L^{2}(0,\, T,\, L^{2}(\Omega))})
+\]
+
+
+Cht\v{e}l bych odhadnout $u_{tt}$, pou¸ijeme vyjád\v{r}ení pomocí
+supréma duality a dosadíme rovnici (druhé rovnítko) a perpartes (t\v{r}etí
+rovnítko): (dod u parabolickyho pripadu bylo uplne vpravo u normy
+f $(W^{1,2}(\Omega))^{\star}$ a ted je tam jen $2$ proc? )
+
+\[
+||u_{tt}(t)||_{(W_{0}^{1,2}(\Omega))^{\star}}=\sup_{||\varphi||_{1,2}\leq1}<u_{tt}(t),\,\varphi>=\sup<\triangle u(t)+f,\,\varphi>=\sup<f(t),\,\varphi>-\int_{\Omega}\nabla u(t)\,\nabla\varphi\, dx\leq||f(t)||_{2}+||\nabla u(t)||_{2}
+\]
+
+
+Umocn\v{e}no na druhou stále platí, na pravou stranu pou¸ijeme Younga:
+
+\[
+||u_{tt}(t)||_{(W_{0}^{1,2}(\Omega))^{\star}}^{2}\leq(||f(t)||_{2}+||\nabla u(t)||_{2})^{2}\leq2(||f(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2})
+\]
+
+
+... a zintegrujeme: (DOD ma u toho W bejt dole nula nebo se nekam
+ztratila?)
+
+\[
+\int_{0}^{T}||u_{tt}(t)||_{(W^{1,2}(\Omega))^{\star}}^{2}\, dt\leq2\int_{0}^{T}(||f(t)||_{2}^{2}+||\nabla u(t)||_{2}^{2})\, dt\leq c(f,u_{0},v_{0})
+\]
+
+
+Tedy pravá strana závisí jen na datech a dostáváme první apriorní
+odhad:
+
+\[
+||u||_{W^{2,2}(0,\, T,\, W_{0}^{1,2}(\Omega)^{\star})\cap W^{1,\infty}(0,\, T,\, L^{2}(\Omega))\cap L^{\infty}(0,\, T,\, W_{0}^{1,2}(\Omega))}\leq c(T,\Omega,f,u_{0},v_{0})
+\]
+
+
+
+\paragraph*{2. Vylep¨ení}
+
+Zderivujeme podle $t$ a testujeme funkcí $u_{t}$: todo doplnit postup
+dle predchoziho?
+
+$u_{ttt}-\triangle u_{t}=f_{t}\,|\cdot u_{tt}$
+
+$\frac{1}{2}\frac{d}{dt}(||u_{tt}(t)||_{2}^{2}+||\nabla u_{t}(t)||_{2}^{2})=\int_{\Omega}f_{t}u_{tt}\, dx$ 
+
+$||u_{tt}(t)||_{2}^{2}+||\nabla u_{t}(t)||_{2}^{2}\leq e^{t}(\int_{0}^{T}||f_{t}(\tau)||^{2}\, d\tau+||u_{tt}(0)||_{2}^{2}+||\nabla u_{t}(0)||_{2}^{2})$
+
+$u_{tt}$si p\v{r}e\v{c}tu z rovnic $u_{tt}(0)=\triangle u(0)+f(0)$:
+
+$\leq e^{t}\int_{0}^{T}||f_{t}(\tau)||^{2}\, d\tau+||\nabla v_{0}||_{2}^{2}+||f(0)||_{2}^{2}+||u_{0}||_{2,2}^{2})$
+
+Te\v{d} pot\v{r}ebujeme místo $||u_{0}||_{1,2}$ $||u_{0}||_{2,2}$,
+nemá to zhlazovací vlastno, z hezkejch dat d\v{e}lá hnusný data.
+
+Souvisí s tím, ¸e vlnová rovnice nevidí tok \v{c}asu (dod jakze je
+ta argumentace?).
+
+dod ``ted se mzlepsil prostorovou regularitu\char`\"{} - what happened?
+
+
+\section*{Bochnerovy prostory}
+
+Funkce budou zobrazovat do $X$ - Banachova prostoru.
+
+$C([0,T],\, X):=\{u:\,(0,T)\rightarrow X,\,\text{¸e }u(t)\,\text{je spojitá}\}$
+
+Slabá m\v{e}\v{r}itelnost
+
+Bochner\r{u}v integrál
+
+...
+
+
+\section*{Sobolev Bochnerovy prostory}
+
+
+\paragraph*{Slabá derivace funkce do B.P.}
+
+Nech\v{t} X je Banach\r{u}v, $T>0$, $u\in L^{1}(0,\, T,\, X)$. 
+
+$u_{t}$ je slabá derivace $u$ $\iff$ $\int_{0}^{T}u(t)\,\varphi(t)\, dt=-\int_{0}^{T}u(t)\,\varphi'(t)\, dt\,...\forall\varphi\in D(0,T)$
+
+(Integrál je Bochner\r{u}v integrál.)
+
+
+\paragraph*{Sobolev Bochner\r{u}v prostor}
+
+Nech\v{t} X je Banach\r{u}v a $T>0$. Definujeme
+
+\[
+W^{1,p}(0,\, T,\, X):=\{u\in L^{p}(0,\, T,\, X),\,\text{slabá derivace }u_{t}\in L^{p}(0,\, T,\, X)\}
+\]
+
+
+
+\subparagraph*{Vlastnosti\textmd{ $W^{1,p}(0,\, T,\, X)$:}}
+\begin{itemize}
+\item Banch\r{u}v pro $\forall p\in[1,\infty]$ s normou: (DOD co znamena
+ta vlnovka?) 
+\[
+||u||_{W^{1,p}(0,\, T,\, X)}=||u||_{L^{p}(0,\, T,\, X)}+||u_{t}||_{L^{p}(0,\, T,\, X)}\sim(||u||^{p}+||u_{t}||^{p})^{1/p}
+\]
+
+\item Separabilní pokud $p\in[1,\infty)\,\&\, X$ separabilní
+\item Reflexivní pokud $p\in(1,\infty)\,\&\, X,\, X^{\star}$ jsou reflexivní
+a separabilní
+\item Hilbert\r{u}v pokud $p=2\,\&\, X$ je Hilbert\r{u}v. Skalární sou\v{c}in
+je 
+\[
+(u,\, v)_{W^{1,2}(0,\, T,\, X)}=\int_{0}^{T}(u(t),\, v(t))_{X}\, dt
+\]
+
+\end{itemize}
+
+\paragraph*{Vno\v{r}ení hustota roz¨í\v{r}ení}
+
+Nech\v{t} X je Banach\r{u}v a $p\in[1,\infty]$, pak
+
+
+\subparagraph*{Vno\v{r}ení}
+
+\[
+W^{1,p}(0,\, T,\, X)\hookrightarrow C^{0,\,1-1/p}([0,\, T],\, X)
+\]
+
+
+
+\subparagraph*{Hustota}
+
+\begin{eqnarray*}
+\overline{\{C^{\infty}([0,\, T],\, X)\}}\begin{array}{c}
+W^{1,p}(0,\, T,\, X)\\
+\\
+\end{array} & = & W^{1,p}(0,\, T,\, X)\,...\text{pro}\, p<\infty\\
+\overline{\{C^{\infty}([0,\, T],\, X)\}}^{\star}\begin{array}{l}
+W^{1,p}(0,\, T,\, X)\\
+\\
+\end{array} & = & W^{1,\infty}(0,\, T,\, X)
+\end{eqnarray*}
+
+
+
+\subparagraph*{Roz¨í\v{r}ení}
+
+\[
+\exists E:\, W^{1,p}(0,\, T,\, X)\rightarrow W^{1,p}(\mathbb{R},\, X)
+\]
+ lineární a omezený (spojitý) operátor, ¸e $\forall u\, Eu(t)=u(t)\,\forall t\in(0,T)$
+
+
+\subparagraph*{Pro\v{c}}
+
+D\r{u}kazy stejné jako v PDR I, problém je, ¸e nevím jak to zhladit
+u hranice. Uvnit\v{r} sta\v{c}í molifikovat, u kraje musim ¨oupnout
+aby bydlelo v $(2\epsilon,\infty)$, te\v{d} to mam vn\v{e} a m\r{u}¸u
+to zhladit, jde o to abych se nedostal mimo interval.
+
+
+\paragraph*{Pro\v{c} - hustota}
+
+Proto¸e jde o \v{c}asovou osu, je problém 1D, tedy se rozd\v{e}lí
+$u=u_{1}+u_{2}+u_{3}$ (jako rozklad jednotky), kde mají $u_{i}$
+kompaktní nosi\v{c}e v $(0,2\delta),\,(\delta,T-\delta),\,(T-2\delta,T)$.
+
+Rozlo¸ené $u_{i}$ molifikujeme (abysme pak mohli znovu se\v{c}íst
+na $u^{\epsilon}=u_{1}^{\epsilon}+u_{2}^{\epsilon}+u_{3}^{\epsilon}$):
+\begin{itemize}
+\item $u_{3}$ jednodu¨e zhladíme rovnou $u_{3}^{\epsilon}:=u_{3}*\eta_{\epsilon}=\int_{\mathbb{R}}u(t)\eta_{\epsilon}(t-\tau)\, d\tau$.
+Pak $u_{3}^{\epsilon}\rightarrow u_{3}$ ve $W^{1,p}(0,\, T,\, X)$.
+\item $u_{1/2}$ p\v{r}ed zhlazením posuneme: $u_{1/2}^{\epsilon}:=u_{1/2}(t+\epsilon)*\eta_{\epsilon}$.
+Jak posun tak výsledné zhlazení jde k funkci (proto¸e posouváme ruku
+v ruce stejným parametrem jako zhlazujeme). Pak $u_{1/2}^{\epsilon}\in C^{\infty}([0,\infty],\, X)$
+a $u_{1/2}^{\epsilon}\rightarrow u_{1/2}$ v $W^{1,p}(0,\, T,\, X)$
+\end{itemize}
+a pro $w*$ sta\v{c}í jen apriorní odhady DOD coze?
+
+
+\paragraph*{Pro\v{c} - vno\v{r}ení}
+
+K dané $u$ najdeme z hustoty $u^{n}\in C^{\infty}([0,T],\, X)$,
+$u^{n}\rightarrow u$ ve $W^{1,p}(0,\, T,\, X)$ (nebo $\rightharpoonup^{\star}$
+ve $W^{1,\infty}$ ).
+
+Uká¸eme, ¸e $u^{n}$ je cauchyovská ve $C^{0,1-1/p}$ a proto¸e jsme
+v Banachprostoru, bude mít limitu.
+
+Pro argumentaci Arzela Ascoli pou¸ijeme stejnou spojitost a stejnou
+omezenost: (DOD hmm jak to teda je?)
+
+\[
+||u^{n}(t_{2})-u^{n}(t_{1})||_{X}=||\int_{t_{1}}^{t_{2}}u_{t}^{n}(\tau)\, d\tau||_{X}\leq\int_{t_{1}}^{t_{2}}||u_{t}^{n}||_{X}\, d\tau
+\]
+
+
+Pak proto¸e $u^{n}\rightarrow u$ v $W^{1,1}(0,\, T,\, X)$:
+
+\[
+\forall\epsilon\exists\delta\forall n:\,|t_{2}-t_{1}|\leq\delta\Rightarrow\int_{t_{1}}^{t_{2}}||u_{t}^{n}||_{X}\, d\tau\leq\epsilon
+\]
+
+
+Máme tedy stejnou spojitost $||u^{n}(t_{2})-u^{n}(t_{1})||_{X}\leq\epsilon$.
+Je¨t\v{e} omezenost - nech\v{t} $t\in[T/2,T]$:
+
+\[
+||u^{n}(t)||_{X}\leq||u^{n}(t)-u^{n}(t_{1})||_{X}+||u^{n}(t_{1})||_{X}
+\]
+
+
+První \v{c}len je $\leq\epsilon$ tzn i men¨í ne¸ konstanta, druhý
+$u^{n}\rightarrow u$ v $L^{1}(0,T,\, X)\Rightarrow\forall\text{(s.v)}\, u^{n}\rightarrow u(t)$
+v $X$. Tedy vyberu $t_{1}$tak, aby platilo ¸e konverguje, díky \v{c}emu¸
+bude taky omezené.
+
+Proto¸e je tedy stejn\v{e} omezené a stejn\v{e} spojité, m\r{u}¸u
+integrovat: (DOD ted nejak nevim co se deje a to az do konce dukazu)
+
+\begin{eqnarray*}
+\int_{0}^{T/2}||u^{n}(t)||_{X}\, dt_{1} & \leq & \int_{0}^{T/2}||u^{n}(t)-u^{n}(t_{1})||_{X}\, dt_{1}+\int_{0}^{T/2}||u^{n}(t_{1})||_{X}\, dt_{1}\\
+ & \leq & c(T)\int_{0}^{T}||u_{t}^{n}||_{X}+||u^{n}||_{X}\, dt_{1}=||u^{n}||_{W^{1,1}(0,T,X)}
+\end{eqnarray*}
+
+
+a co je krása - nezávisí na $t_{1}$! 
+
+$\int_{0}^{T/2}||u^{n}(t)||\, dt_{1}=T/2||u^{n}(t)||_{X}$
+
+Tohle bylo pro první polovinu intervalu. Pro druhou platí analogicky.
+
+$\forall t\forall n\,||u^{n}(t)||_{X}\leq c(T)||u^{n}||_{W^{1,1}(0,\, T,\, X)}\rightarrow||u||_{W^{1,1}(0,\, T,\, X)}c(T)$
+
+A te\v{d} Holdernerovnost:
+
+$||u^{n}(t_{2})-u^{n}(t_{1})||\leq\int_{t_{1}}^{t_{2}}||u_{t}^{n}||_{X}\, d\tau\leq(\int_{t_{1}}^{t_{2}}||u_{t}^{n}||_{X}^{p})^{1/p}|t_{2}-t_{1}|^{1-1/p}$
+
+a p\r{u}jdu k limit\v{e} (pro $p=\infty$ pou¸iju ¸e je omezené)
+
+$||u^{n}(t_{2})-u^{n}(t_{1})||\leq\int_{t_{1}}^{t_{2}}||u_{t}^{n}||_{X}\, d\tau\leq||u_{t}^{n}||_{W^{1,p}(0,\, T,\, X)}^{p}|t_{2}-t_{1}|^{1-1/p}$
+
+a to je p\v{r}esn\v{e} definice sminormy. Je to tedy spoj. vno\v{r}ení
+(sta\v{c}í vyd\v{e}lit $|t_{2}-t_{1}|^{1-1/p}$)
+
+
+\subsubsection*{Sem se hodí nadpis}
+
+Dote\v{d} jsme dokazovali spojitý vno\v{r}ení, co se povedlo o $u_{t}\in L^{2}(0,T,\, W_{0}^{1,2}(\Omega)^{\star})\hookrightarrow C([0,T],\, W_{0}^{1,2}(\Omega)^{\star})$
+a $u$ je v tomté¸ prostoru. Tedy $u$ je spojitá funkce s hodnotama
+v tomhle prostoru, ale bodovej význam pro $W_{0}^{1,2}(\Omega)^{\star}$
+chybí.
+
+$\begin{array}{ccc}
+u\in L^{2}(0,T,\, W_{0}^{1,2}(\Omega)^{\star}) & \hookrightarrow & C([0,T],\, L^{2}(\Omega))\\
+u_{t}\in L^{2}(0,T,\, W_{0}^{1,2}(\Omega)^{\star}) & ...\Uparrow
+\end{array}$ Te\v{d} m\r{u}¸u \v{r}íct, ¸e $u$ je spojitá funkce do $L^{2}(\Omega)$.
+D\r{u}vod je ten, ¸e $L^{2}$ je p\v{r}esn\v{e} mezi tut\v{e}ma prostorama.
+Doká¸eme to obecn\v{e}:
+
+
+\paragraph*{Gelfandova evolu\v{c}ní trojice}
+
+\v{R}ekneme, ¸e $X,\, H,\, X^{\star}$ je Gelfandova trojka $\iff X\overset{\text{hust\v{e}}}{\hookrightarrow}H=H^{\star}\hookrightarrow X^{\star}$.
+
+$X,\, X^{\star}$ Banachovy, $H$ Hilbert\r{u}v prostor (``pivot\char`\"{}).
+
+
+\subparagraph*{Pozn.}
+
+Musí být hustý, jinak neplatí $H^{\star}\hookrightarrow X^{\star}$.
+Typicky bude $X=W_{0}^{1,p}(\Omega),\, H=L^{2}$, spl\v{n}uje p\v{r}edpoklad,
+proto¸e hladký funkce jsou hustý v obojím.
+
+
+\paragraph*{V\v{e}ta DOD coze ta veta rika?}
+
+Nech\v{t} $X,\, H,\, X^{\star}$ je Gelfandova trojka, pak pro $p\in[1,\infty]$
+\begin{itemize}
+\item $V:=L^{p}(0,\, T,\, X)\cap W^{1,p'}(0,\, T,\, X^{\star})\hookrightarrow C([0,\, T],\, H)$
+\item Navíc $\forall u\,,v\in V\,\forall0\leq t_{1}\leq t_{2}\leq T$ máme
+``perpartes\char`\"{}: 
+\[
+\int_{t_{1}}^{t_{2}}<u_{t}(t),\, v(t)>_{X^{\star},X}+<v_{t}(t),\, u(t)>_{X^{\star},X}\, dt=(u(t_{2}),\, v(t_{2}))_{H}-(u(t_{1}),\, v(t_{1}))_{H}
+\]
+
+\end{itemize}
+
+\paragraph*{Pozn.}
+
+Potom dosadíme-li $u=v$, máme:
+
+$2\int_{t_{1}}^{t_{2}}<u_{t}(t),\, u(t)>_{X^{\star},X}\, dt=||u(t_{2})||_{H}^{2}-||u(t_{1})||_{H}^{2}$
+
+vyd\v{e}lím $t_{2}-t_{1}$ a jdu k limit\v{e}:
+
+$\Rightarrow<u_{t}(t),\, u(t)>_{X^{\star},X}=1/2\, d/dt\,||u(t)||_{H}^{2}$
+pro s.v. $t\in(0,T)$
+
+
+\paragraph*{D\r{u}kaz}
+
+Pomocí hustoty - pro $u\in V$ najdu $u^{n}\rightarrow u$, $u^{n}\in C^{\infty}([0,T],\, X)$
+hladký, budu chtít perpartes. Pot\v{r}ebujeme následující vztah:
+
+\framebox{\parbox[t]{1\columnwidth}{%
+Rozepí¨eme derivaci normy v Hilbertov\v{e} prostoru a dostaneme dvakrát
+\v{c}asovou derivaci ve skalárním sou\v{c}inu:
+
+\begin{eqnarray*}
+\frac{d}{dt}||v(t)||_{H}^{2} & = & \underset{h\rightarrow0}{\lim}\frac{(v(t+h),v(t+h))_{H}-(v(t),v(t))_{H}}{h}\\
+ & = & \underset{h\rightarrow0}{\lim}\frac{(v(t+h)-v(t),v(t+h))_{H}}{h}+\frac{(v(t),v(t+h)-v(t))_{H}}{h}\\
+ & = & \underset{h\rightarrow0}{\lim}(\frac{v(t+h)-v(t)}{h},v(t+h))_{H}+(v(t),\frac{v(t+h)-v(t)}{h})_{H}\\
+ & = & 2(v_{t}(t),\, v(t))_{H}
+\end{eqnarray*}
+
+
+Kdy¸ výslednou rovnost zintegrujeme $\int_{t_{1}}^{t_{2}}$ a dosadíme
+$v(t)=u^{n}(t)-u^{m}(t)$, dostaneme:
+
+\[
+||u^{n}(t_{2})-u^{m}(t_{2})||_{H}^{2}=||u^{n}(t_{1})-u^{m}(t_{1})||_{H}^{2}+2\int_{t_{1}}^{t_{2}}(u_{t}^{n}(t)-u_{t}^{m}(t),\, u^{n}(t)-u^{m}(t))_{H}\, dt
+\]
+%
+}}
+
+Vezmeme $t_{2}\in[T/2,T]$, $t_{1}\in[0,T/2]$ a celou rovnost odmocníme:
+(dod what?)
+
+$||u^{n}(t_{2})-u^{m}(t_{2})||_{H}\leq c(||u^{n}(t_{1})-u^{m}(t_{1})||_{H}+|\int_{t_{1}}^{t_{2}}<u_{t}^{n}(t)-u_{t}^{m}(t),\, u^{n}(t)-u^{m}(t)>_{X^{\star},X}\, dt|^{1/2})$
+
+z definice gelfandovy trojky som identifikoval.
+
+lze to ud\v{e}lat i obrácen\v{e}: (dod ale nemuzu uplne beztrestne
+nezmenit znaminko ne?)
+
+$||u^{n}(t_{1})-u^{m}(t_{1})||_{H}\leq c(||u^{n}(t_{2})-u^{m}(t_{2})||_{H}+|\int_{t_{1}}^{t_{2}}<u_{t}^{n}(t)-u_{t}^{m}(t),\, u^{n}(t)-u^{m}(t)>_{X^{\star},X}\, dt|^{1/2})$
+
+A první nerovnost zintegrovat k $t_{1}$, druhou k $t_{2}$ - levé
+strany se integrací nezm\v{e}ní (dod ale melo by tam pribyt delka
+intervalu ne?)
+
+$||u^{n}(t_{2})-u^{m}(t_{2})||_{H}\leq c(T)(\int_{0}^{T}||u^{n}(t_{1})-u^{m}(t_{1})||_{H}\, dt_{1}+\int_{0}^{T/2}|\int_{t_{1}}^{t_{2}}<u_{t}^{n}(t)-u_{t}^{m}(t),\, u^{n}(t)-u^{m}(t)>_{X^{\star},X}\, dt|^{1/2})\, dt_{1}$
+
+dod podobne pro t1 ?
+
+A chci ze je cauchyovská $||u^{n}(t)-u^{m}(t)||_{H}\leq\epsilon$
+První \v{c}ást je k intervalu {[}0,T/2{]}, druhá \v{c}ást k {[}T/2,T{]}
+??????
+
+(dod jak se to vysvetli?)
+
+A te\v{d} $u^{n}\rightarrow u\, L^{p}(0,\, T,\, X)$ tedy jde siln\v{e}
+i v $L^{1}(0,\, T,\, X)$.
+
+Tedy \v{c}len
+
+$\int_{0}^{T}||u^{n}(t_{1})-u^{m}(t_{1})||_{H}\, dt_{1}$ je cauchyovský
+a druhý \v{c}len lze odhadnout dualita a pak Holderem (dod jak?):
+\[
+\int_{0}^{T/2}|\int_{t_{1}}^{t_{2}}<...>_{X^{\star},X}\, dt|^{1/2})\, dt_{1}\leq c(T)\int_{0}^{T}||u_{t}^{n}-u_{t}^{m}||_{X^{\star}}||u^{n}-u^{m}||_{X}\, dt\leq c(T)||u^{n}-u^{m}||_{W^{1,p'}(0,T,X^{\star})}||u^{n}-u^{m}||_{L^{p}(0,T,X)}
+\]
+
+
+a to je jist\v{e} omezené, ale bu\v{d} $p=1$ nebo $p'=1$ tak¸e jedna
+z norem je omezená a druhá Cauchyovská. Tedy má limitu jako celek.
+
+Tak¸e pro hladké funkce to platí. (? dod eh)
+
+Je snadná cesta ke kompaktnímu vno\v{r}ení - pro regularitu $u\in L^{2}(0,T,W^{1,2}),\, u_{t}\in L^{2}(0,\, T,L^{2})$,
+z toho bysme m\v{e}li
+
+$\hookrightarrow\hookrightarrow L^{2}((0,T)\times\Omega)$. To ale
+\v{c}asto nemáme.
+
+
+\paragraph*{V\v{e}ta Aubin Lions Roubí\v{c}ek}
+
+Nech\v{t} $X,\, Y,\, Z$ Banachprostory, $X\hookrightarrow\hookrightarrow Y\hookrightarrow Z$
+(separabilní, (reflexivní)), $p\in(1,\infty)$. Pak
+
+\[
+V:=L^{p}(0,T,X)\cap W^{1,2}(0,T,\, Z)\hookrightarrow\hookrightarrow L^{p}(0,T,\, Y)
+\]
+
+
+Pozn - Roubí\v{c}ek - sta\v{c}í radonovy míry a $Z$ lokáln\v{e} konvexní.
+
+
+\paragraph*{D\r{u}kaz A-L-R}
+
+Chceme sekven\v{c}ní kompaktnost - pro $u^{n}$ omezenou ve $V$ najít
+$u^{n_{k}}\rightarrow u$ v $L^{p}(0,T,\, Y)$.
+
+Nejd\v{r}ív pou¸ijeme ¸e $X$ reflexivní - m\r{u}¸eme najít (BÚNO
+s p\v{r}echodem k podposloupnosti) $u^{n}\rightharpoonup u\,\text{v }L^{p}(0,T,\, X)$
+
+
+\subparagraph*{Ehrlingovo lemma}
+
+Nech\v{t} $X\hookrightarrow\hookrightarrow Y\hookrightarrow Z$ (reflexivní,
+Banachprostory), pak 
+\[
+\forall a>0\,\exists c(a)\,\forall u\in X:\,||u||_{Y}\leq a||u||_{X}+c(a)||u||_{Z}
+\]
+
+
+
+\subparagraph*{D\r{u}kaz Ehrlinga}
+
+D\r{u}vod pro\v{c} to m\r{u}¸eme ud\v{e}lat je práv\v{e} to kompaktní
+vno\v{r}ení. Sporem - nech\v{t}
+
+$\exists a>0\forall n\exists u^{n}$, ¸e $||u^{n}||_{Y}=1$ (búno
+normalizujeme) a neplatí záv\v{e}r, tedy $1=||u^{n}||_{Y}>a||u^{n}||_{X}+n||u^{n}||_{Z}$,
+omezené v $X$, to je kompaktn\v{e} vno\v{r}ené do $Y$. 
+
+Tedy $u^{n}\rightarrow u$ v $Y$ 
+
+$\Rightarrow$$||u||_{Y}=1\Rightarrow||u^{n}||_{Z}\rightarrow0\Rightarrow u^{n}\rightarrow0\text{ v }Z\Rightarrow u=0$
+
+ale to je spor: $u=0\,\times\,||u||_{Y}=1$
+
+
+\subparagraph*{Pokra\v{c}ování d\r{u}kazu A-L-R}
+
+Uká¸eme, ¸e $u^{n}$ je cauchyovská v $L^{p}$ k $Y$. Odhady ($a$
+je libovolné)
+
+$||u^{n}(t)-u^{m}(t)||\overset{\text{Ehrlingovo lemma}}{\leq}a||u^{n}(t)-u^{m}(t)||_{X}+c(a)||u^{n}(t)-u^{m}(t)||_{Z}$
+
+Te\v{d} umocníme na $p$, pou¸ijeme ¸e umocn\v{e}né s\v{c}íance lze
+omezit konstantou krát nejvy¨¨ími \v{c}leny a zintegrujeme:
+
+\v{C}len $||u^{n}(t)-u^{m}(t)||_{X}^{p}$ se schová do konstanty,
+proto¸e je posl z p\v{r}edpokladu omezená ve V (dod ok je omezená
+ve V, ale tohle je X!?).
+
+\begin{eqnarray*}
+\int_{0}^{T}||u^{n}(t)-u^{m}(t)||_{Y}^{p} & \leq & c(p)(a\int_{0}^{T}||u^{n}(t)-u^{m}(t)||_{X}^{p}\, dt+c(a)\int_{0}^{T}||u^{n}(t)-u^{m}(t)||_{Z}^{p}\, dt)\\
+ & \leq & a\, c(p)+c(a,p)\int_{0}^{T}||u^{n}-u^{m}||_{Z}^{p}\\
+\text{Zvolíme }a=\frac{\epsilon}{3c(p)}: & \leq & \frac{\epsilon}{3}+c(\epsilon,\, p)\int_{0}^{T}||u^{n}-u^{m}||_{Z}^{p}
+\end{eqnarray*}
+
+
+\framebox{\parbox[t]{1\columnwidth}{%
+Kompaktnost zaru\v{c}í odhadnutelnost $\epsilon/3,\, c(\epsilon,p)$
+bude velké, ale v tom Z a pou¸ijeme fakt, ¸e kontroluju \v{c}asovou
+derivaci.
+
+$\delta>0\, u_{\delta}^{n}(t)=1/\delta\int_{0}^{\delta}u^{n}(t+\tau)\, d\tau$(st\v{r}ední
+hodnota. Hladké pro fixní $\delta$. Je Bochner\r{u}v integrál.) Pou¸iju
+tenhle fakt a dosadím:%
+}}
+
+\[
+\int_{0}^{T}||u^{n}(t)-u^{m}(t)||\leq...\leq\frac{\epsilon}{3}+c(\epsilon,\, p)\int_{0}^{T}||u_{\delta}^{n}-u_{\delta}^{m}||_{Z}^{p}\, dt+c(\epsilon,\, p)\underline{\int_{0}^{T}||u^{n}-u_{\delta}^{n}-(u^{m}-u_{\delta}^{m})||_{Z}^{p}}_{\text{[Tohle]}}\, dt\leq
+\]
+
+
+...A te\v{d} zvá¸it, jak zvolit $\delta$ , aby {[}Tohle{]} bylo malé.
+
+\framebox{\parbox[t]{1\columnwidth}{%
+Budu odhadovat $u^{n}-u_{\delta}^{n}$ ($u^{n}$ nezávísí na \v{c}ase
+a na $u_{\delta}^{n}(t)$ pou¸ijeme vzore\v{c}ek. Mínus p\v{r}ibude
+z toho, ¸e dáme \v{c}asovou derivaci. Poslední rovnítko je perpartes,
+kde je hrani\v{c}ní \v{c}len nulový - pro $\tau=\delta$ je nula jeden,
+pro $\tau=0$ druhý.)
+
+\[
+u^{n}(t)-u_{\delta}^{n}(t)=\frac{1}{\delta}\int_{0}^{\delta}u^{n}(t)-u^{n}(t+\tau)\, d\tau=\frac{-1}{\delta}\int_{0}^{\delta}\int_{t}^{\tau}u_{t}^{n}(s+t)\, ds\, d\tau=-\int_{0}^{\delta}((\frac{\tau}{\delta}-1)_{\tau}\int_{0}^{\tau}u_{t}^{n}(t+s)\, ds)\, d\tau=+\int_{0}^{\delta}(\frac{\tau}{\delta}-1)u_{t}^{n}(t+\tau)\, d\tau+0
+\]
+
+
+Vezmeme odvozenou rovnost v norm\v{e} a dostaneme nerovnost (vytknutím
+z normy prohodíme po\v{r}adí $\frac{\tau}{\delta}-1$, aby bylo kladné).
+Je omezené konstantou, proto¸e $1-\frac{\tau}{\delta}$ je omezené
+a integruju dle \v{c}asu a ten je v $L^{1}$, tedy omezený:
+
+\[
+||u^{n}(t)-u_{\delta}^{n}(t)||_{Z}\leq\int_{0}^{\delta}(1-\frac{\tau}{\delta})||u_{t}^{n}(t+\tau)||_{Z}\, d\tau\leq const(||u_{t}||_{L^{1}(0,T,Z)}+1)
+\]
+
+
+Nerovnost platí pro libovolný \v{c}as.
+
+Chceme odhadnout $c(\epsilon,\, p)\int_{0}^{T}||u^{n}-u_{\delta}^{n}-(u^{m}-u_{\delta}^{m})||_{Z}^{p}$,
+\v{c}ást toho \v{c}lenu budeme odhadovat takhle:
+
+$c(\epsilon,\, p)\int_{0}^{T}||u^{n}-u_{\delta}^{n}||_{Z}^{p}\leq dod\leq\delta c(\epsilon,p)$
+
+(dod sesit jak to tady pouzijeme tu nerovnost?mproc zmizi exponent
+p-1 do konstanty a nechame to tam na prvou? proc to nezmizi do konstanty
+rovnou?)
+
+Tzn dostanu $\epsilon$, najdu $a=\epsilon/3c(p)$, vybereme $\delta$,
+aby $c(\epsilon,\, p)<\epsilon$ a tedy $\delta:=\epsilon/(6c(\epsilon,\, p))$.
+Pokra\v{c}ujeme. Delta te\v{d} bude dané pomocí epsilon a fixní:%
+}} 
+
+\[
+\leq\frac{\epsilon}{3}+c(\epsilon,\, p)\int_{0}^{T}||u_{\delta(\epsilon)}^{n}-u_{\delta(\epsilon)}^{m}||_{Z}^{p}\, dt+\underline{\frac{\epsilon}{3}}_{\text{[Tohle]}}\leq
+\]
+
+
+...Dote\v{d} nic nezáviselo na $n,\, m$ , to p\v{r}ijde te\v{d}:
+
+\framebox{\parbox[t]{1\columnwidth}{%
+Máme t\v{r}i fakta:
+\begin{itemize}
+\item Vzpomeneme na $u_{\delta}^{n}(t):=1/\delta\int_{0}^{\delta}u^{n}(t+\tau)\, d\tau$ 
+\item p\v{r}idáme fakt, ¸e $u^{n}\rightharpoonup u\text{ v }X$ (od fakt
+v X? Nebylo to v nejakym Lp?)
+\item a máme kompaktní vno\v{r}ení $X\hookrightarrow\hookrightarrow Z$
+\end{itemize}
+Z toho $\forall t\, u_{\delta}^{n}(t)\rightarrow u_{\delta}$ v $Z$
+- ze slabé konvergence.%
+}}
+
+...Pomocí toho odhadneme druhý \v{c}len, ¸e tam dáme trojúhelníkovou
+nerovností limitu:
+
+\[
+\leq\frac{2\epsilon}{3}+c(\epsilon,\, p)\int_{0}^{T}||u_{\delta(\epsilon)}^{n}-u_{\delta}||_{Z}^{p}+||u_{\delta(\epsilon)}^{m}-u_{\delta}||_{Z}^{p}\, dt\leq
+\]
+
+
+...Najdeme $n,\, m\geq n_{0}$ aby byl poslední zbývající \v{c}len
+$\leq\epsilon/3$.
+
+\framebox{\parbox[t]{1\columnwidth}{%
+$\epsilon,\,\delta$ dané a fixní, tedy jdemek limit\v{e}.
+
+\[
+\lim_{n\rightarrow\infty}\int_{0}^{T}||u_{\delta(\epsilon)}^{n}-u_{\delta}||_{Z}^{p}\underset{\text{\text{v\v{e}ta}}}{\overset{\text{Lebesgueova}}{\text{=}}}\int_{0}^{T}\lim_{n\rightarrow\infty}||u_{\delta(\epsilon)}^{n}-u_{\delta}||_{Z}^{p}\, dt=0
+\]
+
+
+M\r{u}¸u najít integrovatelnou majorantu, proto¸e je omezené konstanto
+($||u_{\delta}^{n}||_{Z}\leq1/\delta\int_{0}^{T}||u^{n}(t+\tau)||_{Z}\, d\tau\leq c/\delta$).
+
+No a kdy¸ ta limita je nula, tak lze rozhodn\v{e} ``najít $n,\, m\geq n_{0}$
+aby byl poslední zbývající \v{c}len $\leq\epsilon/3$\char`\"{}.%
+}}
+
+\[
+\leq\frac{2\epsilon}{3}+\frac{\epsilon}{3}
+\]
+
+
+A proto¸e je Banachprostor a Cauchyovská, tak konverguje.
+
+
+\section*{Lineární parabolické}
+
+Pozn - napí¨eme si to pro jednu rovnici, pro systémy to pak zpravidla
+bude platit taky.
+
+Máme $T>0$ , $\Omega\subseteq\mathbb{R}^{d}$ otev\v{r}enou, omezenou,
+$f:\, Q_{T}\rightarrow\mathbb{R},\, u_{0}:\,\Omega\rightarrow\mathbb{R},\, u_{D}:\,(0,T)\times\delta\Omega\rightarrow\mathbb{R}$.
+
+Cíl - najít $u:\, Q_{T}\rightarrow\mathbb{R}$ \v{r}e¨ící rovnice.
+
+\[
+\begin{array}{rcll}
+u_{t}+Lu & = & f & \textrm{v}\, Q_{T}:=(0,T)\times\Omega\\
+u & = & u_{D} & \textrm{v}\,(0,T)\times\delta\Omega\\
+u(0,\, x) & = & u_{0}(x) & \textrm{s.v. v }\Omega
+\end{array}
+\]
+
+
+
+\paragraph*{Definice $L$}
+
+Pro $a:\, Q_{T}\rightarrow\mathbb{R}^{d\times d},\, b:\, Q_{T}\rightarrow\mathbb{R}^{d},\, c:Q_{T}\rightarrow\mathbb{R}$
+definujeme
+
+\begin{eqnarray*}
+Lu: & = & -div(a\nabla u)+b\nabla u+cu\\
+ & = & -\sum_{i=1}^{d}\frac{\partial}{\partial x_{i}}(\sum_{j=1}^{d}a_{ij}\frac{\partial u}{\partial x_{j}})+\sum_{i=1}^{d}b_{i}\frac{\partial u}{\partial x_{i}}+cu
+\end{eqnarray*}
+
+
+(Pozn - a je matice, $a\nabla u$ je matice krát vektor.)
+
+
+\paragraph*{P\v{r}edpoklady na L}
+\begin{itemize}
+\item A1 $a\in L^{\infty}(Q_{T},\mathbb{R}^{d\times d})$ a pro s.v. $(t,\, x)\in Q_{T}$
+a $\forall z\in\mathbb{R}^{d}$ máme elipticitu: 
+\[
+\sum_{i,\, j=1}^{d}a_{ij}(t,\, x)\, z_{i}\, z_{j}\geq\alpha_{0}|z|^{2}
+\]
+
+\item A2 $b\in L^{\infty}(Q_{T},\mathbb{R}^{d})$
+\item A3 $c\in L^{\infty}(Q_{T})$
+\end{itemize}
+
+\paragraph*{Slab¨í p\v{r}edpoklady na L (L-relaxed)}
+\begin{itemize}
+\item A2r $|b|^{2}\in L^{1}(0,T,\, L^{\infty}(\Omega))\oplus L^{\frac{2r}{2r-d}}(0,T,\, L^{r})$
+pro n\v{e}jaké $r>d/2$. ($\oplus$ ... ``Lze rozlo¸it na sou\v{c}et
+dvou v\v{e}cí\char`\"{})
+\item A3r $c\in--|\,|--$
+\end{itemize}
+
+\paragraph*{P\v{r}edpoklady na data}
+\begin{itemize}
+\item D1 $u_{0}\in L^{2}(\Omega)$
+\item D2 $f\in L^{2}(0,T,\, W_{0}^{1,2}(\Omega)^{\star})$
+\item D3 $u_{D}\in L^{2}(0,T,\, W^{1,2}(\Omega))\cap W^{1,2}(0,T,\, W_{0}^{1,2}(\Omega)^{\star})\hookrightarrow C([0,T],\, L^{2})$
+\end{itemize}
+
+\paragraph*{Definice slabého \v{r}e¨ení}
+
+Nech\v{t} A1...A3 a D1...D3 platí a $\Omega\in C^{0,1}$. (dod budeme
+to predpokladat vzdy. Kdy jeste vzdy?) \v{R}ekneme, ¸e $u$ je slabé
+\v{r}e¨ení parabolické rovnice $\Longleftrightarrow$ 
+
+\begin{eqnarray*}
+u-u_{D} & \in & L^{2}(0,T,\, W_{0}^{1,2}(\Omega))\cap W^{1,2}(0,T,\, W_{0}^{-1,2}(\Omega))\\
+u(0) & = & u_{D}\text{( v }L^{2}\text{)}
+\end{eqnarray*}
+
+
+A platí slabá formulace: (DOD nakonec - vsude tady litaj W s nulou
+dole a bez nuly dole. Jak si zapamatovat kam kterou psat?? Ma to nejakej
+system?)
+
+\begin{eqnarray*}
+\int_{0}^{T}\left\langle u_{t},\varphi\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}+\int_{0}^{T}\int_{\Omega}\sum_{i,j=1}^{d}a_{ij}\frac{\partial u}{\partial x_{j}}\frac{\partial\varphi}{\partial x_{i}}\, dx\, dt+ &  & \forall\varphi\in L^{2}(0,T,\, W_{0}^{1,2}(\Omega))\\
++\int_{0}^{T}\int_{\Omega}(b\nabla u)\varphi+cu\varphi\, dx\, dt=\int_{0}^{T}\left\langle f,\varphi\right\rangle \, dt
+\end{eqnarray*}
+
+
+Pozn - pro A2r A3r se musí definice zm\v{e}nit, aby $\varphi\in L^{\infty}$,
+jinak nemám integrovatelnou v\v{e}c.
+
+
+\paragraph*{Slabá formulace}
+
+DOD co to\textgreater{} ted je nejaka jina slaba formulace?
+
+
+\subsection*{Jednozna\v{c}nost a existence}
+
+Pomocí Faedo Galerkinovy metody.
+
+
+\paragraph*{V\v{e}ta Existence a jednozna\v{c}nost}
+
+Exisuje práv\v{e} jedno slabé \v{r}e¨ení {[}Parabolické rovnice{]}.
+
+Navíc $u$ závisí spojit\v{e} na datech, tedy pokud $u_{1},\, u_{2}$
+jsou slabá \v{r}e¨ení pro $f^{1,2},\, u_{0}^{1,2},\, u_{D}^{1,2},\, a^{1,2},\, b^{1,2},\, c^{1,2}$,
+pak
+
+$||u^{1}-u^{2}||_{Res}\leq c(f,\, c,\,...)(||u_{0}^{1}-u_{0}^{2}||_{2}+||u_{D}^{1}-u_{D}^{2}||_{X}+||f^{1}-f^{2}||_{X}+||b^{1}-b^{2}||_{X}+||c^{1}-c^{2}||_{X}+||a^{1}-a^{2}||_{X})$
+
+$X$ je prostor, ve kterém jsou data. m\v{e}ní se v nerovnosti pro
+ka¸dou normu dle p\v{r}edpoklad\r{u} na data (nevejde se na \v{r}ádek).
+
+$(Res:=L^{2}(0,T,\, W^{1,2}(\Omega))\cap W^{1,2}(0,T,\, W^{-1,2}(\Omega)))$
+DOD ho ho a ted tu nejsou nuly u W. Procpa?
+
+(Mmch z toho plyne i stabilita. dod eh?)
+
+
+\paragraph*{D}
+
+Dokazuje to i jednozna\v{c}nost, proto¸e pro d\r{u}kaz jednozna\v{c}nosti
+sta\v{c}í dokázat spojitou závislost na datech. Notace pro rozdíly:
+
+\[
+w:=u^{1}-u^{2},\,\bar{b}:=b^{1}-b^{2},\,\bar{c}:=c^{1}-c^{2},\,\bar{f}:=f^{1}-f^{2}
+\]
+
+
+Dosadíme rozdíl \v{r}e¨ení do rovnice
+
+\[
+\left\langle w_{t},\varphi\right\rangle +\int_{\Omega}a^{1}\nabla u^{1}\nabla\varphi-a^{2}\nabla u^{2}\nabla\varphi+b^{1}\nabla u^{1}\varphi-b^{2}\nabla u^{2}\varphi+c^{1}u^{1}\varphi-c^{2}u^{2}\varphi\, dx=\left\langle f,\,\varphi\right\rangle 
+\]
+
+
+...a \v{c}leny s $a,\, b,\, c$ napí¨eme v¨echny do tvaru sou\v{c}tu
+dvou \v{c}len\r{u}, kde v prvním \v{c}lenu je $a^{1}$ a rozdílové
+\v{r}e¨ení a v druhém \v{c}lenu rozdílové $\bar{a}$ a druhé \v{r}e¨ení
+$u^{2}$ - 
+
+($(a^{1}\nabla u^{1}-a^{2}\nabla u^{2})=a^{1}(\nabla u^{1}-\nabla u^{2})+(a^{1}-a^{2})\nabla u^{2}=a^{1}\nabla w+\bar{a}\nabla u^{2}$).
+
+P\v{r}epí¨eme rovnici tak, ¸e nalevo necháme pouze dualitu a \v{c}len
+s $a^{1}$ a ozna\v{c}íme \v{c}leny na pravé stran\v{e} jako {[}Zbytek{]}
+
+\[
+\left\langle w_{t},\varphi\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla\varphi\, dx=\int_{\Omega}-\bar{a}\nabla u^{2}\nabla\varphi-b^{1}\nabla w\varphi-\bar{b}\nabla u^{2}\varphi-c^{1}w\varphi-\bar{c}u^{2}\varphi\, dx+\left\langle f,\,\varphi\right\rangle 
+\]
+
+
+Zvolíme $\varphi=w-\bar{u_{D}}$, $\bar{u_{D}}=u_{D}^{1}-u_{D}^{2}$,
+te\v{d} bude mít $\varphi$ nulovou stopu. Upravíme rovnici p\v{r}idáním
+\v{c}lenu do duality na levou i pravou stranu (na pravé stran\v{e}
+je p\v{r}ímo vid\v{e}t co jsme p\v{r}idali) a do druhého \v{c}lenu
+na levé stran\v{e} dosadíme za $\varphi$ (to vytvo\v{r}í dva \v{c}leny,
+podtr¸ené, jeden necháme nalevo a druhý (s $a^{1}\bar{u_{D}}$) p\v{r}ibude
+napravo. Nepodtr¸ené z\r{u}stalo z minulého kroku, pouze s dosazeným
+$\varphi=w-\bar{u_{D}}$.):
+
+\begin{eqnarray*}
+L.S.:=\left\langle (w\underline{-\bar{u_{D}}})_{t},\underline{w-\bar{u_{D}}}\right\rangle +\underline{\int_{\Omega}a^{1}\nabla w\nabla w\, dx} & = & \underline{\left\langle -\bar{u_{D}}_{t},w-\bar{u_{D}}\right\rangle +\int_{\Omega}a^{1}\nabla w\nabla\bar{u_{D}}\, dx}+\\
+ &  & +\int_{\Omega}-\bar{a}\nabla u^{2}\nabla(w-\bar{u_{D}})-b^{1}\nabla w\varphi(w-\bar{u_{D}})-\bar{b}\nabla u^{2}(w-\bar{u_{D}})-\\
+ &  & -c^{1}w(w-\bar{u_{D}})-\bar{c}u^{2}(w-\bar{u_{D}})\, dx+\left\langle f,\,(w-\bar{u_{D}})\right\rangle =:P.S.
+\end{eqnarray*}
+
+
+Testujeme $\varphi$ nezávisejícím na \v{c}ase, ale d\v{e}láme to
+pro s.v. \v{c}asy.
+
+Z rovnosti $L.S.=P.S.$ odvodíme na ob\v{e} strany odhady (levou stranu
+zezdola a pravou stranu zeshora, pou¸ívat budeme Holderovu nerovnost),
+abychom mohli pou¸ít Gronwallovo lemma.
+
+Kam sm\v{e}\v{r}ujeme? V Gronwallov\v{e} lemmatu pro nás bude odhadovaná
+veli\v{c}ina $\eta=||w-\bar{u_{D}}||_{2}^{2}$,....todo chceme p\v{r}epsat
+levou stranu do podoby $\eta\cdot\text{n\v{e}co}+\text{n\v{e}co}$.(todo
+lepsi komentar!)
+
+(TODO emphasizovat co delame odzacatku, jsou tam upravy co jsme nevysvetlili.)
+
+
+\subparagraph*{Levou stranu }
+
+...toti¸ umíme odhadnout pomocí triku s polovinou derivace kvadrátu
+(za \v{c}len s dualitou) a elipticitou $a^{1}$ (za \v{c}len s integrálem):
+
+\[
+1/2\frac{d}{dt}||w-\bar{u_{D}}||_{2}^{2}+\alpha_{0}||\nabla w||\leq L.S.
+\]
+
+
+
+\subparagraph*{Pravou stranu}
+
+Celá pravá strana lze odhadnout Holdernerovností.
+
+\v{C}leny jsou odhadovány postupn\v{e} jako byly napsány v rovnosti
+$L.S.=P.S.$. Na první \v{r}ádce jsou \v{c}leny co minule p\v{r}ibyly
+nov\v{e}.
+
+Na t\v{r}etí \v{r}ádce prob\v{e}hla (p\v{r}ed odhadem) zm\v{e}na \v{c}lenu
+$-c^{1}w\varphi=-c^{1}(w-\bar{u_{D}})\varphi-c^{1}\bar{u_{D}}\varphi\overset{\text{dosad }\varphi}{=}-((c^{1})^{\frac{1}{2}}(w-\bar{u_{D}}))^{2}-c^{1}\bar{u_{D}}(w-\bar{u_{D}})$.
+
+(Kde jsme $c^{1}$ schovali rovnou m\v{e}rou ke ka¸dému \v{c}lenu
+do kvadrátu normy, proto jsme ho vzali na jednu polovinu.)
+
+(todo jak si to zapmatovat!? nebo je to dod vec kterou ejdnou vidis
+ale nikdy nema smysl se ji ucit nebo replikovat?)
+\begin{eqnarray*}
+P.S. & \leq & ||\bar{u_{D}}_{t}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W_{0}^{1,2}}+||a^{1}||\,||\nabla w||_{2}\,||\nabla\bar{u_{D}}||_{2}+\\
+ &  & +||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\nabla(w-\bar{u_{D}})||_{2}+||\nabla w||_{2}||\,|b^{1}|\,|w-\bar{u_{D}}|\,||_{2}+||\nabla u^{2}||_{2}||\,|w-\bar{u_{D}}|\,|\bar{b}|\,||_{2}+\\
+ &  & +\underline{||\,|c^{1}|^{1/2}|w-\bar{u_{D}}|\,||_{2}^{2}+||\,|c^{1}|\,|\bar{u_{D}}|\,|w-\bar{u_{D}}|\,||_{1}}+||\,|\bar{c}|\,|u^{2}|\,|w-\bar{u_{D}}|\,||_{1}+\\
+ &  & +||\bar{f}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W^{1,2}}\leq
+\end{eqnarray*}
+
+
+První krok, Holdera jsme pou¸ili. Cíl je osamostatnit $w$ (TODO proc??).
+Pou¸ijeme trojúhelníkovou nerovnost a Youngovu nerovnost (i$\epsilon$-Younga).
+Ud\v{e}láme to po jednotlivých \v{c}lenech nerovnosti, z Younga a
+epsyounga budou vypadávat konstanty, které nebudeme psát, tak¸e znak
+\char`\"{}$\lesssim$\char`\"{} bude zna\v{c}it nerovnost a¸ na konstanty
+u \v{c}len\r{u} na pravé stran\v{e}. Z r\r{u}zných \v{c}ástí budou
+vypadávat stejné \v{c}leny, které nakonec se\v{c}teme dohromady. Po
+\v{c}lenech tedy:
+\begin{itemize}
+\item První \v{c}len 
+\begin{eqnarray*}
+||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\nabla(w-\bar{u_{D}})||_{2} & \overset{\triangle}{\leq} & ||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\nabla w||_{2}+||\bar{a}||_{\infty}||\nabla u^{2}||_{2}||\bar{u_{D}}||_{2}\leq\\
+ & \overset{\epsilon-Young}{\lesssim} & ||\bar{a}||_{\infty}^{2}||\nabla u^{2}||_{2}^{2}+||\nabla w||_{2}^{2}+||\bar{a}||_{\infty}^{2}||\nabla u^{2}||_{2}^{2}+||\bar{u_{D}}||_{2}^{2}
+\end{eqnarray*}
+
+\item $||\nabla w||_{2}||\,|b^{1}|\,|w-\bar{u_{D}}|\,||_{2}\overset{\text{Y}}{\lesssim}||\nabla w||_{2}^{2}+||\,|b^{1}|\,|w-\bar{u_{D}}|\,||_{2}^{2}\lesssim||\nabla w||_{2}^{2}+||b^{1}||_{\infty}^{2}\,||w-\bar{u_{D}}||_{2}^{2}$
+(Nutn\v{e} jsme vytkli v $\infty$-norm\v{e}, proto¸e Holdera jsme
+u¸ p\v{r}edtím vy\v{c}erpali. Je to OK, proto¸e p\v{r}edpokládáme
+$L^{1}$ k \v{c}asu.)
+\item $||\,|c^{1}|^{1/2}|w-\bar{u_{D}}|\,||_{2}^{2}\leq||c^{1}||_{\infty\,}||w-\bar{u_{D}}||_{2}^{2}$
+\item $||\nabla u^{2}||_{2}||\,|w-\bar{u_{D}}|\,|\bar{b}|\,||_{2}\leq||\nabla u^{2}||_{2}\,||w-\bar{u_{D}}||_{2}\,||\bar{b}||_{\infty}\overset{\text{Y}}{\lesssim}||\nabla u^{2}||_{2}^{2}\,||w-\bar{u_{D}}||_{2}^{2}+||\bar{b}||_{\infty}^{2}$
+\item DOD co se stalo s temahle clenama?: Nechybi pak v nasledujici rovnosti?
+\begin{eqnarray*}
+ &  & +||\bar{u_{D}}_{t}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W_{0}^{1,2}}+||a^{1}||\,||\nabla w||_{2}\,||\nabla\bar{u_{D}}||_{2}+||\bar{f}||_{W_{0}^{-1,2}}||w-\bar{u_{D}}||_{W^{1,2}}\\
+ &  & ++||\,|c^{1}|\,|\bar{u_{D}}|\,|w-\bar{u_{D}}|\,||_{1}+||\,|\bar{c}|\,|u^{2}|\,|w-\bar{u_{D}}|\,||_{1}+
+\end{eqnarray*}
+
+\end{itemize}
+Nakonec dostaneme, sesypáním v¨eho dohromady na pravou stranu a sepsáním
+nerovnosti pro levou stranu - ve tvaru kdy jsou vytknute veci tak,
+jak je budeme chtit pro Gronwalla ``$\leq\eta()\beta()+p()$\char`\"{}:
+
+\begin{eqnarray*}
+1/2\frac{d}{dt}||w-\bar{u_{D}}||_{2}^{2}+\alpha_{0}||\nabla w|| & \leq L.S.=P.S.\leq & \underline{||w-\bar{u_{D}}||_{2}^{2}}_{\eta()}\,\underline{c(||c_{1}||_{\infty}+||b^{1}||_{\infty}^{2}+||\nabla u^{2}||_{2}^{2})}_{\beta()}\\
+ &  & +\underline{||\bar{a}||_{\infty}||\nabla u^{2}||_{2}^{2}+||\bar{u_{D}}||_{X}^{2}+||\bar{f}||_{X}^{2}+||\bar{b}||_{\infty}^{2}+||\bar{c}||_{\infty}}_{p()}
+\end{eqnarray*}
+
+
+\framebox{\parbox[t]{1\columnwidth}{%
+
+\paragraph*{Gronwalllema}
+
+Nech\v{t} $\eta,\,\beta,\, p$ nezáporné funkce pat\v{r}ící do $L^{1}(0,\, T)$
+a $\eta$ AC-spoj spl\v{n}ující $\forall$ s.v. $t\in(0,T)$
+
+$\eta'(t)\leq\beta(t)\eta(t)+p(t)$
+
+Pak pro $\forall t\in[0,T]$ máme $\eta(t)\leq\exp(\int_{0}^{T}\beta(\tau)\, d\tau)(\eta(0)+\int_{0}^{t}p(\tau)\, d\tau)$
+
+
+\subparagraph*{D\r{u}kaz}
+
+...vynásobením $e^{-\int_{0}^{T}\beta(\tau)\, d\tau}$ a zintegrováním.
+(dod how?)%
+}}
+
+\framebox{\parbox[t]{1\columnwidth}{%
+
+\paragraph*{Siln\v{e}j¨í Gronwalllema}
+
+DOD!
+
+Nech\v{t} ?
+
+$z(t)+\eta'(t)\leq\beta(t)\eta(t)+p(t)$%
+}}
+
+DOD co sme to kurna dokazali?
+
+
+\subparagraph*{Apriorní odhad}
+
+Lze z toho dostat i apriorní odhad! Pokud $(a,b,c)^{1}=(a,b,c)^{2},\, f^{2}=0,\, u_{0}^{2}=0,\, u_{D}^{2}=0.\, w=u^{1}$,
+pak $u^{2}=0$ je nulové \v{r}e¨ení, to dosadím do rovnosti (m\r{u}¸u,
+mám dv\v{e} \v{r}e¨ení), spousta v\v{e}cí vypadne a to bude apriorní
+odhad. (dod kde se tam vzala alpha pul?)
+
+\begin{eqnarray*}
+1/2\frac{d}{dt}||u-u_{D}||_{2}^{2}+\frac{\alpha_{0}}{2}||\nabla u||_{2}^{2} & \leq & \underline{||u-u_{D}||_{2}^{2}}_{\eta()}\,\underline{c(||c||_{\infty}+||b||_{\infty}^{2})}_{\beta()}\\
+ &  & +\underline{||u_{D}||_{X}^{2}+||f||_{X}^{2}}_{p()}
+\end{eqnarray*}
+
+
+$||u(t)-u_{D}(t)||\leq c\exp(\int_{0}^{T}||c||_{\infty}+||b||_{\infty}^{2}\, dt)\,(||u_{0}-u_{D}(0)||_{\infty}^{2}+\int_{0}^{T}||u_{D}||_{X}^{2}+||f||_{X}^{2}\, dt)$
+
+Apriorní odhad budu pot\v{r}ebovat i v d\r{u}kazu existence.
+
+TODO udelat to s nelinearitou cely? +g(x)
+
+
+\subsubsection*{D\r{u}kaz existence Faedo Galerkin}
+
+Diskretizujeme k prostoru, ale dr¸íme spojité k \v{c}ase.
+
+Najdeme $\{w_{i}\}_{i=1}^{\infty}$ OG bázi $W_{0}^{1,2}(\Omega)$,
+která je dokonce ON v $L^{2}(\Omega)$. 
+
+Existenci takové báze \v{r}e¨í vlastní \v{c}ísla laplace v $\Omega$:
+$-\triangle w_{i}=\lambda_{i}u_{i}$, $w_{i}=0$ na $\delta\Omega$.
+
+Pak n-tá Galerkinova aproximace bude $u^{n}=u_{D}+\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}(=:u_{D}+S^{n})$
+(diskretizujeme k prostoru, adoptujeme my¨lenku, ¸e \v{r}e¨ení m\r{u}¸e
+být jak ospojitá funkce \v{c}asu krát diskretizace prostoru).
+
+Slabá formulace pro ntou aproximaci $(WF)^{n}$ pak vypadá takto:
+
+\begin{eqnarray*}
+\left\langle u_{t}^{n},w_{i}\right\rangle +\int_{\Omega}a\nabla u^{n}\nabla w_{i}+b\nabla u^{n}w_{i}+cu^{n}w_{i}\, dx & = & \left\langle f,w_{i}\right\rangle \,\forall i=1...n,\,\forall\text{s.v. }t\in(0,T)\\
+u^{n}(0)-u_{D}(0) & = & p^{n}(u_{0}-u_{D}(0))
+\end{eqnarray*}
+
+
+...kde duality jsou reprezentovány takto $\left\langle u_{t}^{n},w_{i}\right\rangle =\int_{\Omega}u_{t}^{n}w_{i}\, dx$
+a kde $p^{n}$ je ortogonální projekce $L^{2}$ na $\{w_{i}\}_{i=1}^{n}$:
+
+\[
+p^{n}(v)=\sum_{i=1}^{n}(\int_{\Omega}v\, w_{i}\, dx)w_{i}
+\]
+
+
+Cíl je najít $u^{n}$, co spl\v{n}uje $(WF)^{n}$.
+
+No a $(WF)^{n}$ je systém ODE! Proto¸e p\v{r}i ozna\v{c}ení $\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}=:S_{n}$
+a p\v{r}epí¨eme (dod co se tu stalo???):
+
+\[
+\int_{\Omega}S_{n}w_{i}+a\nabla S_{n}\nabla w_{i}+b\nabla S_{n}w_{i}+cS_{n}w_{i}\, dx=\left\langle f,\, w_{i}\right\rangle -\left\langle u_{D}{}_{t},\, w_{i}\right\rangle -\int_{\Omega}a\nabla u_{D}\nabla w_{i}+b\nabla u_{D}w_{i}+cu_{D}w_{i}=:F_{i}\in L^{1}(0,T)
+\]
+
+
+Rozepsana Fi je: (dod proc? ,mozna to souvisi s predchozi rovnici
+kterou nechapu)
+
+$F_{i}=\sum_{j=1}^{n}\int_{\Omega}\frac{d}{dt}c_{j}^{n}(t)w_{j}w_{i}+ac_{j}^{n}\nabla w_{j}\nabla w_{i}+bc_{j}^{n}\nabla w_{j}w_{i}+\alpha c_{j}^{n}w_{j}w_{i}$
+
+Tedy
+
+$\frac{d}{dt}c_{i}^{n}(t)=F_{i}(t)+G_{i}(t,c^{n})$, kde $G_{i}(t,c^{n}):=-\sum_{i=1}^{n}c_{j}^{n}\int_{\Omega}a\nabla w_{j}\nabla w_{i}+b\nabla w_{j}w_{i}+\alpha w_{j}w_{i}\, dx$
+
+Víme $F_{i}\in L^{1}(0,T)$, $G_{i}$ lineární k $c_{j}^{n}$ a m¨\v{r}itelná
+k \v{c}asu. Tedy $G_{i}$ je Caratheodoryovská. (Dokonce Lipschitzovská
+v $c^{n}$).
+
+Po\v{c}áte\v{c}ní data jsou $\sum_{i=1}^{n}c_{i}^{n}(0)w_{i}=p^{n}(u_{0}-u_{D}(0))=\sum_{i=1}^{n}w_{i}\int_{\Omega}(u_{0}-u_{D}(0))w_{i}\, dx$
+
+No a musí být $c_{i}^{n}(0):=\int_{\Omega}(u_{0}-u_{D}(0))w_{i}\, dx$
+(\v{c}íslo).
+
+Máme ODe systém s po\v{c}áte\v{c}ními hodnotami, existuje tedy \v{r}e¨ení
+problému (dokonce abs. spojitý).
+
+Pro\v{c}
+
+$G_{i}$ lineární spojitá v $c$, m\v{e}\v{r}itelná v $t$, fixed
+point theorem. Existuje $T^{*}$ maximální \v{c}as $0<T^{*}\leq T$,
+¸e existuje AC $c^{n}$ spl\v{n}ující ODE na $[0,T^{*}]$. Navíc \v{r}e¨ení
+bu\v{d} exploduje $c^{n}(t)\overset{t\rightarrow T^{*}}{\rightarrow}\infty$,
+nebo dojede do konce $T^{*}=T$. Chceme ukázat ¸e neexploduje, bude
+to plynout z d\r{u}kazu jednozna\v{c}nosti.
+
+Apriorní odhady
+
+Máme AC \v{r}e¨ení $(WF)^{n}$, odvodíme apriorní odhady, ze kterých
+bude plynout, ¸e \v{r}e¨ení nem\r{u}¸e jít do $\infty$.
+
+Vezmeme itou rovnici...
+
+(DOD tady najednou je derivace podle t a v minulym vyskytu ty samy
+rovnice nebyla)
+
+\[
+\int_{\Omega}S_{t}^{n}w_{i}+a\nabla S^{n}\nabla w_{i}+b\nabla S^{n}w_{i}+cS^{n}w_{i}\, dx=F_{i}
+\]
+
+
+...a vynásobíme jí $c_{i}^{n}$ a se\v{c}teme ($w_{i}$ se se\v{c}tou
+na $S^{n}$):
+
+\[
+\int_{\Omega}S_{t}^{n}S^{n}+a\nabla S^{n}\nabla S^{n}+b\nabla S^{n}S^{n}+c|S^{n}|^{2}\, dx=\left\langle f,\, S^{n}\right\rangle -\left\langle u_{D}{}_{t},\, S^{n}\right\rangle -\int_{\Omega}a\nabla u_{D}\nabla S^{n}+b\nabla u_{D}S^{n}+cu_{D}S^{n}
+\]
+
+
+A to je p\v{r}esn\v{e} ono jako v p\v{r}ípad\v{e} jednozna\v{c}nost
+(jenom místo $S^{n}$ bylo $w-\bar{u_{D}}$). Tedy z postupu vý¨e
+máme odhad levé strany zespoda a pravé strany zeshora:
+
+\[
+\frac{1}{2}\frac{d}{dt}\left\Vert S^{n}\right\Vert _{2}^{2}+\frac{\alpha}{2}\left\Vert \nabla S^{n}\right\Vert _{2}^{2}\leq\left\Vert b\right\Vert _{\infty}^{2}\left\Vert S^{n}\right\Vert _{2}^{2}+\left\Vert c\right\Vert _{\infty}\left\Vert S^{n}\right\Vert _{2}^{2}+\left\Vert f\right\Vert _{-1,2}^{2}+\left\Vert u_{D}{}_{t}\right\Vert _{-1,2}^{2}+c\left\Vert \nabla u_{D}\right\Vert _{2}^{2}+\left\Vert \nabla u_{D}\right\Vert _{2}^{2}\left\Vert S^{n}\right\Vert _{2}^{2}+\left\Vert b\right\Vert _{\infty}^{2}+\left\Vert c\right\Vert _{\infty}(\left\Vert u_{D}\right\Vert ^{2}+\left\Vert S^{n}\right\Vert _{2}^{2})
+\]
+
+
+\{DOD ale ono to neni totez jako tohle (nasledujici) ne:? Jak z tyhle
+radky (nasledujici) dostaneme tu (predchozi)???
+
+\begin{eqnarray*}
+1/2\frac{d}{dt}||u-u_{D}||_{2}^{2}+\frac{\alpha_{0}}{2}||\nabla u||_{2}^{2} & \leq & \underline{||u-u_{D}||_{2}^{2}}_{\eta()}\,\underline{c(||c||_{\infty}+||b||_{\infty}^{2})}_{\beta()}\\
+ &  & +\underline{||u_{D}||_{X}^{2}+||f||_{X}^{2}}_{p()}
+\end{eqnarray*}
+
+
+\}
+
+Co¸ je nerovnost p\v{r}ipravená pro Gronwalla (dod co je p,eta,beta?)
+- dostaneme: (druhá nerovnost je daná tím, ¸e $S^{n}(0)$ je projekce,
+co¸ je men¨í ne¸ data.)
+
+$\left\Vert S^{n}(t)\right\Vert _{2}^{2}+\int_{0}^{T}\left\Vert \nabla S^{n}\right\Vert _{2}^{2}\leq c(data)(1+\left\Vert S^{n}(0)\right\Vert _{2}^{2})\leq c(data)$
+
+Tedy $c^{n}$ neexploduje, proto¸e jsme dokázali, ¸e $\left\Vert S^{n}(t)\right\Vert _{2}^{2}+\int_{0}^{T}\left\Vert \nabla S^{n}\right\Vert _{2}^{2}\leq c(T)$,
+kde $\left|c^{n}(t)\right|^{2}=\left\Vert S^{n}(t)\right\Vert _{2}^{2}$,
+proto je omezené konstantou a nem\r{u}¸e jít do $\infty$. D\r{u}sledek
+je, ¸e i $u^{n}$ je omezené (z $u^{n}=:u_{D}+S^{n}$).
+
+$\sup_{t\in(0,T)}\left\Vert u^{n}(t)\right\Vert +\int_{0}^{T}\left\Vert \nabla u^{n}\right\Vert ^{2}\, dt\leq c(data)$
+(dod kde se tam vzalo supremum?)
+
+... a to je apriorní odhad.
+
+TODO proc ted delame to co delame dal:
+
+Podle definice normy duálu (první rovnost) a $S^{n}$ (druhá rovnost):
+
+(DOD na radce holder se tam objevila konstanta c u gradientu. TO je
+ta z elipticity? A proc tam potom neni kvadrat?)
+
+\begin{eqnarray*}
+\left\Vert u_{t}^{n}(t)\right\Vert _{W^{-1,2}} & = & \sup_{\begin{array}{c}
+\varphi\in W_{0}^{1,2}(\Omega)\\
+\left\Vert \varphi\right\Vert \leq1
+\end{array}}\left\langle u_{t}^{n}(t),\,\varphi\right\rangle =\sup_{\varphi}(\left\langle S_{t}^{n},\,\varphi\right\rangle -\left\langle u_{D}{}_{t},\,\varphi\right\rangle )\leq\sup_{\varphi}\int_{\Omega}S_{t}^{n}\varphi\, dx+\left\Vert u_{D}{}_{t}\right\Vert _{-1,2}=\sup_{\varphi}\int_{\Omega}S_{t}^{n}p^{n}(\varphi)\, dx+\left\Vert u_{D}{}_{t}\right\Vert _{-1,2}=\\
+ & = & \sup_{\varphi}\int_{\Omega}a\nabla u^{n}\nabla p^{n}(\varphi)+b\nabla u^{n}p^{n}(\varphi)+cu^{n}p^{n}(\varphi)+\left\langle f,\, p^{n}(\varphi)\right\rangle \, dx+\left\Vert u_{D}{}_{t}\right\Vert _{-1,2}\leq\\
+\text{(Holder)} & \leq & \sup_{\varphi}\left\Vert p^{n}(\varphi)\right\Vert _{1,2}(c\left\Vert \nabla u^{n}\right\Vert _{2}+\left\Vert b\right\Vert _{L^{\infty}}\left\Vert \nabla u^{n}\right\Vert _{2}+\left\Vert c\right\Vert _{\infty}\left\Vert u^{n}\right\Vert _{2}+\left\Vert f\right\Vert _{-1,2})+\left\Vert u_{D}{}_{t}\right\Vert _{-1,2}
+\end{eqnarray*}
+
+
+No a proto¸e $\sup_{\varphi}\left\Vert p^{n}(\varphi)\right\Vert _{1,2}\leq const$
+(proto¸e $\left\Vert p^{n}(\varphi)\right\Vert _{1,2}\leq\left\Vert \varphi\right\Vert _{1,2}\leq1$
+z vlastnosti projekce a p\v{r}edpokladu) se lze vrátit a zintegriovat
+
+(dod lze to zintegrovat beztrestne tohle? DOD objevili se tam nejadnou
+kvadraty!?):
+
+$\int_{0}^{T}\left\Vert u_{t}^{n}(t)\right\Vert _{W^{-1,2}}\leq c(\int_{0}^{T}\left\Vert \nabla u^{n}\right\Vert _{2}^{2}+\left\Vert b\right\Vert _{L^{\infty}}^{2}\left\Vert \nabla u^{n}\right\Vert _{2}^{2}+\left\Vert c\right\Vert _{\infty}^{2}\left\Vert u^{n}\right\Vert _{2}^{2}+\left\Vert f\right\Vert _{-1,2}^{2}+\left\Vert u_{D}{}_{t}\right\Vert _{-1,2}^{2}\, dt)\leq c(data)$
+
+(dod tady zkoncila hodina, pak jsme navazali a najednou se objevily
+nejaky veci na levy strane)
+
+$\int_{0}^{T}\left\Vert u_{t}^{n}(t)\right\Vert _{W^{-1,2}}\, dt+\int_{0}^{T}\left\Vert u^{n}(t)\right\Vert _{1,2}\, dt+\sup_{t}\left\Vert u^{n}(t)\right\Vert _{2}^{2}\leq c(f,\,\Omega,\, b,\, c,\, u_{D},\, u_{0})$
+
+(dod jasne zavisi na datech, ale kam se podelo a?)
+
+To jsme odvodili a te\v{d} p\v{r}ejdeme k limit\v{e} - pou¸ijeme reflexivitu
+(ceho) na extrakci podposloupnosti $u^{n}\rightharpoonup u$ v $L^{2}(0,T,\, W^{1,2}(\Omega))$
+(resp $u^{n}-u_{D}\rightharpoonup u-u_{D}$ v $L^{2}(0,T,\, W_{0}^{1,2}(\Omega))$
+) a $u_{t}^{n}\rightharpoonup u_{t}$ v $L^{2}(0,T,\, W_{0}^{-1,2}(\Omega))$
+
+A p\v{r}i p\v{r}echodu k limit\v{e} je v¨e lineární. Vynásobíme $(WF)^{n}$
+$\varphi\in D(0,\, T)$ a integrujeme p\v{r}ez $(0,\, T)$. Mí\v{r}íme
+k tomu, ¸e slabá limita $u$ je \v{r}e¨ení p\r{u}vodního problému:
+
+\[
+\int_{0}^{T}\int_{\Omega}u_{t}^{n}w_{i}\varphi\, dx\, dt+\int_{0}^{T}\int_{\Omega}a\nabla u^{n}\nabla w_{i}\varphi+b\nabla u^{n}w_{i}\varphi+cu^{n}w_{i}\varphi\, dx\, dt=\int_{0}^{T}\left\langle f,\,\varphi w_{i}\right\rangle \, dt\text{ ... }i=1...n\,--(WF)^{i}
+\]
+
+
+zafixujeme $i$, vezmeme $n\geq i$ a jdeme do limity $n\rightarrow\infty$.
+\begin{itemize}
+\item $\int_{0}^{T}\int_{\Omega}u_{t}^{n}w_{i}\varphi\, dx\, dt\rightarrow\int_{0}^{T}\left\langle u_{t}^{n},\,\varphi w_{i}\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}\, dt$
+Proto¸e tak jsme definovali Gelfandovu trojici $X\hookrightarrow H=H^{\star}\hookrightarrow X^{\star}$,
+konkrétn\v{e} $W_{0}^{1,2}(\Omega)\hookrightarrow L^{2}(\Omega)=L^{2}(\Omega)^{\star}\hookrightarrow W_{0}^{1,2}(\Omega)^{\star}$
+a celá ta v\v{e}c je v $L^{2}(0,\, T,\, W_{0}^{1,2}(\Omega))$ a jde
+slab\v{e}. (DOD nechybi tam integral z OMEGA? $\int_{\Omega}$)
+\item Pro ostatní \v{c}leny je limitní p\v{r}echod v po\v{r}ádku, proto¸e
+$\nabla u^{n}$ i $u^{n}$ jde slab\v{e} v $L^{2}(0,T,L^{2})$ a $w_{i}$
+i $\nabla w_{i}$ je omezené (v tomhle prostoru)
+\end{itemize}
+Dostáváme: (vytkneme i $\varphi$ z dualit): (DOD nechybi tam integral
+z OMEGA? hned uplne vlevo $\int_{\Omega}$)
+
+\[
+\int_{0}^{T}\left\langle u_{t},\, w_{i}\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}\varphi\, dt+\int_{0}^{T}\int_{\Omega}a\nabla u\nabla w_{i}\varphi+b\nabla uw_{i}\varphi+cuw_{i}\, dx\, dt=\int_{0}^{T}\left\langle f,\, w_{i}\right\rangle \varphi\, dt
+\]
+
+
+A proto¸e je $\varphi\in D(0,\, T)$ libovolné, máme pro s.v. $t\in(0,T)$:
+
+\[
+\left\langle u_{t},\, w_{i}\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}+\int_{\Omega}a\nabla u\nabla w_{i}\varphi+b\nabla uw_{i}\varphi+cuw_{i}\, dx=\left\langle f,\, w_{i}\right\rangle \varphi\, dt
+\]
+
+
+Pou6ijeme fakt, ¸e $w_{i}$ je bází a ¸e $i$ bylo fixní a libovolné
+- dostaneme rovnost nejen pro s.v. $t\in(0,T)$, ale i pro libovolné
+$w\in W_{0}^{1,2}$:
+
+\[
+\left\langle u_{t},\, w\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}+\int_{\Omega}a\nabla u\nabla w\varphi+b\nabla uw\varphi+cuw\, dx=\left\langle f,\, w\right\rangle \varphi\, dt
+\]
+
+
+To je slabá formulace p\r{u}vodního problému, tedy limitní $u$ \v{r}e¨í
+slabou formulaci. Zbývá ov\v{e}\v{r}it, ¸e spl\v{n}uje i po\v{c}áte\v{c}ní
+podmínku.
+
+
+\paragraph*{Nabývání po\v{c}áte\v{c}ní podmínky}
+
+Má smysl \v{r}e¨it hodnotu v jednom bod\v{e} $u(0)$, proto¸e $u\in L^{2}(0,\, T,\, W^{1,2}(\Omega))\cap W^{1,2}(0,\, T,\, W_{0}^{-1,2}(\Omega))$,
+tedy vno\v{r}eno $u\in C([0,\, T],\, L^{2}(\Omega))$ do spojitých
+(a ty u¸ mají bodové hodnoty).
+
+Cíl bude dokázat, ¸e $u(t)\overset{t\rightarrow0_{+}}{\rightharpoonup}u_{0}$,
+proto¸e kdy¸ p\r{u}jde takhle slab\v{e} a zárove\v{n} ze spojitosti
+platí ¸e jde siln\v{e} $u(t)\rightarrow u(0)$, tak se budou ob\v{e}
+limity rovnat.
+
+Zvolím $\varphi\in D(-\infty,T)$ a dosadím do rovnosti $(WF)^{i}$,
+p\v{r}ehodím \v{c}ást na druhou stranu a dostanu:
+
+\[
+\int_{0}^{T}\int_{\Omega}u_{t}^{n}w_{i}\varphi\, dx\, dt=-\int_{0}^{T}\int_{\Omega}a\nabla u^{n}\nabla w_{i}\varphi+b\nabla u^{n}w_{i}\varphi+cu^{n}w_{i}\varphi\, dx\, dt+\int_{0}^{T}\left\langle f,\,\varphi w_{i}\right\rangle \, dt=:\int_{0}^{T}P.S.\varphi\, dt
+\]
+
+
+Pravou stranu jsme si ozna\v{c}ili jako integrál z \v{c}len\r{u} krát
+$\varphi$, proto¸e dál nebude pot\v{r}eba se jí zabývat do detailu.
+
+A jdeme zase k limit\v{e}. Pro \v{c}leny na pravé stran\v{e} d\v{e}láme
+v¨e jako minule, \v{c}lenu na levé stran\v{e} v\v{e}nujeme speciální
+pé\v{c}i. Pou¸ijeme perpartes (v¨e je te\v{d} hladké, m\r{u}¸eme),
+hrani\v{c}ní \v{c}len bude jen jeden: 
+\[
+\int_{0}^{T}\int_{\Omega}u_{t}^{n}w_{i}\varphi\, dx\, dt=-\int_{0}^{T}\int_{\Omega}u^{n}w_{i}\varphi_{t}\, dx\, dt-\int_{\Omega}u^{n}(0)w_{i}\varphi(0)\, dx=
+\]
+
+
+...pou¸ijeme $p^{n}(u_{0}-u_{D})=u_{0}-u_{D}(0)+u_{D}$:
+
+\[
+=-\int_{0}^{T}\int_{\Omega}u^{n}w_{i}\varphi_{t}\, dx\, dt-\int_{\Omega}(p^{n}(u_{0}-u_{D})+u_{D}(0))w_{i}\varphi(0)\, dx
+\]
+
+
+a te\v{d} p\r{u}jdeme k limit\v{e}: (dod kam zmizely v nasledujici
+radce ty cleny u0 uD a tak? Je v druhym clenu nalevo u\_\{0\} nebo
+$u_{D}$ ??)
+
+\[
+-\int_{0}^{T}\int_{\Omega}uw_{i}\varphi_{t}\, dx\, dt-\int_{\Omega}u_{?}w_{i}\varphi(0)\, dx=\int_{0}^{T}P.S.\varphi\, dt
+\]
+
+
+Zase platí $\forall\varphi\in D(-\infty,T),\,\forall w\in W_{0}^{1,2}(\Omega)$,
+zvolíme chyt\v{r}e $\varphi^{\epsilon}=\max(0,1-t/\epsilon)\chi_{[0,T]}$
+jako klesající kope\v{c}ek k nule a dostaneme rovnost s limitním p\v{r}echodem:
+
+\begin{eqnarray*}
+\frac{1}{\epsilon}\int_{0}^{\epsilon}\int_{\Omega}uw\, dx\, dt-\int_{\Omega}u_{?}w\, dx & = & \int_{0}^{\epsilon}P.S.\varphi^{\epsilon}\, dt\\
+\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_{0}^{\epsilon}\int_{\Omega}uw\, dx\, dt-\int_{\Omega}u_{?}w\, dx & = & 0
+\end{eqnarray*}
+
+
+...Limitní rovnost dáme dohromady pod jeden integrál (m\r{u}¸eme díky
+pr\r{u}m\v{e}rovému integrálu a spojitosti $u$):
+
+\[
+\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_{0}^{\epsilon}\int_{\Omega}(u-u_{?})w\, dx\, dt=0
+\]
+
+
+...P\v{r}i\v{c}teme $u(0)-u(0)$ a pak p\v{r}esuneme na pravou stranu
+a z integrálu \v{c}ást s $u_{0}$, proto¸e nezávisí na \v{c}ase:
+
+\begin{eqnarray*}
+\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_{0}^{\epsilon}\int_{\Omega}(u-u_{0}+u(0)-u(0))w\, dx\, dt & = & 0\\
+\lim_{\epsilon\rightarrow0}\frac{1}{\epsilon}\int_{0}^{\epsilon}\int_{\Omega}(u-u(0))w\, dx\, dt & = & -\int_{\Omega}(u(0)-u_{0})w\, dx
+\end{eqnarray*}
+
+
+Limita na levé stran\v{e} je nulová, proto¸e jde o spojitou funkci
+(a limitu integrálního pr\r{u}m\v{e}ru). Proto je pravá strana nulová,
+tedy máme $\forall w$ $\int_{\Omega}(u(0)-u_{0})w\, dx=0$. Proto
+je tedy $u(0)=u_{0}$.
+
+Tohle ¨lo jen proto, ¸e $u$ byla spojitá. Kdy¸ se nepovede spojitost,
+lze mít n\v{e}co jako slabou spojitost.
+
+(DOD kde se ve faedo galerkinovi vyuziva ze je to ON baze, aby se
+mezi sebou vynasobili prvky baze a zustala deltafunkce indexu?)
+
+
+\subsubsection*{Regularita}
+
+Jsou v\v{e}ty o maximální regularit\v{e}, které \v{r}íkají, ¸e pokud
+je pravá strana z prostoru $X$, pak \v{c}leny na levé stran\v{e}
+diferenciální rovnice ($u_{t}$ a $\nabla^{2}u$) jsou té¸ v $X$.
+
+Neplatí pro v¨echny prostory X, ale bude platit pro $X=L^{p}(0,\, T,\, L^{q}(\Omega)),\, p,q\in(1,\infty)$.
+
+Pro jedni\v{c}ku a nekone\v{c}no to neplatí proto¸e chybí reflexivita.
+(Prostor který je mezi $L^{p}$ a $L^{\infty}$ je BMO, pro ten to
+je¨t\v{e} platí.)
+
+Uká¸eme si to pro $L^{2}$, pro jiné je to t\v{e}¸ké. Dv\v{e} varianty
+v\v{e}ty se budou li¨it jen v kurzív\v{e}.
+
+
+\paragraph*{V\v{e}ta jednoduchá verze pro $u_{t}\in L^{2}$}
+
+Nech\v{t} $\Omega\in C^{0,1},\, u_{D}=0$, platí p\v{r}edpoklady na
+data (D1), (A1)...(A3) (tzn v¨echno je omezené), $f\in L^{2}(0,\, T,\, L^{2}(\Omega))$.
+
+\textit{Navíc $a_{ij}(x)=a_{ji}(x)$ je symetrická a nezávisí na \v{c}ase
+$t$ (proto jednoduchá verze).}
+
+Pak $\forall\epsilon>0$ (lokální verze):
+
+\[
+\sup_{t\in[\epsilon,T]}\left\Vert \nabla u(t)\right\Vert _{2}^{2}+\int_{\epsilon}^{T}\left\Vert u_{t}(t)\right\Vert _{2}^{2}\, dt\leq c(\epsilon^{-1},\, f,\, a,\, b,\, c,\, u_{D})
+\]
+
+
+Navíc, pokud $u_{D}\in W_{0}^{1,2}(\Omega)$, pak
+\[
+\sup_{t\in[\epsilon,T]}\left\Vert \nabla u(t)\right\Vert _{2}^{2}+\int_{0}^{T}\left\Vert u_{t}(t)\right\Vert _{2}^{2}\, dt\leq c(f,\, a,\, b,\, c,\, u_{D})
+\]
+
+
+
+\paragraph*{D\r{u}kaz }
+
+Vyu¸ijeme dokázaná fakta z Galerkina:
+\begin{itemize}
+\item víme ¸e $\exists!\, u$ slabé \v{r}e¨ení
+\item $\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}=:u^{n}\rightharpoonup u$
+\item a platí slabá formulace $(WF)^{n}$
+\[
+\int_{\Omega}u_{t}^{n}w_{i}\, dx+\int_{\Omega}a\nabla u^{n}\nabla w_{i}+b\nabla u^{n}w_{i}+cu^{n}w_{i}\, dx=\int_{\Omega}f\, w_{i}\, dx\,\forall i=1...n,\,\forall\text{s.v. }t\in(0,T)
+\]
+
+\end{itemize}
+Cíl - chci dokázat nerovnosti ve v\v{e}t\v{e} pro $\forall u^{n}$,
+pro které víme, ¸e jde slab\v{e} a tedy pro limitní $u$ z\r{u}stanou
+nerovnosti zachovány.
+
+Vynásobíme $(WF)^{n}$ \v{c}asovou derivací $\frac{d}{dt}c_{i}^{n}(t)$
+a se\v{c}teme p\v{r}ez $i$, to nám dá spolu s $w_{i}$ $u_{t}^{n}$
+
+\begin{eqnarray*}
+\int_{\Omega}u_{t}^{n}\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)w_{i}\, dx+\sum_{k,m=1}^{d}\int_{\Omega}a_{km}\frac{\partial u^{n}}{\partial x_{k}}\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)\frac{\partial w_{i}}{\partial x_{m}}\, dx+\int_{\Omega}(b\nabla u^{n}+cu^{n})\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)w_{i}\, dx & = & \int_{\Omega}f\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)w_{i}\, dx\\
+\int_{\Omega}\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\int_{\Omega}\sum_{k,m=1}^{d}a_{km}\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u_{t}^{n}}{\partial x_{m}}\, dx & = & -\int_{\Omega}(b\nabla u^{n}+cu^{n})u_{t}^{n}\, dx+\int_{\Omega}fu_{t}^{n}\, dx
+\end{eqnarray*}
+
+
+DOD begin of madness: v podstate tadyodsad dal to nechapu:
+
+DOD ted udelame nejakou zahadnou magickou upravu:
+
+\[
+\int_{\Omega}\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\int_{\Omega}\sum_{k,m=1}^{d}a_{km}\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u_{t}^{n}}{\partial x_{m}}\, dx\leq\int_{\Omega}(|b|\,|\nabla u^{n}|+|c|\,|u^{n}|+|f|)|u_{t}^{n}|\, dx
+\]
+
+
+DOD ted udelame nejakou zahadnou kryptickou upravu: a Holdera?
+
+\[
+\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\frac{1}{2}\frac{d}{dt}\int_{\Omega}\sum_{k,m=1}^{d}a_{km}\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u^{n}}{\partial x_{m}}\, dx\leq(\left\Vert b\right\Vert _{\infty}\left\Vert \nabla u^{n}\right\Vert _{2}^{2}+\left\Vert c\right\Vert _{\infty}\left\Vert u^{n}\right\Vert _{2}+\left\Vert f\right\Vert _{2})\left\Vert u_{t}^{n}\right\Vert _{2}
+\]
+
+
+DOD coze!? v jakym poradi delame jaky upravy?? ( a \v{c}len na pravý
+dtran\v{e} p\v{r}esunu Youngem na levou stranu a díky elipticit\v{e}
+na pravé stran\v{e} ud\v{e}lám $\left\Vert \nabla u^{n}\right\Vert _{2}^{2}\leq\alpha\int...$:)
+
+\[
+\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\frac{d}{dt}\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx\leq const(\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx+\left\Vert u^{n}\right\Vert _{2}^{2}+\left\Vert f\right\Vert _{2}^{2})\text{a tohle jako zmizelo?:}\left\Vert u_{t}^{n}\right\Vert _{2}
+\]
+
+
+Pou¸ijeme Gronwallovo lemma (dod kde??)
+
+$\frac{d}{dt}\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx\leq c\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx+c(\left\Vert u^{n}\right\Vert _{2}^{2}+\left\Vert f\right\Vert _{2}^{2})$
+
+$T\geq t>\tau\geq0:\,\int_{\Omega}a\nabla u^{n}(t)\nabla u^{n}(t)\, dx\leq c\int_{\Omega}a\nabla u^{n}(\tau)\nabla u^{n}(\tau)\, dx+c\int_{0}^{T}\left\Vert u^{n}\right\Vert _{2}^{2}+\left\Vert f\right\Vert _{2}^{2}\, dt$
+
+První trik $T\geq t\geq\epsilon\geq\tau>0$ volím T a \textbackslash{}tau
+a zintegruju $\int_{0}^{\epsilon}d\tau$. Levá strana nezávisí na
+tau, tak¸e se nezm\v{e}ní.
+
+$\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx\leq\frac{c}{\epsilon}\int_{0}^{\epsilon}\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx\, d\tau+c$
+
+Zmen¨íme levou stranu elipticitou a zv\v{e}t¨íme pravou stranu ???
+
+$\alpha_{0}\left\Vert \nabla u^{n}\right\Vert _{2}^{2}\leq\frac{c}{\epsilon}\int_{0}^{T}\left\Vert \nabla u^{n}\right\Vert _{2}^{2}\, d\tau+c\leq c/\epsilon\,\forall t\geq\epsilon$
+
+...zintegruju od $\epsilon$ do $t$ a dostanu WHAT!???
+
+\[
+\sup_{t\in[\epsilon,T]}\left\Vert \nabla u(t)\right\Vert _{2}^{2}+\int_{\epsilon}^{T}\left\Vert u_{t}(t)\right\Vert _{2}^{2}\, dt\leq c(\epsilon^{-1},\, f,\, a,\, b,\, c,\, u_{D})
+\]
+
+
+Zintegruju 
+\[
+\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\frac{d}{dt}\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx\leq const(\int_{\Omega}a\nabla u^{n}\nabla u^{n}\, dx+\left\Vert u^{n}\right\Vert _{2}^{2}+\left\Vert f\right\Vert _{2}^{2})\text{a tohle jako zmizelo?:}\left\Vert u_{t}^{n}\right\Vert _{2}
+\]
+
+
+dostanu
+
+\[
+\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}\leq c\left\Vert \nabla u^{n}(0)\right\Vert _{2}^{2}+c=
+\]
+
+
+...díky spe¨l form\v{e} báze a pak díky apriornímu p\v{r}edpokladu
+$u_{0}\in W_{0}^{1,2}(\Omega)$:
+
+\[
+=c\left\Vert \nabla p^{n}(u_{0})\right\Vert _{2}^{2}+c\leq c\left\Vert \nabla u_{0}\right\Vert _{2}^{2}+c\leq c\leq\infty
+\]
+
+
+DOD end of madness.
+
+
+\paragraph*{V\v{e}ta standartní verze pro $u_{t}\in L^{2}$}
+
+Nech\v{t} $\Omega\in C^{0,1},\, u_{D}=0$, platí p\v{r}edpoklady na
+data (D1), (A1)...(A3) (tzn v¨echno je omezené), $f\in L^{2}(0,\, T,\, L^{2}(\Omega))$.
+
+\textit{A navíc platí $\frac{1}{2}(a+a^{T})=:a^{S}\in W^{1,\infty}(0,T,L^{\infty})$
+a $div\, a^{A}:=div\,(\frac{1}{2}(a-a^{T}))\in L^{\infty}((0,T)\times\Omega)$}
+
+Pak $\forall\epsilon>0$ (lokální verze):
+
+\[
+\sup_{t\in[\epsilon,T]}\left\Vert \nabla u(t)\right\Vert _{2}^{2}+\int_{\epsilon}^{T}\left\Vert u_{t}(t)\right\Vert _{2}^{2}\, dt\leq c(\epsilon^{-1},\, f,\, a,\, b,\, c,\, u_{D})
+\]
+
+
+Navíc, pokud $u_{D}\in W_{0}^{1,2}(\Omega)$, pak
+\[
+\sup_{t\in[\epsilon,T]}\left\Vert \nabla u(t)\right\Vert _{2}^{2}+\int_{0}^{T}\left\Vert u_{t}(t)\right\Vert _{2}^{2}\, dt\leq c(f,\, a,\, b,\, c,\, u_{D})
+\]
+
+
+
+\paragraph*{FAQ}
+
+P\v{r}edpoklad s divergencí anitsymetrické \v{c}ásti znamená p\v{r}epsán
+$\sum_{j=1}^{d}\frac{\partial}{\partial x_{j}}a_{ij}^{A}(t,x)\in L^{\infty}((0,T)\times\Omega)$.
+
+Pro\v{c} je $div\, a^{A}$ v jiním prostoru ne¸ $a$? Proto¸e slo¸ky
+$a$, jako¸to matice jsou v jiném prostoru. Pro\v{c} jsou v jiném
+prostoru slo¸ky matice? Proto¸e p\v{r}i definici $a$ máme dv\v{e}
+explicitní informace - jednak z jakého je prostoru a jednak jak je
+zadaná (maticí). A aby byla zadaná maticí korektn\v{e}, tak koeficienty
+nejsou z toho samého prostoru, ale musí p\v{r}ispívat aby celek byl
+operátor z toho správného prostoru.
+
+
+\paragraph*{D\r{u}kaz}
+
+Zase vyu¸ijeme dokázané fakta z Galerkina - 
+\begin{itemize}
+\item víme ¸e $\exists!\, u$ slabé \v{r}e¨ení
+\item $\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}=:u^{n}\rightharpoonup u$
+\item a platí slabá formulace $(WF)^{n}$
+\[
+\int_{\Omega}u_{t}^{n}w_{i}\, dx+\int_{\Omega}a\nabla u^{n}\nabla w_{i}+b\nabla u^{n}w_{i}+cu^{n}w_{i}\, dx=\int_{\Omega}f\, w_{i}\, dx\,\forall i=1...n,\,\forall\text{s.v. }t\in(0,T)
+\]
+
+\end{itemize}
+Cíl - chci dokázat nerovnosti ve v\v{e}t\v{e} pro $\forall u^{n}$,
+pro které víme, ¸e jde slab\v{e} a tedy pro limitní $u$ z\r{u}stanou
+nerovnosti zachovány.
+
+Vynásobíme $(WF)^{n}$ \v{c}asovou derivací $\frac{d}{dt}c_{i}^{n}(t)$
+a se\v{c}teme p\v{r}ez $i$, to nám dá spolu s $w_{i}$ $u_{t}^{n}$
+
+\begin{eqnarray*}
+\int_{\Omega}u_{t}^{n}\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)w_{i}\, dx+\int_{\Omega}\sum_{k,m=1}^{d}a_{km}\frac{\partial u^{n}}{\partial x_{k}}\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)\frac{\partial w_{i}}{\partial x_{m}}\, dx+\int_{\Omega}(b\nabla u^{n}+cu^{n})\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)w_{i}\, dx & = & \int_{\Omega}f\sum_{i=1}^{n}\frac{d}{dt}c_{i}^{n}(t)w_{i}\, dx\\
+\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\underline{\int_{\Omega}\sum_{k,m=1}^{d}a_{km}\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u_{t}^{n}}{\partial x_{m}}\, dx} & = & -\int_{\Omega}(b\nabla u^{n}+cu^{n})u_{t}^{n}+\int_{\Omega}fu_{t}^{n}\, dx
+\end{eqnarray*}
+
+
+Levou stranu budeme odhadovat pomocí rozkladu $a_{km}=a_{km}^{S}+a_{km}^{A}$,
+p\r{u}jde o podtr¸ený \v{c}len.
+
+
+\subparagraph*{Odhad symetrické \v{c}ásti}
+
+Pou¸ijeme trik s derivací kvadrátu a pak p\v{r}esuneme derivaci p\v{r}ed
+integrál:
+
+$\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{S}(t,x)\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u_{t}^{n}}{\partial x_{m}}\, dx=\frac{1}{2}\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{S}(t,x)\frac{d}{dt}(\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u^{n}}{\partial x_{m}})\, dx=\frac{1}{2}\frac{d}{dt}\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{S}\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u^{n}}{\partial x_{m}}\, dx-\frac{1}{2}\int_{\Omega}a_{t}^{S}\nabla u^{n}\nabla u^{n}\, dx$
+
+
+\subparagraph*{Odhad antisymetrické \v{c}ásti}
+
+Proto¸e $u^{n}\in W_{0}^{1,2}(\Omega)$, máme $u_{H}^{n}\in D(\Omega)$,
+¸e $u_{H}^{n}\rightarrow u^{n}(t)$ v $W_{0}^{1,2}(\Omega)$:
+
+\[
+\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{A}\frac{\partial u^{n}}{\partial x_{k}}\frac{\partial u_{t}^{n}}{\partial x_{m}}\, dx=\lim_{H\rightarrow\infty}\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{A}\frac{\partial u_{H}^{n}}{\partial x_{k}}\frac{\partial u_{t}^{n}}{\partial x_{m}}\, dx=
+\]
+
+
+DOD pro\v{c}?
+
+\[
+=-\lim_{H\rightarrow\infty}\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{A}\frac{\partial^{2}u_{H}^{n}}{\partial x_{k}\partial x_{m}}u_{t}^{n}\, dx+\int_{\Omega}\sum_{k,m=1}^{d}a_{km}^{A}\frac{\partial u_{H}^{n}}{\partial x_{k}}u_{t}^{n}\frac{\partial}{\partial x_{m}}a_{km}^{A}\, dx=
+\]
+
+
+...kde první \v{c}ást je nula, proto¸e se násobí antisymetrická krát
+symetrická matice: (dod a co se stalo s druhym clenem?)
+
+\[
+=-\int_{\Omega}u_{t}^{n}\nabla u^{n}\, div\, a^{A}\, dx
+\]
+
+
+Zp\v{e}t k rovnici DOD jak?
+
+$\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\frac{1}{2}\frac{d}{dt}\int_{\Omega}a^{S}\nabla u^{n}\nabla u^{n}\, dx\leq\int_{\Omega}|u_{t}^{n}|(|f|+|b|\,|\nabla u^{n}|+|c|\,|u^{n}|+|\nabla u^{n}|\,|div\, a^{A}|)+\frac{1}{2}\int_{\Omega}|a_{t}^{S}|\,|\nabla u^{n}|^{2}\, dx$
+
+A zase Young abysme neco dali doleva:
+
+V rovnici oznacime clen na leve strane jak o$I$, proto¸e se vyskytuje
+i na ppravé stran\v{e}, kde pí¨eme jen $I$:
+
+$\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\frac{d}{dt}\underline{\int_{\Omega}a^{S}\nabla u^{n}\nabla u^{n}\, dx}_{I}\leq c(\left\Vert f\right\Vert _{2}^{2}+\left\Vert b\right\Vert _{\infty}^{2}I+\left\Vert c\right\Vert _{\infty}^{2}\left\Vert u^{n}\right\Vert _{2}^{2}+\left\Vert div\, a^{A}\right\Vert _{\infty}^{2}I)+c\left\Vert a_{t}^{S}\right\Vert _{\infty}I\leq$
+
+Dáme k sob\v{e} \v{c}leny s $I$:
+
+$\leq c(\left\Vert f\right\Vert _{2}^{2}+\left\Vert c\right\Vert _{\infty}^{2}\left\Vert u^{n}\right\Vert _{2}^{2})+c(\left\Vert div\, a^{A}\right\Vert _{\infty}^{2}+\left\Vert b\right\Vert _{\infty}^{2}+\left\Vert a_{t}^{S}\right\Vert _{\infty})I$
+
+První závorka je integrabilní k \v{c}asu. Druhá závorka chceme taky
+integrabilní.
+
+Aby byla druhá závorka integrabilní, p\v{r}ijdou do hry tyhle p\v{r}edpoklady
+DOD jsou to jiny predpoklady nez ve zneni vety!!!! PRoc coze?
+
+$a_{t}^{S}\in L^{1}(0,T,L^{\infty}(\Omega,\mathbb{R}^{d}))$ a $div\, a^{A}\in L^{\infty}(0,\, T,L^{\infty}(\Omega,\mathbb{R}^{d})$)
+
+Je pripravene na Gronwalllema. DOD ok a jak ho pouzijeme co z toho
+plyne what?
+
+Potrebujeme jeste $\sum_{k,m=1}^{d}a_{km}^{S}z_{k}z_{m}\geq\alpha_{0}|z|^{2}$
+aby $I$ bylo integrovatelné k \v{c}asu. Ale to platí, proto¸e symetrická
+\v{c}ást se v tomhle p\v{r}ípad\v{e} rovná p\r{u}vodnímu a to je elipticky
+omezené $\sum_{k,m=1}^{d}a_{km}^{S}z_{k}z_{m}=\sum_{k,m=1}^{d}a_{km}z_{k}z_{m}\geq\alpha_{0}|z|^{2}$.
+Pro\v{c} se rovná antisymetrická \v{c}ást tomu p\r{u}vodnímu? Proto¸e
+pro antisymetrickou \v{c}ást platí $\sum_{k,m=1}^{d}a_{km}^{A}z_{k}z_{m}=-\sum_{k,m=1}^{d}a_{mk}^{A}z_{k}z_{m}$
+a v sum\v{e} se ov¨em se\v{c}te na nulu.
+
+
+\paragraph*{V\v{e}ta Odhady pro druhé \v{c}asové derivace}
+
+Nech\v{t} $a,\, b,\, c$ jsou Lipschitzovské, $f\in W^{1,2}(0,\, T,\, L^{2}(\Omega)),\, u_{D}=0,\, u_{0}\in L^{2}(\Omega)$.
+Pak pro $\forall\epsilon>0$
+
+$\sup_{t\in[0,T]}\left\Vert u_{t}(t)\right\Vert _{2}^{2}+\int_{0}^{T}\left\Vert u_{tt}\right\Vert _{W_{0}^{-1,2}}^{2}+\int_{\epsilon}^{T}\left\Vert \nabla u_{t}\right\Vert _{2}^{2}\leq c(\epsilon^{-1},\, data)$
+
+Navíc, pokud $u_{0}\in W^{2,2}(\Omega)$:
+
+$\sup_{t\in[0,T]}\left\Vert u_{t}(t)\right\Vert _{2}^{2}+\int_{0}^{T}\left\Vert u_{tt}\right\Vert _{W_{0}^{-1,2}}^{2}+\int_{0}^{T}\left\Vert \nabla u_{t}\right\Vert _{2}^{2}\leq c(data)$
+
+
+\paragraph*{D\r{u}kaz}
+
+Vyu¸ijeme dokázaná fakta z Galerkina:
+\begin{itemize}
+\item víme ¸e $\exists!\, u$ slabé \v{r}e¨ení
+\item $\sum_{i=1}^{n}c_{i}^{n}(t)w_{i}=:u^{n}\rightharpoonup u$
+\item a platí slabá formulace $(WF)^{n}$
+\[
+\int_{\Omega}u_{t}^{n}w_{i}\, dx+\int_{\Omega}a\nabla u^{n}\nabla w_{i}+b\nabla u^{n}w_{i}+cu^{n}w_{i}\, dx=\int_{\Omega}f\, w_{i}\, dx\,\forall i=1...n,\,\forall\text{s.v. }t\in(0,T)
+\]
+
+\end{itemize}
+Cíl - chci dokázat nerovnosti ve v\v{e}t\v{e} pro $\forall u^{n}$,
+pro které víme, ¸e jde slab\v{e} a tedy pro limitní $u$ z\r{u}stanou
+nerovnosti zachovány.
+
+Navíc v tomhle p\v{r}ípad\v{e} máme zderivováním platné rovnosti dle
+\v{c}asu (abysme tam dostali druhou \v{c}asovou derivaci) následující
+(spolu s tím, ¸e $w_{i}$ nezávisí na \v{c}aseá):
+
+DOD nema tam bejt t?
+
+\[
+\int_{\Omega}u_{tt}^{n}w_{i}\, dx+\int_{\Omega}\sum_{k,m=1}^{d}(a_{km}\frac{\partial u^{n}}{\partial x_{k}})_{dod\, nema\, tady\, betj\, t}\frac{\partial w_{i}}{\partial x_{m}}\, dx+\int_{\Omega}(b\nabla u^{n}+cu^{n})_{t}w_{i}\, dx=\int_{\Omega}f_{t}\, w_{i}\, dx\,\forall i=1...n,\,\forall\text{s.v. }t\in(0,T)
+\]
+
+
+Zase jako minule vynásobíme $\frac{d}{dt}c_{i}^{n}(t)$ a se\v{c}teme,
+co¸ spolu s $w_{i}$ dá výsledek (``místo $w_{i}$ pi¨ $u_{t}^{n}$\char`\"{}):
+
+\[
+\int_{\Omega}u_{tt}^{n}u_{t}^{n}\, dx+\int_{\Omega}\sum_{k,m=1}^{d}(a_{km}\frac{\partial u^{n}}{\partial x_{k}})_{?}\frac{u_{t}^{n}}{\partial x_{m}}\, dx+\int_{\Omega}(b\nabla u^{n}+cu^{n})_{t}u_{t}^{n}\, dx=\int_{\Omega}f_{t}\, u_{t}^{n}\, dx
+\]
+
+
+DOD a ted rozderivuju: (dod jak co napriklad tam nechapu tu zavorku...)
+
+\[
+\frac{1}{2}\frac{d}{dt}\left\Vert u_{t}^{n}\right\Vert _{2}^{2}+\int_{\Omega}a\nabla u_{t}^{n}\nabla u_{t}^{n}\, dx\leq\int_{\Omega}|a_{t}|\,|\nabla u^{n}|\,|\nabla u_{t}^{n}|+|f_{t}|\,|u_{t}^{n}|+|u_{t}^{n}|(|b_{t}|\,|\nabla u^{n}|+|b|\,|\nabla u_{t}^{n}|+|c_{t}|\,|u^{n}|+|c|\,|u_{t}^{n}|)
+\]
+
+
+a odhad zespoda, p\v{r}edpokládáme $a,\, b,\, c$ jsou Lipschitzovské,
+proto je omezené a sta\v{c}í napsat jedna konstanta.
+
+\[
+\frac{d}{dt}\left\Vert u_{t}^{n}\right\Vert _{2}^{2}+2\alpha_{0}\left\Vert \nabla u_{t}^{n}\right\Vert _{2}^{2}\leq c(\left\Vert \nabla u^{n}\right\Vert _{2}\left\Vert \nabla u_{t}^{n}\right\Vert _{2}+\left\Vert f_{t}\right\Vert _{2}\left\Vert u_{t}^{n}\right\Vert _{2}+\left\Vert \nabla u^{n}\right\Vert _{2}\left\Vert u_{t}^{n}\right\Vert _{2}+\left\Vert \nabla u_{t}^{n}\right\Vert _{2}\left\Vert u_{t}^{n}\right\Vert _{2}+\left\Vert u_{t}^{n}\right\Vert _{2}^{2}+\left\Vert u_{t}^{n}\right\Vert _{2}\left\Vert u^{n}\right\Vert _{2})
+\]
+
+
+a zase Young veci doleva
+
+\[
+\frac{d}{dt}\left\Vert u_{t}^{n}\right\Vert _{2}^{2}+\alpha_{0}\left\Vert \nabla u_{t}^{n}\right\Vert _{2}^{2}\leq c(data)(\left\Vert \nabla u^{n}\right\Vert _{2}^{2}+\left\Vert u_{t}^{n}\right\Vert _{2}^{2}+\left\Vert f_{t}\right\Vert _{2}^{2})
+\]
+
+
+Na levé stran\v{e} je první \v{c}len omezený k \v{c}asu, druhý \v{c}len
+integrovatelný k \v{c}asu a na pravé stran\v{e} je v¨e $L^{1}$ (druhý
+\v{c}len $L^{1}(\epsilon,\, T)$ z p\v{r}edchozí v\v{e}ty).
+
+Tedy DOD co?
+
+$\sup_{t\in(\epsilon,T)}\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\int_{\epsilon}^{T}\left\Vert \nabla u_{t}^{n}\right\Vert _{2}^{2}\leq c(\epsilon^{-1})$
+
+DOD a ted delame zas neco jinyho
+
+\[
+\left\Vert u_{t}^{n}(t)\right\Vert _{2}^{2}+\alpha_{0}\int_{0}^{t}\left\Vert \nabla u_{t}^{n}\right\Vert _{2}^{2}\, d?\leq\left\Vert \nabla u_{t}^{n}(0)\right\Vert _{2}^{2}+\underline{\int_{0}^{t}\left\Vert u_{t}^{n}\right\Vert _{2}^{2}+\left\Vert f_{t}\right\Vert _{2}^{2}\, d?}
+\]
+
+
+P\v{r}edpokládali jsme $u_{0}\in W^{2,2}$, tedy je i v $W^{1,2}$
+a to sta\v{c}í - z p\v{r}edchozí v\v{e}ty - k tomu, aby podtr¸ený
+integrál byl omezený konstantou $c$.
+
+Musím vy\v{r}e¨it \v{c}len $\left\Vert \nabla u_{t}^{n}(0)\right\Vert _{2}^{2}$,
+ten nep\v{r}edepisuju, tak¸e ho musím vy\v{c}íst z rovnice: (dod what
+co se deje dole: )
+
+$\int_{\Omega}u_{t}^{n}w_{i}+\int_{\Omega}a\nabla u^{n}\nabla w_{i}+(b\nabla u^{n}+cu^{n})w_{i}=\int fw_{i}$
+
+$\int_{\Omega}u_{t}^{n}u_{t}^{n}+\int_{\Omega}a\nabla u^{n}\nabla u_{t}^{n}+(b\nabla u^{n}+cu^{n})u_{t}^{n}=\int fu_{t}^{n}$
+
+$\left\Vert u_{t}^{n}(0)\right\Vert _{2}^{2}\leq|-\int_{\Omega}a\nabla u^{n}(0)\nabla u_{t}^{n}(0)+(b\nabla u^{n}(0)+cu^{n}(0))u_{t}^{n}(0)+\int f(0)u_{t}^{n}(0)|\, dx$
+
+Perpartes abych dostal pry\v{c} první integrál. Hrani\v{c}ní \v{c}leny
+nejsou, proto¸e nula na hranici:
+
+$\left\Vert u_{t}^{n}(0)\right\Vert _{2}^{2}\leq|\int_{\Omega}u_{t}^{n}\,{\rm div}(a\nabla u^{n})\, dx|+\left\Vert u^{n}(0)\right\Vert _{1,2}\left\Vert u_{t}^{n}(0)\right\Vert _{2}+\left\Vert f(0)\right\Vert _{2}\left\Vert u_{t}^{n}(0)\right\Vert _{2}^{2}\leq$
+
+Holder
+
+$\leq\left\Vert u_{t}^{n}(0)\right\Vert _{2}(\left\Vert u^{n}(0)\right\Vert _{1,2}+\left\Vert f(0)\right\Vert _{2}+\left\Vert \nabla u^{n}(0)\right\Vert _{2}+\left\Vert \nabla^{2}u^{n}(0)\right\Vert _{2}$
+
+dod tedy co se to stalo
+
+$\left\Vert u_{t}^{n}(0)\right\Vert _{2}\leq c(0+\left\Vert p^{n}(u_{0})\right\Vert _{2,2}+\left\Vert f(0)\right\Vert _{2})$
+
+a p\v{r}edpokládáme $f\in W^{1,2}(0,\, T,\, L^{2})$, tedy $f\in C([0,\, T],\, L^{2})$:
+
+$\left\Vert u_{t}^{n}(0)\right\Vert _{2}\leq c(\left\Vert p^{n}(u_{0})\right\Vert _{2,2}+1)\leq c(\left\Vert u_{0}\right\Vert _{2,2}+1))$
+
+Poslední nerovnost se doká¸e tak, ¸e $-\triangle w_{i}=\lambda_{i}w_{i}$
+v $\Omega$ a z ortogonality (v $L^{2}$) bych dostal $\leq c(\left\Vert u_{0}\right\Vert _{2,2}+1+\left\Vert \nabla^{2}p^{n}(u_{0})\right\Vert _{2})$.
+Tedy musím omezit $\left\Vert \nabla^{2}p^{n}(u_{0})\right\Vert _{2}$
+
+Kdy¸ si ale \v{r}eknu, ¸e $\Omega\in C^{1,1}$, pak je $w_{i}\in W^{2,2}(\Omega)$,
+tedy je $\left\Vert \nabla^{2}p^{n}(u_{0})\right\Vert _{2}$ kone\v{c}ná.
+
+\parbox[t]{1\columnwidth}{%
+Pro\v{c} odhad:
+
+Z eliptické teorie platí
+
+$\left\Vert \nabla^{2}u\right\Vert _{2}^{2}\leq c||\triangle u||_{2}^{2}$,
+vy\v{r}e¨íme li $\triangle u=f\in L^{2}$ pro dirichletdata, tak dle
+rovnice platí $\left\Vert \nabla^{2}u\right\Vert _{2}^{2}\leq c||f||_{2}^{2}=c||\triangle u||_{2}^{2}$.
+Proto
+
+$\left\Vert \nabla^{2}p^{n}(u_{0})\right\Vert _{2}^{2}\leq c\left\Vert \triangle p^{n}(u_{0})\right\Vert _{2}^{2}=c\left\Vert \triangle\sum c_{i}^{n}w_{i}\right\Vert _{2}^{2}=c\left\Vert \sum c_{i}^{n}\lambda_{i}w_{i}\right\Vert _{2}^{2}=c\sum_{i=1}^{n}(c_{i}^{n}\lambda_{i})^{2}\leq c\sum_{i=1}^{\infty}(c_{i}^{n}\lambda_{i})^{2}$
+
+Pro\v{c} suma konverguje? ta báze je bází i $W^{1,2},\, W^{2,2}$,
+OG v¨ude a muj skalární produkt je $\triangle\triangle+\nabla\nabla$,
+proto¸e $\triangle\triangle$ je ekvivalentní norma pro $\nabla^{2}\nabla^{2}$
+
+DOD U osirise a abise co?%
+}
+
+DOD a jakze konci dukaz?
+
+
+\paragraph*{V\v{e}ta \v{c}asová a prostorová regularita}
+
+Nech\v{t} $\Omega\in C^{1,1}$, $a,\, b,\, c$ jsou Lipschitzovské
+(v operátoru $Lu$).
+
+Pokud $f\in L^{2}(0,\, T,\, L(\Omega))$ a $u_{0}\in W_{0}^{1,2}(\Omega)$,
+pak unikátní slabé \v{r}e¨ení s $u_{D}=0$ spl\v{n}uje
+
+$u\in W^{1,2}(0,\, T,\, L^{2}(\Omega))\cap L^{2}(0,\, T,\, W^{2,2}(\Omega))$
+
+Navíc pokud $f\in W^{1,2}(0,\, T,\, L^{2}(\Omega))$ a $u_{0}\in W^{2,2}$,
+pak 
+
+$u\in W^{1,\infty}(0,\, T,\, L^{2}(\Omega))\cap L^{\infty}(0,\, T,\, W^{2,2}(\Omega))$
+
+
+\paragraph*{D\r{u}kaz}
+
+Pou¸ijeme p\v{r}edchozí v\v{e}tu s \v{c}asovou regularitou $\Rightarrow u_{t}\in L^{2}(0,\, T,\, L^{2}(\Omega))$.
+P\v{r}epí¨eme si rovnici:
+
+$Lu=-u_{t}+f$
+
+zafixujeme $t$ a viz eliptická regularita PDR I:
+
+$\Rightarrow\left\Vert u(t)\right\Vert _{2}^{2}\leq c(\left\Vert u_{t}(t)\right\Vert _{2}^{2}+\left\Vert f(t)\right\Vert _{2}^{2}+\left\Vert u\right\Vert _{1,2}^{2})$
+
+A zintegrujeme k \v{c}asu. V¨e napravo je omezené ($\left\Vert u\right\Vert _{1,2}^{2}$
+prvním apriorním odhadem, $u\in L^{\infty}(0,\, T,\, W_{0}^{1,2}(\Omega))$
+z minula (todo odkad?))
+
+A to je ono. todo napis jak to vypada zintegrovane. Dokázali jsme
+$L^{2}(0,\, T,\,,W^{2,2}(\Omega))$ a druhou \v{c}ást tvrzení ``$W^{1,2}(0,\, T,\, L^{2}(\Omega))\cap$\char`\"{}
+jsme m\v{e}li minule (todo kde). TODO hodilo by se pridat hyperrefy
+na odkazovany vexi i tam jak se pouziva WFn.
+
+Te\v{d} doká¸eme \v{c}ást ``Navíc\char`\"{}
+\begin{itemize}
+\item $u\in L^{\infty}(0,\, T,\, W_{0}^{1,2}(\Omega))$ máme od minula (taky)
+\item $f\in C([0,\, T],\, L^{2}(\Omega))$ je vno\v{r}ením z p\v{r}edpokladu
+$f\in W^{1,2}(0,\, T,\, L^{2}(\Omega))$
+\item $u_{t}\in L^{\infty}(0,\, T,\, L^{2}(\Omega))$ je z minula
+\end{itemize}
+
+\paragraph*{V\v{e}ta induk\v{c}ní regularita}
+
+Nech\v{t} $\Omega\in C^{k,1},\, a,b,c\in C^{k-1,1}([0,\, T]\times\bar{\Omega}),\, u_{0}\in W^{k,2}(\Omega)$,
+$f\in W^{k-1,2}(0,\, T,\, W^{k-1,2}(\Omega))$
+
+Pak slabé \v{r}e¨ení $u\in W^{k,2}(0,\, T,\, W^{k-1,2}(\Omega))\cap W^{k-1,2}(0,\, T,\, W^{k+1,2}(\Omega))$
+
+DOD opsal sem si spravne ze je tam plus?
+
+D\r{u}kaz indukcí podle p\v{r}edchozí v\v{e}ty
+
+DOD sta\v{c}í to takhle napsat do písemky!? If not dopsat sem.
+
+
+\subsubsection*{Principy maxima}
+
+Pro rovnici 
+\begin{eqnarray*}
+u_{t}+Lu & = & f\\
+u(0) & = & u_{0}\\
+u|_{\delta\Omega} & = & u_{D}
+\end{eqnarray*}
+
+
+Princip maxima, Jednoduchá v\v{e}ta
+
+Nech\v{t} $\Omega\in C^{0,1},\, f\in W_{0}^{-1,2}$ je nekladná (tzn.
+$\forall v\in W_{0}^{1,2}(\Omega),\, v\geq0,\,\left\langle f,\, v\right\rangle \leq0$)
+
+Nech\v{t} $c\geq0,\, u_{D}\leq0$ na $\delta\Omega\times(0,\, T),\, u_{0}\leq0$
+v $\Omega$
+
+Pak unikátní slabý \v{r}e¨ení je $u\leq0$ s.v. v $(0,\, T)\times\Omega$
+(nekladný).
+
+D\r{u}kaz
+
+$u\in L^{2}(0,\, T,\, W^{1,2}(\Omega))\cap W^{1,2}(0,\, T,\, W_{0}^{-1,2})$
+
+$\left\langle u_{t},\, v\right\rangle +\int_{\Omega}a\nabla u\nabla v+b\nabla uv+cuv\, dx=\left\langle f,\, v\right\rangle \,\forall v\in W_{0}^{1,2}(\Omega)\text{ a s.v. }t\in(0,\, T)$
+
+$v:=\max(0,\, u)=u_{+}$
+
+Je dob\v{r}e definovaný objekt? $u$ je sobolevovská, $\max()$ je
+lipschitzovská. Má $v$ nulovou stopu? Ano, na okraji ano a $\max()$
+to nezkazí.
+
+$v(t)\in W_{0}^{1,2}(\Omega)\text{ s.v. }t\in(0,\, T)$ Tedy proto
+lze dosadit. Dostanu:
+
+$\left\langle u_{t},\, u_{+}\right\rangle +\int_{\Omega}a\nabla u\nabla u_{+}+b\nabla uu_{+}+cuu_{+}\, dx=\left\langle f,\, u_{+}\right\rangle \leq0$
+
+Vesele m\r{u}¸eme napsat $u_{+}$ i místo $u$, proto¸e na mno¸in\v{e},
+kde náhodou $u\leq0$ (a \v{c}leny by se tedy li¨ily), je $u_{+}=0$
+a tedy díky tomu, ¸e se vyskytují v¸dy v sou\v{c}inu spolu, je na
+této mno¸in\v{e} integrál nulový. Sepí¨eme bez pravé strany, která
+splnila sv\r{u}j ú\v{c}el ve chvíli, kdy dostala do rovnice $\leq0$,
+místo toho p\v{r}esuneme jen n\v{e}které \v{c}leny na pravou stranu:
+
+$\left\langle u_{t},\, u_{+}\right\rangle +\int_{\Omega}a\nabla u_{+}\nabla u_{+}\, dx\leq-\int_{\Omega}+b\nabla u_{+}u_{+}+c|u_{+}|^{2}\, dx$
+
+Zmen¨íme levou stranu (elipticitou) a zv\v{e}t¨íme pravou stranu (DOD
+jak? + jak se na pravou stranu dostane alpha?):
+
+$\left\langle u_{t},\, u_{+}\right\rangle +\alpha\left\Vert \nabla u_{+}\right\Vert _{2}^{2}\leq\left\Vert b\right\Vert _{\infty}\left\Vert \nabla u_{+}\right\Vert _{2}\left\Vert u_{+}\right\Vert _{2}\overset{\text{Young}}{\leq}\alpha\left\Vert \nabla u_{+}\right\Vert _{2}^{2}+\frac{1}{\alpha}\left\Vert b\right\Vert _{\infty}\left\Vert u_{+}\right\Vert _{2}^{2}$
+
+Fináln\v{e} tedy
+
+$\left\langle u_{t},\, u_{+}\right\rangle \leq c\left\Vert u_{+}\right\Vert _{2}^{2}$
+
+Pou¸iju rovnost $\left\langle u_{t},\, u_{+}\right\rangle =\frac{1}{2}\frac{d}{dt}\left\Vert u_{+}\right\Vert _{2}^{2}$
+
+\framebox{\parbox[t]{1\columnwidth}{%
+Pro\v{c} rovnost - pro hladký platí (pou¸itím úvahy o nulovosti integrálu
+na mno¸in\v{e}, na které je $u\leq0$):
+
+\[
+\left\langle u_{t},\, u_{+}\right\rangle =\int_{\Omega}u_{t}u_{+}\, dx=\int_{\Omega}(u_{+})_{t}u_{+}\, dx=\frac{1}{2}\frac{d}{dt}\left\Vert u_{+}\right\Vert _{2}^{2}
+\]
+
+
+To pou¸ijeme pro $u^{n}\rightarrow u$ v $W^{-1,2}(0,\, T,\, W_{0}^{1,2}(\Omega))\cap L^{2}(0,\, T,\, W^{1,2}(\Omega))$,
+proto¸e na limitu hladkých to u¸ pou¸ít jde:
+
+$\left\langle u_{t},\, u_{+}\right\rangle =\lim_{n\rightarrow\infty}\left\langle u_{t}^{n},\, u_{+}^{n}\right\rangle =\lim_{n\rightarrow\infty}\frac{1}{2}\frac{d}{dt}\left\Vert u_{+}\right\Vert _{2}^{2}$
+
+Tedy jde slab\v{e} (DOD CO jde slabe?) $\rightharpoonup\frac{1}{2}\frac{d}{dt}\left\Vert u_{+}\right\Vert _{2}^{2}$
+a to chci, proto¸e (dod CO jde silne) jde siln\v{e} i slab\v{e}, tak¸e
+to platí.%
+}}
+
+Dostanem 
+
+$\frac{1}{2}\frac{d}{dt}\left\Vert u_{+}\right\Vert _{2}^{2}=\left\langle u_{t},\, u_{+}\right\rangle \leq c\left\Vert u_{+}\right\Vert _{2}^{2}$
+
+Pou¸ijeme Gronwallovo lemma (dod jak?)
+
+$\left\Vert u_{+}(t)\right\Vert _{2}^{2}\leq e^{ct}\left\Vert u_{+}(0)\right\Vert _{2}^{2}=0$
+
+Tedy 
+
+$u_{+}=0$ v $(0,\, T)\times\Omega$ $\Rightarrow$ $u$ musí být
+nekladné.
+
+
+\paragraph*{V\v{e}ta klasický p\v{r}ístup}
+
+
+\section*{Tududum}
+
+-chybi sbirka prikladu
+
+-neni realny spocitat jeden priklad zkosuskove jza 4 hodiny na cviceni
+
+-navrh - priklad na doma a na zkousku prijit ho jenom odprezentovat
+s vlasntima poznamkama.
+
+-mb otazky: 
+
+--kdy pouzit casoprostorovou slabresenidefinic a kdy prostorovou 
+
+--bude nekdy v pisemce JINEJ prostor nez Linf(L2) cup L2(W01,2) 
+
+-------------------------------L2(W0-1,2)?
+
+-----------------proc se ptam - heuristiky nejsou jednoduchy --
+
+-zakladni chyba je predpokladat ze kdyz to zvladnu ja zvladnou to
+i oni. Oni to zvladnou tak jak jim to ja umim vysvetlit. To co oni
+umi znamena jak ja umim ucit.
+
+---
+
+celkove se to uci jako kdyby clovek neusel znat postup protoze je
+to total mess. jako pochopime tu myslenku to jo, nicmene nesmi se
+po nas chtit ji zopakovat jinak nez ``rovnice ma zhlazovaci vlastnost.
+Proc\_ Nevim, nejak jsme to dokazovali ale uz si to nepamatuju. Vim
+ze sem to chapal.''
+
+
+\subparagraph*{Myslenky}
+
+Pokud muzes udelat veci barevny, udelej veci barevny.
+
+Pokud muzes neco dat vedle sebe (upravvu a vysvetleni), je to lepsi
+nez podsebe.
+
+Podtrzene v rovnici ppribylo v tomhle kroku. Nepodtrzene zustalo,
+opiseme.
+
+
+\subparagraph*{Metamyslenky}
+
+Nejde ucit predtim, nez clovek VI, co jeho odlisuje od lidi, ktery
+to nechapou. Nejde rict to pochopite, taky sem to pochopil, nejde
+rict ze je to jen v casu kterej tomu clovek venuje (i kdyz je to pravda,
+protoze to me zdrzuje ten cas lidem zkratit).
+
+Neni to jen znalost vet. Prednaska neni jen receni vet jak to jde
+za sebou, ale o tom naucit nas o tom premejslet. (Bandler \& grinder)
+
+Prednaska i zkouska musi mit jeden stejnej cil. Bud nas povyhazovat,
+nebo nas to naucit.
+
+V cem je spatny dat ukol lidem nadoma a vyzkouset z nej? V nicem.
+
+Nerikam ze to tak chci, ale dobrej prednasejici ma vsechno pedagogicky
+psychologicky oduvodneny, duvod ``nekdo jinej dela tohle\char`\"{}
+nebo ``za nas to bylo tak a tak\char`\"{} neni duvod, to je jen fakt
+nebo zkusenost a znamena to ze to neni promysleny. Psychologiccky
+pedagogicky oduvodnit proc to mame umet nazpamet.
+
+Retorika se de naucit, ze to nejde je vymluva.
+
+PDR jdou ucit jako limity a analyza, ze to nejde je vymluva lidi co
+to zatim neumi.
+
+
+\subparagraph*{Blbinky}
+
+Holder and young I want to use Holder and young
+
+If you want to Young forewer, forewer, and ever...
+\end{document}
