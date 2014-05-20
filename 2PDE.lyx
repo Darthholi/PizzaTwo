@@ -198,43 +198,14 @@ LatexCommand tableofcontents
 Teorie
 \end_layout
 
-\begin_layout Section*
-Notace a triky
-\end_layout
-
 \begin_layout Standard
-Následující triky budou v textu popsány a vysvětleny, nicméně abychom je
- poznali a nebyli nám cizí, uvedeme ty nejzajímavější ihned zde.
+Nejprve se podívejme na notace a triky, budou i dále v textu popsány a vysvětlen
+y i tam kde se používají, nicméně abychom je poznali a nebyli nám cizí,
+ uvedeme ty nejzajímavější ihned zde.
 \end_layout
 
-\begin_layout Itemize
-\begin_inset Formula $L^{3}\hookrightarrow L^{2}\hookrightarrow L^{1}$
-\end_inset
-
- (
-\begin_inset Quotes eld
-\end_inset
-
-
-\begin_inset Formula $L^{\infty}$
-\end_inset
-
- je lepší než 
-\begin_inset Formula $L^{2}$
-\end_inset
-
- na omezeném intervalu.
-\begin_inset Quotes erd
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $\left\Vert u\right\Vert _{A}\leq c\,\&\,\left\Vert u\right\Vert _{B}\leq c\,\Rightarrow\left\Vert u\right\Vert _{A\cap B}\leq c$
-\end_inset
-
-
+\begin_layout Section*
+Notace a Triky
 \end_layout
 
 \begin_layout Itemize
@@ -245,17 +216,10 @@ Následující triky budou v textu popsány a vysvětleny, nicméně abychom je
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $W_{(0)}^{-1,2}(\Omega)=(W_{(0)}^{1,2}(\Omega))^{\star}$
+\begin_inset Formula $\left\Vert u\right\Vert _{A}\leq c\,\&\,\left\Vert u\right\Vert _{B}\leq c\,\Rightarrow\left\Vert u\right\Vert _{A\cap B}\leq c$
 \end_inset
 
-...
- zde jako značení, abychom nemuseli psát hvězdičku.
- Nutno poznamenat že v jiných zdrojích se definuje automaticky dole s indexem
- 
-\begin_inset Formula $_{0}$
-\end_inset
 
-, takže pozor na to, může to být matoucí.
 \end_layout
 
 \begin_layout Itemize
@@ -273,6 +237,20 @@ Trik s polovinou derivace kvadrátu
 \color none
 
 \begin_inset Formula $u_{t}(t)u(t)=\frac{1}{2}\frac{d}{dt}u(t)^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Holderova nerovnost 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Tady zhruba končí věci co umíme použít
+\end_layout
+
 \end_inset
 
 
@@ -306,21 +284,75 @@ Youngova nerovnost
 \end_layout
 
 \begin_layout Itemize
-Holderova nerovnost
-\end_layout
-
-\begin_layout Itemize
 Velikost mocněného mnohočlenu lze omezit konstantou krát součtem nejvyšších
  mocnin.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Tady zhruba končí věci co *známe* a začíná černá magie.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Lebesgueův bod
-\begin_inset Formula 
-\[
-g^{n}\rightharpoonup g\mbox{ v }L^{p}\mbox{ \& }f^{n}\rightarrow f\mbox{ v }L^{p'}\,\Rightarrow\int g^{n}f^{n}\rightarrow\int gf
-\]
+\begin_inset Formula $L^{3}\hookrightarrow L^{2}\hookrightarrow L^{1}$
+\end_inset
 
+ (
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Formula $L^{\infty}$
+\end_inset
+
+ je lepší než 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ na omezeném intervalu.
+\begin_inset Quotes erd
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $W_{(0)}^{-1,2}(\Omega)=(W_{(0)}^{1,2}(\Omega))^{\star}$
+\end_inset
+
+...
+ zde jako značení, abychom nemuseli psát hvězdičku.
+ Nutno poznamenat že v jiných zdrojích se definuje automaticky dole s indexem
+ 
+\begin_inset Formula $_{0}$
+\end_inset
+
+, takže pozor na to, může to být matoucí.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $u\in W^{k,p}\Rightarrow\nabla u\in W^{k-1,p}$
+\end_inset
+
+ i kdybysme měli spadnout do duálu
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\triangle\sim\nabla^{2}\Rightarrow(u\in W^{k,p}\Rightarrow\triangle u\in W^{k-2,p})$
+\end_inset
+
+ i kdybysme měli spadnout do duálu
+\end_layout
+
+\begin_layout Itemize
+Duál součtu je průnik duálů 
+\begin_inset Formula $A^{\star}+B^{\star}=(A\cap B)^{\star}$
 \end_inset
 
 
@@ -333,6 +365,22 @@ Vnořování a hvězdičky - ohvězdičkuju-li vnořené prostory, otočí se (z
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Itemize
+Lebesgueův bod
+\end_layout
+
+\begin_layout Itemize
+Konvergování součinu
+\begin_inset Formula 
+\[
+g^{n}\rightharpoonup g\mbox{ v }L^{p}\mbox{ \& }f^{n}\rightarrow f\mbox{ v }L^{p'}\,\Rightarrow\int g^{n}f^{n}\rightarrow\int gf
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph*
@@ -2656,6 +2704,160 @@ Protože můžu spočítat rovnici
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsubsection*
+Ještě jednou a lidsky
+\end_layout
+
+\begin_layout Standard
+Obecně apriorní odhady dají výsledek pro prostor: 
+\begin_inset Formula 
+\[
+\mbox{Tvar }div(A(u)\nabla u)\Rightarrow L^{\infty}(0,T,L^{2}(\Omega))\cap L^{2}(0,T,W^{1,2}(\Omega))
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jak tyhle výsledky dají? Odvodím-li odhad tvaru (lépe řečeno chci odvodit
+ takový odhad v příkladech) 
+\begin_inset Formula $\int_{0}^{T}\left\Vert u\right\Vert _{{\color{blue}X}}^{{\color{red}p}}\leq c$
+\end_inset
+
+, pak z toho budu mít, že 
+\begin_inset Formula $u\in L^{{\color{red}p}}(0,T,{\color{blue}X})$
+\end_inset
+
+.
+ Proč - protože mám li samotnou nerovnost 
+\begin_inset Formula $\int_{0}^{T}\mbox{něco}^{p}\leq c$
+\end_inset
+
+, pak 
+\begin_inset Formula $\mbox{něco}\in L^{p}(0,T)$
+\end_inset
+
+.
+ Když je něco navíc funkce, a znám odhad v normě přez čas, tak už náleži
+ do prostoru časových zobrazení do funkcí.
+\end_layout
+
+\begin_layout Paragraph*
+Jak prostor pro 
+\begin_inset Formula $u_{t}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jakmile mám prostor, ze kterého beru řešení, potřebuju najít prostor pro
+ 
+\begin_inset Formula $u_{t}$
+\end_inset
+
+ (nebo 
+\begin_inset Formula $u_{tt}$
+\end_inset
+
+ pro hyperbolickou).
+ Platí následující pravidlo:
+\end_layout
+
+\begin_layout Paragraph*
+Často
+\end_layout
+
+\begin_layout Standard
+Pokud 
+\begin_inset Formula $u\in S$
+\end_inset
+
+, 
+\begin_inset Formula $S$
+\end_inset
+
+ je nějaký prostor, pak 
+\begin_inset Formula $u_{t(t)}\in S^{\star}$
+\end_inset
+
+ - v duálu k nějakému prostoru.
+\end_layout
+
+\begin_layout Paragraph*
+Detailní postup
+\end_layout
+
+\begin_layout Standard
+(který je důkazem tvrzení 
+\begin_inset Quotes eld
+\end_inset
+
+Často
+\begin_inset Quotes erd
+\end_inset
+
+ a vysvětluje co dělat, pokud nejsme v Častém případu) je takový, že jakmile
+ známe prostor pro 
+\begin_inset Formula $u$
+\end_inset
+
+ (a rozhodli jsme se nějak i pro 
+\begin_inset Formula $u_{0}$
+\end_inset
+
+ a 
+\begin_inset Formula $f$
+\end_inset
+
+, nebo je máme zadané), přepíšeme si rovnici tak, že na levé straně necháme
+ jen 
+\begin_inset Formula $u_{t(t)}$
+\end_inset
+
+ a na pravou stranu dáme vše ostatní.
+ A ptám se, kam náleží pravá strana jako celek.
+ Použijeme k tomu následující pravidla:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $u\in W^{k,p}\Rightarrow\nabla u\in W^{k-1,p}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\triangle\sim\nabla^{2}\Rightarrow(u\in W^{k,p}\Rightarrow\triangle u\in W^{k-2,p})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $W^{-\mbox{něco},\mbox{něco}}$
+\end_inset
+
+ je duál a je to vymyšlené tak, aby předchozí dva řádky spadly do duálu
+\end_layout
+
+\begin_layout Itemize
+Duál součtu je průnik duálů 
+\begin_inset Formula $A^{\star}+B^{\star}=(A\cap B)^{\star}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
@@ -5999,6 +6201,22 @@ Má smysl řešit hodnotu v jednom bodě
 \end_inset
 
  do spojitých (a ty už mají bodové hodnoty).
+\end_layout
+
+\begin_layout Standard
+Mimochodem v 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+ nemá smysl ptát se na bodovou hodnotu, protože není vnořené do žádných
+ spojitých funkcí a tedy jediné co umíme říct je že je to třída funkcí co
+ nezáleží na hodnotách na množině míry nula.
+ Tedy nezáleží ani na hodnotě v bodě.
+ Proto při odvozování prostorů chceme něco lepšího, než 
+\begin_inset Formula $L^{1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -16249,8 +16467,61 @@ Detailní výpočet je testování rovnice řešením.
 \end_inset
 
 .
+ Cíl je upravit rovnici na nerovnici do tvaru, kdy na pravé straně mám data
+ (tzn 
+\begin_inset Formula $f$
+\end_inset
+
+, 
+\begin_inset Formula $u_{0}$
+\end_inset
+
+) v nějakých normách (které znám, nebo budu požadovat, že je znám) a na
+ levé straně neznámé řešení 
+\begin_inset Formula $u$
+\end_inset
+
+ v nějakých derivacích a ideálně kvadrátech.
+ Pak totiž libovolný člen na levé straně je menší než pravá strana a z toho
+ dostanu podmínky na prostor.
+ Typově dostávám
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Formula $L^{\infty}(0,T,L^{2})$
+\end_inset
+
+ z 
+\begin_inset Formula $esssup\left\Vert u(t)\right\Vert _{2}$
+\end_inset
+
+ ...
+ tohle je hezký odhad, napíšu si ho a dál se jím nezabývám.
+ (Proto také není napsaný výše v 
+\begin_inset Quotes eld
+\end_inset
+
+Tvar 
+\begin_inset Formula $\Rightarrow$
+\end_inset
+
+")
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $L^{2}(0,T,W_{0}^{1,2})$
+\end_inset
+
+ z 
+\begin_inset Formula $\left\Vert \nabla u\right\Vert _{L^{2}(0,T,L^{2})}\leq c\Rightarrow\left\Vert u\right\Vert _{L^{2}(0,T,W_{0}^{1,2})}\leq c$
+\end_inset
+
+ ...
+ kde se extenzivně využívá ekvivalence norem s homogenním dirichletem.
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Itemize
 Definice slabého řešení:

@@ -99,37 +99,43 @@ II LS}
 
 \part*{Teorie}
 
+Nejprve se podívejme na notace a triky, budou i dále v textu popsány
+a vysv\v{e}tleny i tam kde se pou¸ívají, nicmén\v{e} abychom je poznali
+a nebyli nám cizí, uvedeme ty nejzajímav\v{e}j¨í ihned zde.
 
-\section*{Notace a triky}
 
-Následující triky budou v textu popsány a vysv\v{e}tleny, nicmén\v{e}
-abychom je poznali a nebyli nám cizí, uvedeme ty nejzajímav\v{e}j¨í
-ihned zde.
+\section*{Notace a Triky}
 \begin{itemize}
-\item $L^{3}\hookrightarrow L^{2}\hookrightarrow L^{1}$ (``$L^{\infty}$
-je lep¨í ne¸ $L^{2}$ na omezeném intervalu.'')
-\item $\left\Vert u\right\Vert _{A}\leq c\,\&\,\left\Vert u\right\Vert _{B}\leq c\,\Rightarrow\left\Vert u\right\Vert _{A\cap B}\leq c$
 \item $\frac{\partial u}{\partial t}=u_{t}$
-\item $W_{(0)}^{-1,2}(\Omega)=(W_{(0)}^{1,2}(\Omega))^{\star}$... zde jako
-zna\v{c}ení, abychom nemuseli psát hv\v{e}zdi\v{c}ku. Nutno poznamenat
-¸e v jiných zdrojích se definuje automaticky dole s indexem $_{0}$,
-tak¸e pozor na to, m\r{u}¸e to být matoucí.
+\item $\left\Vert u\right\Vert _{A}\leq c\,\&\,\left\Vert u\right\Vert _{B}\leq c\,\Rightarrow\left\Vert u\right\Vert _{A\cap B}\leq c$
 \item Trik s polovinou derivace kvadrátu $u_{t}(t)u(t)=\frac{1}{2}\frac{d}{dt}u(t)^{2}$
+\item Holderova nerovnost 
 \item Poincareho nerovnost
 \item Youngova nerovnost $(ab)^{p}\leq\frac{a^{p}}{p}+\frac{b^{p'}}{p'}$,
 bez psaní konstant: $(ab)^{p}\overset{\text{Y}}{\lesssim}a^{p}+b^{p'}$
 \item $\epsilon$-Young $ab=\sqrt{\epsilon}a\, b/\sqrt{\epsilon}\overset{\text{Y}}{\leq}\epsilon a^{2}/2+b^{2}/(2\epsilon)$
-\item Holderova nerovnost
 \item Velikost mocn\v{e}ného mnoho\v{c}lenu lze omezit konstantou krát sou\v{c}tem
-nejvy¨¨ích mocnin.
+nejvy¨¨ích mocnin. 
+\item $L^{3}\hookrightarrow L^{2}\hookrightarrow L^{1}$ (``$L^{\infty}$
+je lep¨í ne¸ $L^{2}$ na omezeném intervalu.'')
+\item $W_{(0)}^{-1,2}(\Omega)=(W_{(0)}^{1,2}(\Omega))^{\star}$... zde jako
+zna\v{c}ení, abychom nemuseli psát hv\v{e}zdi\v{c}ku. Nutno poznamenat
+¸e v jiných zdrojích se definuje automaticky dole s indexem $_{0}$,
+tak¸e pozor na to, m\r{u}¸e to být matoucí.
+\item $u\in W^{k,p}\Rightarrow\nabla u\in W^{k-1,p}$ i kdybysme m\v{e}li
+spadnout do duálu
+\item $\triangle\sim\nabla^{2}\Rightarrow(u\in W^{k,p}\Rightarrow\triangle u\in W^{k-2,p})$
+i kdybysme m\v{e}li spadnout do duálu
+\item Duál sou\v{c}tu je pr\r{u}nik duál\r{u} $A^{\star}+B^{\star}=(A\cap B)^{\star}$
+\item Vno\v{r}ování a hv\v{e}zdi\v{c}ky - ohv\v{e}zdi\v{c}kuju-li vno\v{r}ené
+prostory, oto\v{c}í se (za jistých p\v{r}edpoklad\r{u}) vno\v{r}ení
+$X\hookrightarrow Y\Rightarrow X^{\star}\hookleftarrow Y^{\star}$.
 \item Lebesgue\r{u}v bod
+\item Konvergování sou\v{c}inu
 \[
 g^{n}\rightharpoonup g\mbox{ v }L^{p}\mbox{ \& }f^{n}\rightarrow f\mbox{ v }L^{p'}\,\Rightarrow\int g^{n}f^{n}\rightarrow\int gf
 \]
 
-\item Vno\v{r}ování a hv\v{e}zdi\v{c}ky - ohv\v{e}zdi\v{c}kuju-li vno\v{r}ené
-prostory, oto\v{c}í se (za jistých p\v{r}edpoklad\r{u}) vno\v{r}ení
-$X\hookrightarrow Y\Rightarrow X^{\star}\hookleftarrow Y^{\star}$.
 \end{itemize}
 
 \paragraph*{Vitaliova v\v{e}ta.}
@@ -850,6 +856,55 @@ takto: $u=div\, f,\, f\in L^{2}(\Omega,R^{d})$.
 
 Proto¸e m\r{u}¸u spo\v{c}ítat rovnici $-\triangle v=0$, vy\v{r}e¨ím
 a vím $div\,\nabla v=u$ a vezmu $f=\nabla v$.
+
+
+\subsubsection*{Je¨t\v{e} jednou a lidsky}
+
+Obecn\v{e} apriorní odhady dají výsledek pro prostor: 
+\[
+\mbox{Tvar }div(A(u)\nabla u)\Rightarrow L^{\infty}(0,T,L^{2}(\Omega))\cap L^{2}(0,T,W^{1,2}(\Omega))
+\]
+
+
+Jak tyhle výsledky dají? Odvodím-li odhad tvaru (lépe \v{r}e\v{c}eno
+chci odvodit takový odhad v p\v{r}íkladech) $\int_{0}^{T}\left\Vert u\right\Vert _{{\color{blue}X}}^{{\color{red}p}}\leq c$,
+pak z toho budu mít, ¸e $u\in L^{{\color{red}p}}(0,T,{\color{blue}X})$.
+Pro\v{c} - proto¸e mám li samotnou nerovnost $\int_{0}^{T}\mbox{n\v{e}co}^{p}\leq c$,
+pak $\mbox{n\v{e}co}\in L^{p}(0,T)$. Kdy¸ je n\v{e}co navíc funkce,
+a znám odhad v norm\v{e} p\v{r}ez \v{c}as, tak u¸ nále¸i do prostoru
+\v{c}asových zobrazení do funkcí.
+
+
+\paragraph*{Jak prostor pro $u_{t}$}
+
+Jakmile mám prostor, ze kterého beru \v{r}e¨ení, pot\v{r}ebuju najít
+prostor pro $u_{t}$ (nebo $u_{tt}$ pro hyperbolickou). Platí následující
+pravidlo:
+
+
+\paragraph*{\v{C}asto}
+
+Pokud $u\in S$, $S$ je n\v{e}jaký prostor, pak $u_{t(t)}\in S^{\star}$
+- v duálu k n\v{e}jakému prostoru.
+
+
+\paragraph*{Detailní postup}
+
+(který je d\r{u}kazem tvrzení ``\v{C}asto'' a vysv\v{e}tluje co
+d\v{e}lat, pokud nejsme v \v{C}astém p\v{r}ípadu) je takový, ¸e jakmile
+známe prostor pro $u$ (a rozhodli jsme se n\v{e}jak i pro $u_{0}$
+a $f$, nebo je máme zadané), p\v{r}epí¨eme si rovnici tak, ¸e na
+levé stran\v{e} necháme jen $u_{t(t)}$ a na pravou stranu dáme v¨e
+ostatní. A ptám se, kam nále¸í pravá strana jako celek. Pou¸ijeme
+k tomu následující pravidla:
+\begin{itemize}
+\item $u\in W^{k,p}\Rightarrow\nabla u\in W^{k-1,p}$
+\item $\triangle\sim\nabla^{2}\Rightarrow(u\in W^{k,p}\Rightarrow\triangle u\in W^{k-2,p})$
+\item $W^{-\mbox{n\v{e}co},\mbox{n\v{e}co}}$ je duál a je to vymy¨lené
+tak, aby p\v{r}edchozí dva \v{r}ádky spadly do duálu
+\item Duál sou\v{c}tu je pr\r{u}nik duál\r{u} $A^{\star}+B^{\star}=(A\cap B)^{\star}$
+\end{itemize}
+\pagebreak{}
 
 
 \subsection*{Rovnice vlny a vedení tepla}
@@ -1856,6 +1911,13 @@ podmínku.
 Má smysl \v{r}e¨it hodnotu v jednom bod\v{e} $u(0)$, proto¸e $u\in L^{2}(0,\, T,\, W^{1,2}(\Omega))\cap W^{1,2}(0,\, T,\, W_{0}^{-1,2}(\Omega))$,
 tedy vno\v{r}eno $u\in C([0,\, T],\, L^{2}(\Omega))$ do spojitých
 (a ty u¸ mají bodové hodnoty).
+
+Mimochodem v $L^{1}$ nemá smysl ptát se na bodovou hodnotu, proto¸e
+není vno\v{r}ené do ¸ádných spojitých funkcí a tedy jediné co umíme
+\v{r}íct je ¸e je to t\v{r}ída funkcí co nezále¸í na hodnotách na
+mno¸in\v{e} míry nula. Tedy nezále¸í ani na hodnot\v{e} v bod\v{e}.
+Proto p\v{r}i odvozování prostor\r{u} chceme n\v{e}co lep¨ího, ne¸
+$L^{1}$.
 
 Cíl bude dokázat, ¸e $u(t)\overset{t\rightarrow0_{+}}{\rightharpoonup}u_{0}$,
 proto¸e kdy¸ p\r{u}jde takhle slab\v{e} a zárove\v{n} ze spojitosti
@@ -4745,7 +4807,21 @@ brát \v{r}e¨ení)
 \]
 
 \item Detailní výpo\v{c}et je testování rovnice \v{r}e¨ením. Parabolickou
-testujeme rovnou $u$, hyperbolickou $u_{t}$.
+testujeme rovnou $u$, hyperbolickou $u_{t}$. Cíl je upravit rovnici
+na nerovnici do tvaru, kdy na pravé stran\v{e} mám data (tzn $f$,
+$u_{0}$) v n\v{e}jakých normách (které znám, nebo budu po¸adovat,
+¸e je znám) a na levé stran\v{e} neznámé \v{r}e¨ení $u$ v n\v{e}jakých
+derivacích a ideáln\v{e} kvadrátech. Pak toti¸ libovolný \v{c}len
+na levé stran\v{e} je men¨í ne¸ pravá strana a z toho dostanu podmínky
+na prostor. Typov\v{e} dostávám
+
+\begin{itemize}
+\item $L^{\infty}(0,T,L^{2})$ z $esssup\left\Vert u(t)\right\Vert _{2}$
+... tohle je hezký odhad, napí¨u si ho a dál se jím nezabývám. (Proto
+také není napsaný vý¨e v ``Tvar $\Rightarrow$\char`\"{})
+\item $L^{2}(0,T,W_{0}^{1,2})$ z $\left\Vert \nabla u\right\Vert _{L^{2}(0,T,L^{2})}\leq c\Rightarrow\left\Vert u\right\Vert _{L^{2}(0,T,W_{0}^{1,2})}\leq c$
+... kde se extenzivn\v{e} vyu¸ívá ekvivalence norem s homogenním dirichletem.
+\end{itemize}
 \end{itemize}
 \item Definice slabého \v{r}e¨ení:
 \begin{align*}
