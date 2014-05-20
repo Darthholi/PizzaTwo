@@ -4769,7 +4769,6 @@ ode\v{c}tu, vyu¸iju monotonie toho \v{c}lenu, otestuju rozdílem).
 
 \part*{P\v{r}íklady}
 
-Jak \v{r}e¨it p\v{r}íklad - za\v{c}ínejme v\v{e}cmi které nevíme.
 
 
 
@@ -4811,9 +4810,10 @@ testujeme rovnou $u$, hyperbolickou $u_{t}$. Cíl je upravit rovnici
 na nerovnici do tvaru, kdy na pravé stran\v{e} mám data (tzn $f$,
 $u_{0}$) v n\v{e}jakých normách (které znám, nebo budu po¸adovat,
 ¸e je znám) a na levé stran\v{e} neznámé \v{r}e¨ení $u$ v n\v{e}jakých
-derivacích a ideáln\v{e} kvadrátech. Pak toti¸ libovolný \v{c}len
-na levé stran\v{e} je men¨í ne¸ pravá strana a z toho dostanu podmínky
-na prostor. Typov\v{e} dostávám
+derivacích a ideáln\v{e} kvadrátech. K tomuhle tvaru se n\v{e}kolikrát
+vracíme a v¸dy z n\v{e}j vyvodíme jiné záv\v{e}ry a odhady. Toti¸
+libovolný \v{c}len na levé stran\v{e} je men¨í ne¸ pravá strana a
+z toho dostanu vícero podmínek na prostor. Typov\v{e} dostávám:
 
 \begin{itemize}
 \item $L^{\infty}(0,T,L^{2})$ z $esssup\left\Vert u(t)\right\Vert _{2}$
@@ -4834,9 +4834,12 @@ u(0) & =u_{0}\text{ v }L^{2}\\
 \int_{\Omega}a\nabla u\nabla\varphi\, dx & = & \int_{\Omega}\sum_{i,j=1}^{d}a_{ij}\frac{\partial u}{\partial x_{j}}\frac{\partial\varphi}{\partial x_{i}}\, dx\\
 \int_{\Omega}f\varphi\, dx & = & \left\langle f(t),\varphi\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}
 \end{eqnarray*}
-
-\item Faedo Galerkinova aproximace - sestrojit $u^{n}$
-\item Uniformí odhady $u^{n}$
+Kdy¸ mám navíc Neumannova data na hranici, tak ty vypadnou do slabého
+\v{r}e¨ení pou¸itím perpartes.
+\item Faedo Galerkinova aproximace - sestrojit $u^{n}$ jako bázi $W_{0}^{1,2}$.
+Kdy¸ nemáme homogenního dirichleta, tak musíme sestrojovat bázi tro¨ku
+jinak - p\v{r}idat k ní konstantní funkci. 
+\item Uniformí odhady $u^{n}$ - pou¸ívají se odvozené apriorní odhady.
 \item P\v{r}echod k limitám
 \item Nabývání po\v{c}áte\v{c}ních podmínek
 \item Jednozna\v{c}nost a pro\v{c} ji ná¨ p\v{r}íklad umo¸\v{n}uje
@@ -4899,6 +4902,26 @@ v(0) & =v_{0}
 \end{align*}
 
 
+\begin{comment}
+myslím si, ¸e postup bude v podstat\v{e} stejný jako u lineární rovnice,
+jen je pot\v{r}eba upravit int\_omega arctg (u\textasciicircum{}n)
+u\_t\textasciicircum{}n \textless{}= Pi/2.int\_omega Iu\textasciicircum{}n\_tI\textless{}=
+/Young/ \textless{}=C\_2.int\_omega Iu\textasciicircum{}n\_tI\textasciicircum{}2
++ C \textless{}= C\_3 (IIu\textasciicircum{}n\_tII\_2\textasciicircum{}2
++1). Tím dostanu rovnici \textless{}u\textasciicircum{}n\_tt,u\textasciicircum{}n\_t\textgreater{}
++ int\_omega A grad u grad u\textasciicircum{}n\_t \textless{}= \textless{}f,u\textasciicircum{}n\_t\textgreater{}
++C + C\_3 IIu\textasciicircum{}n\_tII\_2\textasciicircum{}2. Upravím
+standardn\v{e} \textless{}u\textasciicircum{}n\_tt,u\textasciicircum{}n,t\textgreater{}
+= 1/2 d/dt IIu\textasciicircum{}n\_tII\_2\textasciicircum{}2, u A
+pou¸iju elipticitu (snadno lze ov\v{e}\v{r}it ¸e A je eliptická :-)).
+Na to lze u¸ vypustit Gronwalla stejn\v{e} jako u lineární rovnice.
+A asi je je¨t\v{e} pot\v{r}eba u konvergence nezapomenout od\r{u}vodnit,
+¸e arctan(u\textasciicircum{}n)-\textgreater{}arctan(u), co¸ by nem\v{e}l
+být problém proto¸e arctan je spojitý a omezený konstantou (viz postup
+na minulém cvi\v{c}ení, ten p\v{r}íklad se sinem).
+\end{comment}
+
+
 Matice $A$ pro tvar v $\sum_{i,j}A_{ij}\frac{\partial^{2}u}{\partial x_{i}\partial x_{j}}$
 vypadá takhle: $A=\left[\begin{array}{cc}
 2 & -\nicefrac{1}{2}\\
@@ -4930,6 +4953,32 @@ Slabá formulace pak vypadá takto:
 \left\langle u_{tt},\varphi\right\rangle _{W_{0}^{-1,2},W_{0}^{1,2}}+\int_{\Omega}A\nabla u\nabla\varphi+\arctan(u)\varphi\, dx & =\int_{\Omega}f\varphi\, dx\,\text{ ... }\forall\varphi\in W_{0}^{1,2}(\Omega)\text{ a s.v. }t\in(0,T)\\
 u(0) & =u_{0}\text{ v }L^{2}\\
 u_{t}(0) & =v_{0}\text{ v }W_{0}^{-1,2}
+\end{align*}
+
+
+
+\subparagraph*{Apriorní odhady}
+
+Jsme hyperbolická rovnice, tak¸e testujeme $u_{t}$.
+\begin{align*}
+\int_{\Omega}u_{tt}u_{t}\, dx+\int_{\Omega}A\nabla u\nabla u_{t}\, dx+\int_{\Omega}\arctan(u)u_{t}\, dx & =\int_{\Omega}fu_{t}\, dx
+\end{align*}
+
+
+První \v{c}len zapí¨eme trikem s derivací kvadrátu, druhý \v{c}len,
+rozd\v{e}líme na dva vytknutím \v{c}asové derivace:
+
+\begin{align*}
+1/2\frac{d}{dt}\left\Vert u_{t}\right\Vert _{2}^{2}+\frac{d}{dt}\int_{\Omega}A\nabla u\nabla u\, dx-\int_{\Omega}A_{t}\nabla u\nabla u\, dx+\int_{\Omega}\arctan(u)u_{t}\, dx & =\int_{\Omega}fu_{t}\, dx
+\end{align*}
+
+
+V na¨em p\v{r}ípad\v{e} je matice $A$ konstantní, tak¸e t\v{r}etí
+\v{c}len vymizí, jinak bychom ji ¨oupli na pravou stranu. \v{c}len
+s arctg dáme na pravou stranu:
+
+\begin{align*}
+\frac{d}{dt}(1/2\left\Vert u_{t}\right\Vert _{2}^{2}+\int_{\Omega}A\nabla u\nabla u\, dx) & =\int_{\Omega}fu_{t}\, dx-\int_{\Omega}\arctan(u)u_{t}\, dx
 \end{align*}
 
 

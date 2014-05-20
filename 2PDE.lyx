@@ -16335,13 +16335,13 @@ Příklady
 \end_layout
 
 \begin_layout Standard
-Jak řešit příklad - začínejme věcmi které nevíme.
- 
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-todo cela tahle sekce
+Pozn - Jak řešit příklad - začínejme věcmi které nevíme, zacinani z bodu
+ nula.
+ DOdelat.
 \end_layout
 
 \end_inset
@@ -16482,9 +16482,11 @@ Detailní výpočet je testování rovnice řešením.
 \end_inset
 
  v nějakých derivacích a ideálně kvadrátech.
- Pak totiž libovolný člen na levé straně je menší než pravá strana a z toho
- dostanu podmínky na prostor.
- Typově dostávám
+ K tomuhle tvaru se několikrát vracíme a vždy z něj vyvodíme jiné závěry
+ a odhady.
+ Totiž libovolný člen na levé straně je menší než pravá strana a z toho
+ dostanu vícero podmínek na prostor.
+ Typově dostávám:
 \end_layout
 
 \begin_deeper
@@ -16543,12 +16545,41 @@ u(0) & =u_{0}\text{ v }L^{2}\\
 
 \end_inset
 
+Když mám navíc Neumannova data na hranici, tak ty vypadnou do slabého řešení
+ použitím perpartes.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \begin_layout Itemize
 Faedo Galerkinova aproximace - sestrojit 
 \begin_inset Formula $u^{n}$
+\end_inset
+
+ jako bázi 
+\begin_inset Formula $W_{0}^{1,2}$
+\end_inset
+
+.
+ Když nemáme homogenního dirichleta, tak musíme sestrojovat bázi trošku
+ jinak - přidat k ní konstantní funkci.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+ +dodelat - tadyodsad dal to neumim a je to takovy strohy
+\end_layout
+
 \end_inset
 
 
@@ -16559,23 +16590,73 @@ Uniformí odhady
 \begin_inset Formula $u^{n}$
 \end_inset
 
+ - používají se odvozené apriorní odhady.
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \begin_layout Itemize
 Přechod k limitám
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
 Nabývání počátečních podmínek
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
 Jednoznačnost a proč ji náš příklad umožňuje
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
 Hladkost/regulartia
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+dod jak.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection*
@@ -16728,6 +16809,29 @@ v(0) & =v_{0}
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+myslím si, že postup bude v podstatě stejný jako u lineární rovnice, jen
+ je potřeba upravit int_omega arctg (u^n) u_t^n <= Pi/2.int_omega Iu^n_tI<=
+ /Young/ <=C_2.int_omega Iu^n_tI^2 + C <= C_3 (IIu^n_tII_2^2 +1).
+ Tím dostanu rovnici <u^n_tt,u^n_t> + int_omega A grad u grad u^n_t <= <f,u^n_t>
+ +C + C_3 IIu^n_tII_2^2.
+ Upravím standardně <u^n_tt,u^n,t> = 1/2 d/dt IIu^n_tII_2^2, u A použiju
+ elipticitu (snadno lze ověřit že A je eliptická :-)).
+ Na to lze už vypustit Gronwalla stejně jako u lineární rovnice.
+ A asi je ještě potřeba u konvergence nezapomenout odůvodnit, že arctan(u^n)->ar
+ctan(u), což by neměl být problém protože arctan je spojitý a omezený konstantou
+ (viz postup na minulém cvičení, ten příklad se sinem).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Matice 
 \begin_inset Formula $A$
 \end_inset
@@ -16863,6 +16967,62 @@ u_{t}(0) & =v_{0}\text{ v }W_{0}^{-1,2}
 \end_layout
 
 \begin_layout Subparagraph*
+Apriorní odhady
+\end_layout
+
+\begin_layout Standard
+Jsme hyperbolická rovnice, takže testujeme 
+\begin_inset Formula $u_{t}$
+\end_inset
+
+.
+\begin_inset Formula 
+\begin{align*}
+\int_{\Omega}u_{tt}u_{t}\, dx+\int_{\Omega}A\nabla u\nabla u_{t}\, dx+\int_{\Omega}\arctan(u)u_{t}\, dx & =\int_{\Omega}fu_{t}\, dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+První člen zapíšeme trikem s derivací kvadrátu, druhý člen, rozdělíme na
+ dva vytknutím časové derivace:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+1/2\frac{d}{dt}\left\Vert u_{t}\right\Vert _{2}^{2}+\frac{d}{dt}\int_{\Omega}A\nabla u\nabla u\, dx-\int_{\Omega}A_{t}\nabla u\nabla u\, dx+\int_{\Omega}\arctan(u)u_{t}\, dx & =\int_{\Omega}fu_{t}\, dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+V našem případě je matice 
+\begin_inset Formula $A$
+\end_inset
+
+ konstantní, takže třetí člen vymizí, jinak bychom ji šoupli na pravou stranu.
+ člen s arctg dáme na pravou stranu:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+\frac{d}{dt}(1/2\left\Vert u_{t}\right\Vert _{2}^{2}+\int_{\Omega}A\nabla u\nabla u\, dx) & =\int_{\Omega}fu_{t}\, dx-\int_{\Omega}\arctan(u)u_{t}\, dx
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph*
 Existence
 \end_layout
 
@@ -16989,17 +17149,6 @@ Upravíme rovnici
 \end_inset
 
 :
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-cvdod a co ted jako? Z ty nelinearity to nevytknu tu sumu, takze druhej
- radek uz neplati
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
