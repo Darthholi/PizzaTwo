@@ -1902,7 +1902,11 @@ Protože je omezené v
 \begin_inset Formula $Y$
 \end_inset
 
-, platí (pro podposloupnost) 
+ (a do 
+\begin_inset Formula $Z$
+\end_inset
+
+), platí (pro podposloupnost) 
 \begin_inset Formula $u^{n}\rightarrow u$
 \end_inset
 
@@ -1910,7 +1914,11 @@ Protože je omezené v
 \begin_inset Formula $Y$
 \end_inset
 
-:
+ (a v 
+\begin_inset Formula $Z$
+\end_inset
+
+; to je důležité k tomu, že limita v těchto prostorech existuje):
 \begin_inset Formula 
 \[
 \Rightarrow\,1>n\left\Vert u^{n}\right\Vert _{Z}\Rightarrow\left\Vert u^{n}\right\Vert _{Z}\rightarrow0\Rightarrow u^{n}\rightarrow0\text{ v }Z\Rightarrow u=0
@@ -17179,11 +17187,12 @@ Cíl je mít pravou stranu rovnou něčemu měřitlnému v
 \end_inset
 
  jako součet spojitých funkcí.
- Proste Caratheodoryova věta.
+ Prostě Caratheodoryova věta.
 \begin_inset Formula 
 \begin{eqnarray*}
-\int_{\Omega}fw_{i}-A\nabla u^{n}\nabla w_{i}-\arctan(u^{n})w_{i}\, dx & = & \underline{\int_{\Omega}fw_{i}\, dx}_{F(t)}-\sum_{j=1}^{n}d_{n}^{j}(t)\int_{\Omega}A\nabla w_{j}\nabla w_{i}\, dx-\int_{\Omega}\arctan(\sum_{j=1}^{n}d_{n}^{j}(t)w_{j})w_{i}\, dx=\\
-=F(t)-\sum_{j=1}^{n}d_{n}^{j}(t)G_{j}^{i}(t)-\sum_{j=1}^{n}K_{j}^{i}(t) & = & H^{i}(t,d)
+\int_{\Omega}fw_{i}-A\nabla u^{n}\nabla w_{i}-\arctan(u^{n})w_{i}\, dx & = & \underline{\int_{\Omega}fw_{i}\, dx}_{F(t)}-\sum_{j=1}^{n}d_{n}^{j}(t)\int_{\Omega}A\nabla w_{j}\nabla w_{i}\, dx-\\
+ &  & -\int_{\Omega}\arctan(\sum_{j=1}^{n}d_{n}^{j}(t)w_{j})w_{i}\, dx=\\
+=F(t)-\sum_{j=1}^{n}d_{n}^{j}(t)G_{j}^{i}(t)-K_{n}^{i}(t) & = & H^{i}(t,d)
 \end{eqnarray*}
 
 \end_inset

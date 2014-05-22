@@ -618,8 +618,10 @@ vno\v{r}ení. Sporem - nech\v{t}
 \[
 1=\left\Vert u^{n}\right\Vert _{Y}>a\left\Vert u^{n}\right\Vert _{X}+n\left\Vert u^{n}\right\Vert _{Z}
 \]
-Proto¸e je omezené v $X$, které je kompaktn\v{e} vno\v{r}ené do $Y$,
-platí (pro podposloupnost) $u^{n}\rightarrow u$ v $Y$:
+Proto¸e je omezené v $X$, které je kompaktn\v{e} vno\v{r}ené do $Y$
+(a do $Z$), platí (pro podposloupnost) $u^{n}\rightarrow u$ v $Y$
+(a v $Z$; to je d\r{u}le¸ité k tomu, ¸e limita v t\v{e}chto prostorech
+existuje):
 \[
 \Rightarrow\,1>n\left\Vert u^{n}\right\Vert _{Z}\Rightarrow\left\Vert u^{n}\right\Vert _{Z}\rightarrow0\Rightarrow u^{n}\rightarrow0\text{ v }Z\Rightarrow u=0
 \]
@@ -5017,11 +5019,12 @@ Cíl je mít pravou stranu rovnou n\v{e}\v{c}emu m\v{e}\v{r}itlnému
 v $t$ a spojitému v $d$. Rozdíl oproti teorii, kde bylo $c$ lineární
 je ten, ¸e na pravé stran\v{e} se $d$ neschová do sumy. Nicmén\v{e}
 v¨e je stále v pohod\v{e}, proto¸e nový \v{c}len $K_{j}^{i}$ je také
-spojitý v $d$ jako sou\v{c}et spojitých funkcí. Proste Caratheodoryova
+spojitý v $d$ jako sou\v{c}et spojitých funkcí. Prost\v{e} Caratheodoryova
 v\v{e}ta.
 \begin{eqnarray*}
-\int_{\Omega}fw_{i}-A\nabla u^{n}\nabla w_{i}-\arctan(u^{n})w_{i}\, dx & = & \underline{\int_{\Omega}fw_{i}\, dx}_{F(t)}-\sum_{j=1}^{n}d_{n}^{j}(t)\int_{\Omega}A\nabla w_{j}\nabla w_{i}\, dx-\int_{\Omega}\arctan(\sum_{j=1}^{n}d_{n}^{j}(t)w_{j})w_{i}\, dx=\\
-=F(t)-\sum_{j=1}^{n}d_{n}^{j}(t)G_{j}^{i}(t)-\sum_{j=1}^{n}K_{j}^{i}(t) & = & H^{i}(t,d)
+\int_{\Omega}fw_{i}-A\nabla u^{n}\nabla w_{i}-\arctan(u^{n})w_{i}\, dx & = & \underline{\int_{\Omega}fw_{i}\, dx}_{F(t)}-\sum_{j=1}^{n}d_{n}^{j}(t)\int_{\Omega}A\nabla w_{j}\nabla w_{i}\, dx-\\
+ &  & -\int_{\Omega}\arctan(\sum_{j=1}^{n}d_{n}^{j}(t)w_{j})w_{i}\, dx=\\
+=F(t)-\sum_{j=1}^{n}d_{n}^{j}(t)G_{j}^{i}(t)-K_{n}^{i}(t) & = & H^{i}(t,d)
 \end{eqnarray*}
 Upravili jsme tak, aby bylo vid\v{e}t, ¸e se jedná o m\v{e}\v{r}itelnou
 funkci, pouze \v{c}asovou.
