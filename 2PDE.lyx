@@ -70,7 +70,7 @@
 \maintain_unincluded_children false
 \language english
 \language_package default
-\inputencoding auto
+\inputencoding utf8
 \fontencoding global
 \font_roman default
 \font_sans default
@@ -2421,7 +2421,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Formula 
 \[
-\lim_{n\rightarrow\infty}\int_{0}^{T}||u_{\delta(\epsilon)}^{n}-u_{\delta}||_{Z}^{p}\underset{\text{\text{věta}}}{\overset{\text{Lebesgueova}}{\text{=}}}\int_{0}^{T}\lim_{n\rightarrow\infty}||u_{\delta(\epsilon)}^{n}-u_{\delta}||_{Z}^{p}\, dt=0
+\lim_{n\rightarrow\infty}\int_{0}^{T}\left\Vert u_{\delta(\epsilon)}^{n}-u_{\delta}\right\Vert _{Z}^{p}\underset{\text{\text{věta}}}{\overset{\text{Lebesgueova}}{\text{=}}}\int_{0}^{T}\lim_{n\rightarrow\infty}\left\Vert u_{\delta(\epsilon)}^{n}-u_{\delta}\right\Vert _{Z}^{p}\, dt=0
 \]
 
 \end_inset
@@ -3217,7 +3217,7 @@ Budeme odhadovat normy
 \end_layout
 
 \begin_layout Paragraph*
-Udhad pro 
+Odhad pro 
 \begin_inset Formula $u$
 \end_inset
 
